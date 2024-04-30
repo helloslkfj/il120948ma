@@ -10,7 +10,7 @@ function mapMultiSelectToObject(selector) {
     return object;
 }
 
-function add0sInPlaceOfNothing(string) {
+function addsInPlaceOfNothing(string) {
     var arr = convertStringtoArray(string);
 
     for (let i=0; i<arr.length; i++) {
