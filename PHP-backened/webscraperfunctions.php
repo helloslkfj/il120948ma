@@ -1,6 +1,4 @@
 <?php 
-    ini_set('display_errors', 1);
-    error_reporting(E_ALL);
 
     function getHTMLfromlink($link) { 
         //curl html extraction that is done before so if a site timesout then we don't send it to nodejs for wasting more time and possibly closing the server
@@ -151,10 +149,13 @@
         return $out;
     }
 
-    $out = getAnythingFromHTML("https://www.sickkids.ca/en/staff/k/joseph-kuzma/", ['head', 'header', 'footer', 'script'], [ 'body'], 'text');
+    //$out = getAnythingFromHTML("https://www.sickkids.ca/en/staff/k/joseph-kuzma/", ['head', 'header', 'footer', 'script'], [ 'body'], 'text');
 
 
-    echo strlen($out);
+    //echo strlen($out);
+
+    //$Open_API_Key = "sk-proj-EaIv8nrRCfGh1i0hSzsuT3BlbkFJYiQ0ijBx72byvSVL3bDr";
+    #Open AI key: sk-proj-EaIv8nrRCfGh1i0hSzsuT3BlbkFJYiQ0ijBx72byvSVL3bDr
 
     //$openairesp = communicatetoOpenAILLM('gpt-3.5-turbo-0125', 'you are an assitant on a web application', "Given the following html:".$out."Extract all the relevant information about Joseph Kuzma. Write in point form and talk about his research and professional experience. Write the notes in a detailed manner.", $Open_API_Key);
     //echo $openairesp;

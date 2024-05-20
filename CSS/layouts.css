@@ -1,1 +1,74 @@
 /*This page contains all the css for layouts on the website*/
+  
+.grid {
+    display:grid;
+}
+
+.gap-r-5 {
+    grid-row-gap:5px;
+}
+  
+.gap-r-7 {
+    grid-row-gap:7px;
+}
+  
+.gap-r-10 {
+    grid-row-gap:10px;
+}
+  
+.gap-r-15 {
+    grid-row-gap:15px;
+}
+  
+.gap-r-22 {
+    grid-row-gap:22px;
+}
+  
+.gap-r-25 {
+    grid-row-gap:25px;
+}
+  
+.gap-r-30 {
+    grid-row-gap:30px;
+}
+  
+.gap-r-85 {
+    grid-row-gap:85px;
+}
+  
+.gap-c-10 {
+    grid-column-gap:10px;
+}
+  
+.gap-c-20 {
+    column-gap:20px;
+}
+
+/* CSS for Dashboard layout*/
+.outerdashnav {
+    display:grid;
+    grid-template-columns:1fr 3fr;
+}
+
+.innerdashnav {
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+}
+
+/* CSS for any page loaded in page load from the dashboard so that they have appropriate space on both sides*/
+.generaldashspace {
+    display:grid;
+    grid-template-columns:0.25fr 4fr 0.25fr;
+}
+
+/* CSS for the research interface page layout*/
+.research-inputgrid {
+    display:grid;
+    grid-template-columns:1fr 0.1fr 1fr;
+}
+
+/* CSS for creating side-space on any other page on the website*/
+.generalspace {
+    display:grid;
+    grid-template-columns:0.15fr 4fr 0.15fr;
+}

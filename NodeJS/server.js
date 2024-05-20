@@ -12,6 +12,8 @@ async function webScrape(url) {
     await page.goto(url);
     const content = await page.content();
     await browser.close();
+
+    console.log('done');
     return content;
 }
 

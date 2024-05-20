@@ -1,1 +1,16 @@
 /* This page contains all the classes with hover, inputfield classes, etc*/
+
+.textlink {
+    color:black;
+}
+
+.textlink:hover {
+    color:darkcyan;
+    cursor:pointer;
+}
+
+
+/*CSS for generate button present on the research and corporate dashboard*/
+.generatebutton {
+    width:40%;
+}

@@ -1,1 +1,9 @@
 /* This is the file that contains all the color related classes like background, backgroundofbuttons, highlightcolor, etc */
+
+.highlight {
+    color:#DC143C;
+}
+
+.greensuccess {
+    color:#259944;
+}
