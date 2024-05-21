@@ -1,0 +1,88 @@
+.titlebutton {
+  font-family: Work Sans;
+  font-size: 60px;
+  font-weight: 200;
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+
+}
+
+.gsbutton {
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 25px;
+  background-color: transparent;
+  border-color: transparent;
+  color: white;
+  width: 160px;
+  cursor: pointer;
+  transition: font-weight 0.15s;
+  
+}
+
+.gsbutton:hover {
+  font-weight: 300;
+}
+
+.caccbutton {
+  background-color: #3A138D;
+  border: none;
+  color: white;
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 20px;
+  border-radius: 5px;
+  width: 350px;
+  height: 40px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+}
+
+
+.caccbutton:hover {
+  opacity: 0.8;
+  box-shadow: 1px 1px 1px #3A138D;
+}
+
+.fineprint {
+  font-family: Work Sans;
+  font-weight: 300;
+  font-size: 20px;
+  color: #3A138D;
+  text-decoration: underline 1.5px;
+  cursor: pointer;
+  transition: font-weight 0.15s;
+  margin-top: 20px;
+}
+
+.fineprint:hover {
+  color: black;
+}
+
+.choosebutton {
+  background-color: #3A138D;
+  border: none;
+  color: white;
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 20px;
+  border-radius: 5px;
+  width: 200px;
+  height: 40px;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  cursor: pointer;
+
+}
+
+
+.choosebutton:hover {
+  opacity: 0.8;
+  box-shadow: 1px 1px 1px #3A138D;
+}
