@@ -90,16 +90,28 @@
         if($signupsubmit == true) {
             if ($error < 1) {
                 echo "true";
-                $signuparr = [$signupemail, $fname, $signuppassword, 'none', 'not active', date("Y-m-d")];
+                $signuparr = [$signupemail, $fname, $signuppassword, 'false', 'none', 'not active', date("Y-m-d")];
                 $tencryptedsignuparr = encryptSetofData($signuparr, $key);
-                $signupiv = $tencryptedsignuparr[0];
-                $encryptedsignuparr = $tencryptedsignuparr[1];
                 
-                $signupsql = "INSERT INTO users(email, fname, pass, typofsubscription, subscriptionstat, dateandtime, iv) VALUES(?, ?, ?, ?, ?, ?, ?);";
-                executeSQL($conn, $signupsql, ["s", "s", "s", "s", "s", "s", "s"], array_merge($encryptedsignuparr, [$signupiv]), "insert", 5);
+                $signupsql = "INSERT INTO users(email, fname, pass, verification, typofsubscription, subscriptionstat, dateandtime, iv) VALUES(?, ?, ?, ?, ?, ?, ?, ?);";
+                executeSQL($conn, $signupsql, ["s", "s", "s", "s", "s", "s", "s", "s"], array_merge($tencryptedsignuparr[1], [$tencryptedsignuparr[0]]), "insert", 7);
 
                 $userobject = new stdClass();
-                $_SESSION["user"] = createUserObject($userobject, $fname, $signupemail, $signuppassword, 'none', 'not active');
+                $_SESSION["user"] = createUserObject($userobject, $fname, $signupemail, $signuppassword, 'false', 'none', 'not active', $tencryptedsignuparr[0]);
+                
+
+                $verificationcode = rand(1000000, 9999999);
+                sendVerificationMail($_SESSION["user"], $verificationcode, $sendgridapi_key);
+
+                $verificationsql = "INSERT INTO verification(email, verificationnum, attempts, iv) VALUES(?, ?, ?, ?);";
+                $verificationarr = [$signupemail, $verificationcode, 0];
+
+                $encverificationarr = encryptDataGivenIv($verificationarr, $key, $tencryptedsignuparr[0]);
+                executeSQL($conn, $verificationsql, ["s", "s", "s", "s"], array_merge($encverificationarr, [$tencryptedsignuparr[0]]), "insert", 3);
+
+
+                //error handling is such that the fatal errors are posted on the signup screen notifying user that something has gone wrong; if insertion sql for user data failed then, they will see that they have to sign up again; for verfication insertion or mail fail then they will just resend verification as they will realize their number does not work or they didn't recieve it and they will know it has something to do with the error 
+                
             }
             else {
                 echo "false";

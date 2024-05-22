@@ -6,6 +6,7 @@ create table users (
     email varchar(300) not null,
     fname varchar(300) not null,
     pass varchar(300) not null,
+    verification varchar(300) not null,
     typofsubscription varchar(300) not null,
     subscriptionstat varchar(300) not null,
     dateandtime varchar(500) not null,
@@ -18,5 +19,6 @@ create table verification (
     id int(11) not null PRIMARY KEY AUTO_INCREMENT,
     email varchar(300) not null,
     verificationnum varchar(300) not null,
-    attempts varchar(300) not null
-)
+    attempts varchar(300) not null,
+    iv varchar(10000) not null
+);

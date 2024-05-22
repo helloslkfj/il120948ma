@@ -18,6 +18,12 @@
             <div></div>
         </div>
         <br>
+        <?php 
+            if(isset($_GET['verification'])) {
+        ?>
+            <text class="greensuccess"><?php echo $_GET['verification']; ?></text>
+        <?php } ?>
+        <br>
         <div id="pageload">
 
         </div>

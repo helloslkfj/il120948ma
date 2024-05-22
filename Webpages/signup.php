@@ -3,34 +3,46 @@
 ?>
     <div class="generalspace">
         <div></div>
-        <form class="grid gap-r-15" method="POST" onsubmit="return false" enctype="multipart/form-data">
-            <h1>Sign up</h1>
-            <div class="grid">
-                <input name="firstname" type="text" placeholder="First Name">
-                <p id="fnameerror" class="highlight"></p>
-            </div>
+        <div class="grid">
+            <form class="grid gap-r-15" method="POST" onsubmit="return false" enctype="multipart/form-data">
+                <h1>Sign up</h1>
+                <div class="grid">
+                    <input name="firstname" type="text" placeholder="First Name">
+                    <p id="fnameerror" class="highlight"></p>
+                </div>
 
-            <div class="grid">
-                <input name="signupemail" type="text" placeholder="Email">
-                <p id="signupemailerror" class="highlight"></p>
-            </div>
+                <div class="grid">
+                    <input name="signupemail" type="text" placeholder="Email">
+                    <p id="signupemailerror" class="highlight"></p>
+                </div>
 
-            <div class="grid">
-                <input name="signuppassword" type="password" placeholder="Password">
-                <p id="signuppassworderror" class="highlight"></p>
-            </div>
+                <div class="grid">
+                    <input name="signuppassword" type="password" placeholder="Password">
+                    <p id="signuppassworderror" class="highlight"></p>
+                </div>
 
-            <div class="grid">
-                <input name="signuprepassword" type="password" placeholder="Retype your Password">
-                <p id="signuprepassworderror" class="highlight"></p>
-            </div>
+                <div class="grid">
+                    <input name="signuprepassword" type="password" placeholder="Retype your Password">
+                    <p id="signuprepassworderror" class="highlight"></p>
+                </div>
+                
+                <div class="grid"> <!--Make this error text small as it is general error text, that is coming out of the system and non-formatted, its needed to tell the user when a fatal error occurs in the script -->
+                    <text>General Error Text:</text>
+                    <text id="totalsignuperror" class="highlight">...</text>
+                </div>
+                
 
-            <button name="signupbutton" type="submit" class="center">Submit</button>
-        </form>
+                <button name="signupbutton" type="submit" class="center">Submit</button>
+            </form>
+            <div>
+                <a href="login.php">Have an account?</a>
+            </div>
+        </div>
         <div></div>
     </div>
 
     <script type="text/javascript">
+
         $(document).ready(()=>{
             const url = "../PHP-backened/signup-backened.php";
 
@@ -58,7 +70,7 @@
                 signupformdata.append('signupsubmit', true);
                 keyUpAllElements(allinputelements);
 
-                sendAJAXRequest(url, signupformdata, reLoad);
+                sendAJAXRequest2(url, signupformdata, reLoadandErrorHandle, "#totalsignuperror");
             })
 
         });

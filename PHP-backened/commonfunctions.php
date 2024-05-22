@@ -81,17 +81,20 @@
     }
 
     //Encrypts an array of data and returns an encrypted array; Encryption is done based on provided key and iv
+    //iv passed in is of type base64
     function encryptDataGivenIv($data, $key, $iv) {
         $encryptedset = [];
         for($i=0; $i<count($data);$i++) {
             try {
-                $encryptedset[] = openssl_encrypt($data[$i], "AES-128-CTR", $key, 0, $iv);
+                $encryptedset[] = openssl_encrypt($data[$i], "AES-128-CTR", $key, 0, base64_decode($iv));
             }
             catch (Exception $e) {
                 echo "Could not encrypt the set of data", $e -> getMessage();
                 exit("Problem!");
             }
         }
+
+        return $encryptedset;
     }
 
     //takes a single array of data (one input in a database) -> iv is always at the end

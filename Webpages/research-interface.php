@@ -1,5 +1,5 @@
 <?php
-    include 'head-inside-internal.php';
+    include 'head-code/headinternal-code.php';
 ?>
 
     <!-- Here create the inputs for research and the generate button-->

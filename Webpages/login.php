@@ -3,31 +3,32 @@
 
     include 'head-external.php';
 
-    print_r($_SESSION["user"]);
 ?>
 
     <div class="grid generalspace">
         <div></div>
-        <form class="grid gap-r-15" method="POST" onsubmit="return false" enctype="multipart/form-data">
-            <h1>Log in</h1>
-            <div class="grid">
+        <div class="grid">
+            <form class="grid gap-r-15" method="POST" onsubmit="return false" enctype="multipart/form-data">
+                <h1>Log in</h1>
+
                 <input name="loginemail" type="text" placeholder="Email">
-            </div>
 
-            <div class="grid">
                 <input name="loginpassword" type="password" placeholder="Password">
+
+                <p id="loginerror" class="highlight"></p>
+
+                <button name="loginbutton" type="submit" class="center">Submit</button>
+            </form>
+            <div>
+                <a href="signup.php">Don't have an account yet?</a>
             </div>
-
-            <p id="loginerror" class="highlight"></p>
-
-            <button name="loginbutton" type="submit" class="center">Submit</button>
-        </form>
+        </div>
         <div></div>
     </div>
 
     <script type="text/javascript">
         $("button[name='loginbutton']").click(()=> {
-            sendAJAXRequest("../PHP-backened/login-backened.php", createFormDataObject(["input[name='loginemail']", "input[name='loginpassword']"], ["loginemail", "loginpassword"]), reLoadandErrorHandle);
+            sendAJAXRequest2("../PHP-backened/login-backened.php", createFormDataObject(["input[name='loginemail']", "input[name='loginpassword']"], ["loginemail", "loginpassword"]), reLoadandErrorHandle, "#loginerror");
         })
     </script>
 

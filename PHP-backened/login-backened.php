@@ -5,8 +5,8 @@
         $loginemail = mysqli_real_escape_string($conn, $_POST['loginemail']);
         $loginpassword = mysqli_real_escape_string($conn, $_POST['loginpassword']);
 
-        $encuserresp = getDatafromSQLResponse(["fname", "email", "pass", "typofsubscription", "subscriptionstat", "iv"], executeSQL($conn, "SELECT * from users ORDER BY id ASC", "nothing", "nothing", "select", "nothing"));
-        $decuserinfos = decryptFullData($encuserresp, $key, 5);
+        $encuserresp = getDatafromSQLResponse(["fname", "email", "pass", "verification", "typofsubscription", "subscriptionstat", "iv"], executeSQL($conn, "SELECT * from users ORDER BY id ASC", "nothing", "nothing", "select", "nothing"));
+        $decuserinfos = decryptFullData($encuserresp, $key, 6);
 
         $loginoccurance = 0;
         foreach($decuserinfos as $decuserinfo) {
@@ -17,7 +17,7 @@
 
                     
                     $userobj = new stdClass();
-                    $_SESSION["user"] = createUserObject($userobj, $decuserinfo[0], $decuserinfo[1], $decuserinfo[2], $decuserinfo[3], $decuserinfo[4]);
+                    $_SESSION["user"] = createUserObject($userobj, $decuserinfo[0], $decuserinfo[1], $decuserinfo[2], $decuserinfo[3], $decuserinfo[4], $decuserinfo[5], $decuserinfo[6]);
                     break;
                 }
             }

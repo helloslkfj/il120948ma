@@ -23,6 +23,22 @@ function sendAJAXRequest(url, data, func) {
     });
 }
 
+function sendAJAXRequest2(url, data, func, vardata) {
+    $.ajax({
+        url: url,
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: data,
+        type: 'post',
+        success: function(response) {
+            console.log(response);
+            func(response, vardata);
+        }
+    });
+}
+
 //This errorHandle function will send the value of the input element to the specified url and then get the response from the server based on var name and 
 // add it to the element where the response should be shown (id for error); this function helps with asynchronous error handling
 function errorHandle(url, dataobject, idforerror) {
@@ -59,8 +75,11 @@ function createFormDataObject(elements, varnames) {
     return formdataobject;
 }
 
-function reLoad(input) {
+function reLoadandErrorHandle(input, varname) {
     if(input == 'true') {
         location.reload();
+    }
+    else {
+        $(varname).html(input);
     }
 }
