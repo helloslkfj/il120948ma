@@ -1,0 +1,82 @@
+.slogan {
+  font-family: Work Sans;
+  font-weight: 700;
+  font-size: 80px;
+  color: white;
+}
+
+.blurb1 {
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 40px;
+  color: white;
+  width: calc(90%);
+
+}
+
+.blurb2 {
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 30px;
+  color: white;
+  padding: 5rem;
+
+
+}
+
+.signup {
+  text-align: center;
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 40px;
+  color: #3A138D;
+}
+
+::placeholder {
+  color: #3A138D;
+  opacity: 0.3;
+}
+
+.subtitle {
+  font-family: Work Sans;
+  font-weight: 700;
+  font-size: 50px;
+  color: white;
+  padding: 5rem;
+  padding-bottom: 1rem;
+}
+
+.pricing {
+  font-family: Work Sans;
+  font-weight: 700;
+  font-size: 100px;
+  color: #0E0129;
+  padding: 3rem;
+}
+
+.blurb3 {
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 60px;
+  color: #0E0129;
+  padding: 2rem;
+  border: solid #0E0129;
+  margin: 2rem;
+  border-radius: 15px;
+}
+
+.subtitle2 {
+  font-family: Work Sans;
+  font-weight: 600;
+  font-size: 80px;
+  text-decoration: underline;
+}
+
+.blurb4 {
+  font-family: WOrk Sans;
+  font-weight: 300;
+  color: #3A138D;
+  font-size: 30px;
+}
+
+
