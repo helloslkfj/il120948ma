@@ -72,3 +72,29 @@
     display:grid;
     grid-template-columns:0.15fr 4fr 0.15fr;
 }
+
+.title {
+    display: inline-flex;
+    padding-left: 4rem;
+    padding-top: 2rem;
+}
+
+
+.epass {
+
+    font-family: Work Sans;
+    font-weight: 300;
+    font-size: 20px;
+    color: #3A138D;
+    border: solid;
+    border-radius: 5px;
+    border-color: #3A138D;
+
+    margin: auto;
+    width: 350px;
+    height: 40px;
+
+}
+
+
+

@@ -1,1 +1,9 @@
 /* This is the file that contains all the different font classes with @font-face and then each different font having its class */
+
+.signup {
+  text-align: center;
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: 40px;
+  color: #3A138D;
+}
