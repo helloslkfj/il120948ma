@@ -25,7 +25,7 @@
         else {
             echo "You have reached your maximum number of attempts. Please click resend verification.";
         }
-
+        
         // select data first then update data;
         // if there is more than one record then exit() -> error occured
 
