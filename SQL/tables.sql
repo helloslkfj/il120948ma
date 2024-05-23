@@ -22,3 +22,10 @@ create table verification (
     attempts varchar(300) not null,
     iv varchar(10000) not null
 );
+
+-- code for creating the secrets table which will store all the API keys and our key for encrypting data
+create table secrets (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    keyname varchar(300) not null,
+    actualkey varchar(300) not null
+);

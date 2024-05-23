@@ -1,1 +1,1 @@
--- This file can be used to store the sql commands for inserting sample testing data into the calliope databaset
+-- This file can be used to store the sql commands for inserting sample testing data into the calliope database

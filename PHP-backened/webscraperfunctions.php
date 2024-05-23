@@ -154,9 +154,6 @@
 
     //echo strlen($out);
 
-    //$Open_API_Key = "sk-proj-EaIv8nrRCfGh1i0hSzsuT3BlbkFJYiQ0ijBx72byvSVL3bDr";
-    #Open AI key: sk-proj-EaIv8nrRCfGh1i0hSzsuT3BlbkFJYiQ0ijBx72byvSVL3bDr
-
     //$openairesp = communicatetoOpenAILLM('gpt-3.5-turbo-0125', 'you are an assitant on a web application', "Given the following html:".$out."Extract all the relevant information about Joseph Kuzma. Write in point form and talk about his research and professional experience. Write the notes in a detailed manner.", $Open_API_Key);
     //echo $openairesp;
 
