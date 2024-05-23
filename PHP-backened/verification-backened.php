@@ -17,15 +17,40 @@
         $numofattempts = (int)$decverificationinfo[1];
 
         if($numofattempts < 3) {
-            $newattempts = $decverificationinfo[1] + 1;
+            $newattempts = $numofattempts + 1;
+            $encnewattempts = encryptSingleDataGivenIv([$newattempts], $key, $_SESSION["user"]->iv);
 
-            executeSQL($conn, "UPDATE verification SET attempts='$newattempts' WHERE email='$encemail';", "nothing", "nothing", "update", "nothing");
+            executeSQL($conn, "UPDATE verification SET attempts='$encnewattempts' WHERE email='$encemail';", "nothing", "nothing", "update", "nothing");
+
+            if((int)$verificationnum == (int)$decverificationinfo[0]) {
+                $_SESSION["user"]->verification = 'true';
+                $encverificationresult = encryptSingleDataGivenIv(['true'], $key, $_SESSION["user"]->iv);
+
+                executeSQL($conn, "UPDATE users SET verification='$encverificationresult' WHERE email='$encemail';", "nothing", "nothing", "update", "nothing");
+
+                echo "true";
+            }
+            else {
+                $attemptsremaining = 3 - $newattempts;
+                if($attemptsremaining > 1) {
+                    $attemptwordending = "s";
+                }
+                else if ($attemptsremaining == 0) {
+                    $attemptwordending = "s";
+                }
+                else {
+                    $attemptwordending = "";
+                }
+                echo "You have ".$attemptsremaining." attempt".$attemptwordending." remaining";
+            }
             //now check verification and if error then log the attempt and say how many remain
         }   
         else {
-            echo "You have reached your maximum number of attempts. Please click resend verification.";
+            echo "You have 0 attempts remaining. Please click resend verification.";
         }
-        
+
+
+
         // select data first then update data;
         // if there is more than one record then exit() -> error occured
 

@@ -13,11 +13,14 @@
         <form class="grid gap-r-15" method="POST" onsubmit="return false" enctype="multipart/form-data">
             <h1>Verification</h1>
             <div class="grid">
+                <p>You will recieve an email containing a verficiation number for your Calliope account.</p>
+            </div>
+            <div class="grid">
                 <input name="verificationnumber" type="text" placeholder="1234567">
                 <p id="verificationerror" class="highlight"></p>
             </div>
             <div>
-                <a href="">Resend Verification</a>
+                <a name="resendverification" href="">Resend Verification</a>
             </div>
             <button name="verificationbutton" type="submit" class="center">Verify</button>
         </form>
@@ -30,6 +33,12 @@
         var verificationdata = createFormDataObject(["input[name='verificationnumber']"], ["verificationnum"]);
         sendAJAXRequest2("../PHP-backened/verification-backened.php", verificationdata, reLoadandErrorHandle, "#verificationerror");
     });
+
+    $("a[name='resendverification']").click((e)=>{
+        e.preventDefault();
+        var emptydata = createFormDataObject([], []);
+        sendAJAXRequest2("../PHP-backened/resend-verification.php", emptydata, reLoadandErrorHandle, "#verificationerror");
+    })
 </script>
 
 

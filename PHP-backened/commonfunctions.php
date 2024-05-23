@@ -97,6 +97,13 @@
         return $encryptedset;
     }
 
+    //when the count of the data array is one
+    function encryptSingleDataGivenIv($data, $key, $iv) {
+        $encdataarr = encryptDataGivenIv($data, $key, $iv);
+        $encdata = $encdataarr[0];
+        return $encdata;
+    }
+
     //takes a single array of data (one input in a database) -> iv is always at the end
     function decryptSetofData($data, $key, $indexofIV) {
         $unencryptedset = [];
