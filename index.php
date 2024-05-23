@@ -7,7 +7,7 @@
     <body>
         <script type="text/javascript">
             $(document).ready(() => {
-                window.location.replace('Webpages/dashboard.php');
+                window.location.replace('Webpages/homepage.php');
             })
         </script>
     </body>
