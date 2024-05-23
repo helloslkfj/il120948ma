@@ -7,4 +7,4 @@
         <!--include the html code for the header of the external pages like signup and login where the user is not supposed to be logged in -->
     </head>
 
-    <body>
+    <body style="margin: 0;">

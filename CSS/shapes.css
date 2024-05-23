@@ -1,0 +1,13 @@
+.box {
+
+  text-align: center;
+
+  width: 400px;
+  height: 430px;
+
+  background-color: white;
+
+  border-radius: 10px;
+  margin: auto;
+
+}
