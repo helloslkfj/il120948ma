@@ -3,11 +3,23 @@
   text-align: center;
 
   width: 400px;
-  height: 430px;
+  height: fit-content;
 
   background-color: white;
 
   border-radius: 10px;
   margin: auto;
+  padding-bottom: 2rem;
+  margin-top: 0;
 
 }
+
+.line2 {
+  width: calc(90%);
+  height: 1px;
+  border-bottom: 1px solid #3A138D;
+  margin: auto;
+
+}
+
+
