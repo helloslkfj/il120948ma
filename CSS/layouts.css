@@ -96,5 +96,13 @@
 
 }
 
+/*CSS layout for the your templates section where the templates listed*/ 
+.templateslayout {
+    display:grid;
+    grid-template-columns:4fr 1fr;
+}
+
+
+
 
 

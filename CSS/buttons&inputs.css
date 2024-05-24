@@ -63,3 +63,7 @@
     opacity: 0.8;
     box-shadow: 1px 1px 1px #3A138D;
   }
+
+  .inputfield:focus::placeholder {
+    color:transparent;
+  }

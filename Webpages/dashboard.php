@@ -1,5 +1,5 @@
 <?php 
-    include 'head-internal.php';
+    include_once __DIR__.'/head-internal.php';
 ?>
 
     <div class="grid">

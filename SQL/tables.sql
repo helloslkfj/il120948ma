@@ -29,3 +29,13 @@ create table secrets (
     keyname varchar(300) not null,
     actualkey varchar(300) not null
 );
+
+-- code for creating the templates table which which will store the templates of the users
+create table templates (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    email varchar(300) not null,
+    title varchar(300) not null,
+    textt varchar(300) not null,
+    datentimeinteger varchar(300) not null,
+    iv varchar(10000) not null
+);

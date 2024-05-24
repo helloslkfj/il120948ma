@@ -1,7 +1,7 @@
 <?php 
     //set up login with login backened function
 
-    include 'head-external.php';
+    include_once __DIR__.'/head-external.php';
 
 ?>
 

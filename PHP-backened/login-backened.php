@@ -1,5 +1,5 @@
 <?php 
-    include 'header-backened-friend.php';
+    include_once __DIR__.'/header-backened-friend.php';
 
     if(isset($_POST['loginemail'], $_POST['loginpassword'])) {
         $loginemail = mysqli_real_escape_string($conn, $_POST['loginemail']);

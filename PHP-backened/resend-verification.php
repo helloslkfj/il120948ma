@@ -1,8 +1,8 @@
 <?php 
-    include 'header-backened-code/start-backened.php';
-    include 'header-backened-code/loginprotection-backened.php';
-    include 'header-backened-code/nonverificationprotection-backened.php';
-    include 'header-backened-code/headerincludes-backened.php';
+    include_once __DIR__.'/header-backened-code/start-backened.php';
+    include_once __DIR__.'/header-backened-code/loginprotection-backened.php';
+    include_once __DIR__.'/header-backened-code/nonverificationprotection-backened.php';
+    include_once __DIR__.'/header-backened-code/headerincludes-backened.php';
 
     //delete the current verification number and attempts in table
     //create new verification number and send mail

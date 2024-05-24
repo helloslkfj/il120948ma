@@ -1,5 +1,5 @@
 <?php 
-    include 'head-external.php';
+    include_once __DIR__.'/head-external.php';
 ?>
     <div class="generalspace">
         <div></div>

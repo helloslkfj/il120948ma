@@ -1,5 +1,5 @@
 <?php 
-    include 'head-intermediate.php';
+    include_once __DIR__.'/head-intermediate.php';
 ?>
 
 <!--Add the html code for the home page below (you are in the body tag of the homepage)-->

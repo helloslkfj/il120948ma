@@ -1,8 +1,8 @@
 <?php 
-    include 'head-code/start-code.php';
-    include 'head-code/loginprotection-code.php';
-    include 'head-code/protectionforverificationpage-code.php';
-    include 'head-html/head-internal-html.php';
+    include_once __DIR__.'/head-code/start-code.php';
+    include_once __DIR__.'/head-code/loginprotection-code.php';
+    include_once __DIR__.'/head-code/protectionforverificationpage-code.php';
+    include_once __DIR__.'/head-html/head-internal-html.php';
 
     print_r($_SESSION["user"]);
 ?>

@@ -1,5 +1,5 @@
 <?php 
-    include 'header-backened-friend.php';
+    include_once __DIR__.'/header-backened-friend.php';
 
     $error = 0;
 

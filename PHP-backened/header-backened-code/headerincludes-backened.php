@@ -1,7 +1,8 @@
 <?php 
-    include_once 'database.php';
-    include_once 'commonfunctions.php';
-    include_once 'secrets.php';
-    include_once 'signuploginfunctions.php';
-    include_once 'webscraperfunctions.php';
+    include_once __DIR__.'/../database.php';
+    include_once __DIR__.'/../commonfunctions.php';
+    include_once __DIR__.'/../secrets.php';
+    include_once __DIR__.'/../signuploginfunctions.php';
+    include_once __DIR__.'/../webscraperfunctions.php';
+    include_once __DIR__.'/../templatefunctions.php';
 ?>

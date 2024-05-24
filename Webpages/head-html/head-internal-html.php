@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <?php include 'links.php';?>
+        <?php include_once __DIR__.'/links.php';?>
 
         <!--include the html code for the header of the external pages like signup and login where the user is not supposed to be logged in -->
         <!-- the code below just has a signout button and displays the persons first name -->
@@ -14,7 +14,7 @@
         <div>
 
         
-        <br><br>
+        <br>
     </head>
 
     <body>

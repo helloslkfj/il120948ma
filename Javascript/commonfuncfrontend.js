@@ -83,3 +83,9 @@ function reLoadandErrorHandle(input, varname) {
         $(varname).html(input);
     }
 }
+
+function reLoad(input) {
+    if(input == 'true') {
+        location.reload();
+    }
+}
