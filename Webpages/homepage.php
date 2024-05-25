@@ -16,7 +16,7 @@
     <br>
     <br>
 
-    <div class="grid3">
+    <div class="grid2">
 
       <div class="blurb1">
         Calliope drafts personalized cold emails so you can focus on school, work, and life.
@@ -86,7 +86,7 @@
       Pricing
     </div>
 
-    <div class="grid4">
+    <div class="grid2">
 
       <div class="blurb3">
 

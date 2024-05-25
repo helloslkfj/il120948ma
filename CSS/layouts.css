@@ -73,13 +73,14 @@
     grid-template-columns:0.15fr 4fr 0.15fr;
 }
 
+/*put logo and name inline and position*/
 .title {
     display: inline-flex;
     padding-left: 4rem;
     padding-top: 2rem;
 }
 
-
+/*format input boxes*/
 .epass {
 
     font-family: Work Sans;
@@ -106,38 +107,18 @@
     grid-template-columns:4fr 1fr;
 }
 
+/*two columns for homepage*/
 
-.grid3 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  }
-  
   .grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
-  
-  .grid4 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-  }
 
+/*add space around homepage*/
   .main1 {
     margin: 5rem;
   }
 
-
-.forstudents {
-    background-color: #1B0055;
-}
-  
-.howwork {
-    background-color: #0E0129;
-}
-  
-.main3 {
-    background-color: white;
-}
 
 
 
