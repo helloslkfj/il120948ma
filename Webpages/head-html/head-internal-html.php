@@ -9,6 +9,7 @@
         <div class="grid">
             <text><?php echo substr($_SESSION["user"]->fname, 0, 10) ?></text>
             <form method="POST" onsubmit="return false" enctype="multipart/form-data">
+                <a href="dashboard.php">Dashboard</a>
                 <button class="center" name="logout" type="submit">Logout</button>
             </form>
         <div>

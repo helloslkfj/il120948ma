@@ -1,5 +1,6 @@
 <?php  
     include_once __DIR__.'/head-internal.php'; 
+    include_once __DIR__.'/../PHP-backened/header-backened-code/start-backened.php';
     include_once __DIR__.'/../PHP-backened/secrets.php'; //secrets includes the secrets code and the head-background-friend.php which has the commonfunctions and all other functions needed for programming
 ?>
 
@@ -10,6 +11,30 @@
             <h1>Templates</h1>
             <form class="grid gap-r-10" method="POST" onsubmit="return false" enctype="multipart/form-data">
                 <div class="grid"> 
+                    <?php 
+                        if(isset($_SESSION["template"])) {
+                    ?> 
+                        <div class="generaltwocolumns center gap-c-10">
+                            <em><?php echo $_SESSION["template"]->title; ?></em>
+                            <button name="exittemplate">Exit</button>
+                        </div>
+
+                        <script>
+                            $(document).ready(()=> {
+                                $("button[name='exittemplate']").click(()=>{
+                                    var exittemplatedata = new FormData();
+
+                                    exittemplatedata.append('exit', true);
+
+                                    var exitconfirmation = confirm("Are you sure you want to exit the template? Any changes made will not be saved unless you click the update button.")
+
+                                    if(exitconfirmation == true) {
+                                        sendAJAXRequest('../PHP-backened/deletetemplates-backened.php', exittemplatedata, reLoad);
+                                    }
+                                });
+                            });
+                        </script>
+                    <?php } ?>
                     <text>Template Title</text>
                     <?php 
                         if(isset($_SESSION["template"])) {
@@ -49,10 +74,12 @@
         </div>
         <?php 
             $encemail = encryptSingleDataGivenIv([$_SESSION["user"]->email], $key, $_SESSION["user"]->iv);
-            $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email='$encemail' ORDER BY datentimeinteger DESC;", "nothing", "nothing", "select", "nothing"));
-            //have to fix which shows up first and the brackets showing up in the text.
-            //make sure to unset the session variable of templates when deleting templates
+            $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=? ORDER BY datentimeinteger DESC;", ["s"], [$encemail], "select", "nothing"));
+            // have exit feature wehn updating
+
+            //make sure to unset the session variable of templates when deleting templates, have a delete button (trash icon) --> it should make sure before deleting
             $dectemplates = decryptFullData($enctemplates, $key, 4);
+            $dectemplates = order2DArray_BasedOnValue($dectemplates, 3, "DESC");
         ?>
         <div class="grid gap-r-5">
             <h3>Your Templates</h3>
@@ -60,15 +87,21 @@
                 <div class="grid gap-r-10">
                     <?php 
                         for($i=0;$i<count($dectemplates);$i++) {
-                    ?>
+                    ?>  
+                        <div class="individualtemprow">
                             <text class="underline"><?php echo $dectemplates[$i][1]; ?></text>
+                            <em> <?php echo "Last updated ".date("F d, Y", (int)$dectemplates[$i][3])." at ".date("h:i A", (int)$dectemplates[$i][3])." EST"; ?></em>
+                        </div>
                     <?php } ?>
                 </div>
                 <div class="grid gap-r-10">
                     <?php 
                         for($i=0;$i<count($dectemplates);$i++) {
-                    ?>
+                    ?>       
+                        <div class="individualtemprow">
+                            <i name="deletetemplate" value="<?php echo $dectemplates[$i][1]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-xl trashicon"></i>
                             <button id="<?php echo $dectemplates[$i][1]; ?>" name="templateviewbutton">View</button>
+                        </div>
                     <?php } ?>
                 </div>
             </div>
@@ -109,6 +142,20 @@
                     viewformdata.append('templatetitle', templatetitle);
 
                     sendAJAXRequest('../PHP-backened/viewtemplate-backened.php', viewformdata, reLoad);
+                });
+
+                $("i[name='deletetemplate']").click(function() {
+                    var deleteformdata = new FormData();
+                    var templatetitle = $(this).attr('value');
+
+                    deleteformdata.append('delete', true);
+                    deleteformdata.append('templatetitle', templatetitle);
+
+                    var confirmation = confirm('Are you sure you want to delete the template?');
+
+                    if(confirmation == true) {
+                        sendAJAXRequest('../PHP-backened/deletetemplates-backened.php', deleteformdata, reLoad);
+                    }
                 });
 
             });

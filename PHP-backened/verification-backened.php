@@ -5,11 +5,9 @@
     include_once __DIR__.'/header-backened-code/loginprotection-backened.php';
 
     if(isset($_POST["verificationnum"])) {
-        $encemailarr = encryptDataGivenIv([$_SESSION["user"]->email], $key, $_SESSION["user"]->iv);
-        $encemail = $encemailarr[0];
-        $verificationnum = mysqli_real_escape_string($conn, $_POST["verificationnum"]);
+        $verificationnum = $_POST["verificationnum"];
 
-        $encverificationinfo =  getDatafromSQLResponse(["verificationnum", "attempts", "iv"], executeSQL($conn, "SELECT * FROM verification WHERE email='$encemail';", "nothing", "nothing", "select", "nothing"));
+        $encverificationinfo =  getDatafromSQLResponse(["verificationnum", "attempts", "iv"], executeSQL($conn, "SELECT * FROM verification WHERE email=?;", ["s"], [$encemail], "select", "nothing"));
         if(count($encverificationinfo) > 1) {
             exit("Error occured in the database!");
         }
@@ -20,13 +18,13 @@
             $newattempts = $numofattempts + 1;
             $encnewattempts = encryptSingleDataGivenIv([$newattempts], $key, $_SESSION["user"]->iv);
 
-            executeSQL($conn, "UPDATE verification SET attempts='$encnewattempts' WHERE email='$encemail';", "nothing", "nothing", "update", "nothing");
+            executeSQL($conn, "UPDATE verification SET attempts=? WHERE email=?;", ["s", "s"], [$encnewattempts, $encemail], "update", "nothing");
 
             if((int)$verificationnum == (int)$decverificationinfo[0]) {
                 $_SESSION["user"]->verification = 'true';
                 $encverificationresult = encryptSingleDataGivenIv(['true'], $key, $_SESSION["user"]->iv);
 
-                executeSQL($conn, "UPDATE users SET verification='$encverificationresult' WHERE email='$encemail';", "nothing", "nothing", "update", "nothing");
+                executeSQL($conn, "UPDATE users SET verification=? WHERE email=?;", ["s", "s"], [$encverificationresult, $encemail], "update", "nothing");
 
                 echo "true";
             }

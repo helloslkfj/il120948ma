@@ -40,11 +40,11 @@
 
 
 
-  }
+}
 
-  .fineprint:hover {
+.fineprint:hover {
     color: black;
-  }
+}
 
 .caccbutton {
     background-color: #3A138D;
@@ -61,14 +61,21 @@
     margin-bottom: 20px;
     cursor: pointer;
   
-  }
+}
   
   
-  .caccbutton:hover {
-    opacity: 0.8;
-    box-shadow: 1px 1px 1px #3A138D;
-  }
+.caccbutton:hover {
+  opacity: 0.8;
+  box-shadow: 1px 1px 1px #3A138D;
+}
 
-  .inputfield:focus::placeholder {
-    color:transparent;
-  }
+.inputfield:focus::placeholder {
+  color:transparent;
+}
+
+
+/* CSS so that the trash icon (acts as an icon) gets colored when hovered over */
+.trashicon:hover {
+  cursor:pointer;
+  color:#DC143C;
+}

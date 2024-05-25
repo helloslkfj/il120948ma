@@ -3,11 +3,11 @@
 
     if(isset($_POST['view'])) {
         if(isset($_POST['templatetitle'])) {
-            $encemail = encryptSingleDataGivenIv([$_SESSION['user']->email], $key, $_SESSION['user']->iv); // make this encemail accessible across pages
-            $templatetitle = mysqli_real_escape_string($conn, $_POST['templatetitle']);
+           // make this encemail accessible across pages
+            $templatetitle = $_POST['templatetitle'];
             $enctemplatetitle = encryptSingleDataGivenIv([$templatetitle], $key, $_SESSION['user']->iv);
 
-            $enctemplateresp = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email='$encemail' AND title='$enctemplatetitle';", "nothing", "nothing", "select", "nothing"));
+            $enctemplateresp = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=? AND title=?;", ["s", "s"], [$encemail, $enctemplatetitle], "select", "nothing"));
             if(count($enctemplateresp) != 1) {
                 exit("Error in viewing the template!");
             }

@@ -136,6 +136,32 @@
         return $fullunencryptedset;
     }
 
+    //function that orders a 2d array based on a specific index in the single arrays of the 2d array
+    function order2DArray_BasedOnValue($twodarray, $indexoforder, $typeofordering) {
+        $ordered2darr = [];
 
+        for($i=0;$i<count($twodarray); $i++) {
+            for($g=$i+1; $g<count($twodarray); $g++) {
+                if($typeofordering == "ASC") {
+                    if ($twodarray[$i][$indexoforder] > $twodarray[$g][$indexoforder]) {
+                        $informationholder = $twodarray[$g];
+                        $twodarray[$g] = $twodarray[$i];
+                        $twodarray[$i] = $informationholder;
+                    }
+                }
+                else if($typeofordering == "DESC") {
+                    if ($twodarray[$i][$indexoforder] < $twodarray[$g][$indexoforder]) {
+                        $informationholder = $twodarray[$g];
+                        $twodarray[$g] = $twodarray[$i];
+                        $twodarray[$i] = $informationholder;
+                    }
+                }
+            }
+        }
+
+        $ordered2darr =  $twodarray;
+
+        return $ordered2darr;
+    }
 
 ?>

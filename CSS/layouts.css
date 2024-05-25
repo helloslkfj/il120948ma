@@ -106,25 +106,36 @@
     grid-template-columns:4fr 1fr;
 }
 
+/*CSS layout for each individual template row under the Your Templates Section to add the last updated text; also used for delete button*/
+.individualtemprow {
+    display:grid;
+    grid-template-columns:1fr 3fr;
+}
+
+/*CSS layout for creating two side by side columns*/
+.generaltwocolumns {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+}
 
 .grid3 {
     display: grid;
     grid-template-columns: 1fr 1fr;
   }
   
-  .grid2 {
+.grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
+}
   
-  .grid4 {
+.grid4 {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-  }
+}
 
-  .main1 {
+.main1 {
     margin: 5rem;
-  }
+}
 
 
 .forstudents {
@@ -138,6 +149,8 @@
 .main3 {
     background-color: white;
 }
+
+
 
 
 

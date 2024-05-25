@@ -1,15 +1,15 @@
 <?php 
     include_once __DIR__.'/header-backened-code/start-backened.php';
+    include_once __DIR__.'/header-backened-code/headerincludes-backened.php';
     include_once __DIR__.'/header-backened-code/loginprotection-backened.php';
     include_once __DIR__.'/header-backened-code/nonverificationprotection-backened.php';
-    include_once __DIR__.'/header-backened-code/headerincludes-backened.php';
+    
 
     //delete the current verification number and attempts in table
     //create new verification number and send mail
     //insert that number into a SQL request that then adds it to the table as a verification number with 0 attempts under the users  enc email
 
-    $encemail = encryptSingleDataGivenIv([$_SESSION["user"]->email], $key, $_SESSION["user"]->iv);
-    executeSQL($conn, "DELETE FROM verification WHERE email='$encemail';", "nothing", "nothing", "delete", "nothing");
+    executeSQL($conn, "DELETE FROM verification WHERE email=?;", ["s"], [$encemail], "delete", "nothing");
 
     $verificationcode = rand(1000000, 9999999);
 
