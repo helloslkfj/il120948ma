@@ -1,5 +1,5 @@
 /* This is the file that contains all the different font classes with @font-face and then each different font having its class */
-
+/*sign up text on log in pages*/
 .signup {
   text-align: center;
   font-family: Work Sans;
@@ -13,12 +13,14 @@
   text-decoration:underline;
 }
 
+/*error text*/
 .highlight {
-  color: blue;
+  color: red;
   font-family: Work Sans;
 
 }
 
+/*homepage slogan*/
 .slogan {
   font-family: Work Sans;
   font-weight: 700;
@@ -26,6 +28,7 @@
   color: white;
 }
 
+/*homepage blurbs*/
 .blurb1 {
   font-family: Work Sans;
   font-weight: 200;

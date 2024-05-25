@@ -15,6 +15,7 @@
     width:40%;
 }
 
+/*name takes back to homepage*/
 .titlebutton {
     font-family: Work Sans;
     font-size: 60px;
@@ -26,6 +27,7 @@
     
 }
 
+/*already have an account link*/
 .fineprint {
     font-family: Work Sans;
     font-weight: 300;
@@ -37,15 +39,21 @@
     transition: color 0.15s;
     margin-top: 1rem;
 
+<<<<<<< HEAD
 
 
 
 }
+=======
+  }
+>>>>>>> 593a99785acc98e06b858423f75d1dcd03262b84
 
 .fineprint:hover {
     color: black;
 }
 
+
+/*submit button on log in pages*/
 .caccbutton {
     background-color: #3A138D;
     border: none;
