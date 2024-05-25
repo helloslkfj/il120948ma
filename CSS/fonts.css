@@ -6,8 +6,84 @@
   font-weight: 400;
   font-size: 40px;
   color: #3A138D;
+  padding: 1rem;
 }
 
 .underline {
   text-decoration:underline;
 }
+
+.highlight {
+  color: blue;
+  font-family: Work Sans;
+
+}
+
+.slogan {
+  font-family: Work Sans;
+  font-weight: 700;
+  font-size: 80px;
+  color: white;
+}
+
+.blurb1 {
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 40px;
+  color: white;
+  width: calc(90%);
+  margin-bottom: 9rem;
+
+}
+
+.blurb2 {
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 30px;
+  color: white;
+  padding: 5rem;
+
+
+}
+
+.subtitle {
+  font-family: Work Sans;
+  font-weight: 700;
+  font-size: 50px;
+  color: white;
+  padding: 5rem;
+  padding-bottom: 1rem;
+}
+
+.pricing {
+  font-family: Work Sans;
+  font-weight: 700;
+  font-size: 100px;
+  color: #0E0129;
+  padding: 4rem;
+}
+
+.blurb3 {
+  font-family: Work Sans;
+  font-weight: 200;
+  font-size: 35px;
+  color: #0E0129;
+
+  border: solid #0E0129;
+  
+  border-radius: 15px;
+  padding: 3rem;
+  margin: 4rem;
+
+}
+
+.subtitle2 {
+  font-family: Work Sans;
+  font-weight: 600;
+  font-size: 50px;
+  text-decoration: underline;
+  margin-left: 1rem;
+  margin-bottom: 2rem;
+}
+
+

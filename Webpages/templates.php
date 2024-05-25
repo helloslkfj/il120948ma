@@ -51,6 +51,7 @@
             $encemail = encryptSingleDataGivenIv([$_SESSION["user"]->email], $key, $_SESSION["user"]->iv);
             $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email='$encemail' ORDER BY datentimeinteger DESC;", "nothing", "nothing", "select", "nothing"));
             //have to fix which shows up first and the brackets showing up in the text.
+            //make sure to unset the session variable of templates when deleting templates
             $dectemplates = decryptFullData($enctemplates, $key, 4);
         ?>
         <div class="grid gap-r-5">

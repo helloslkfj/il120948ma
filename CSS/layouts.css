@@ -93,14 +93,53 @@
     margin: auto;
     width: 350px;
     height: 40px;
+    margin-top: 2rem;
 
 }
+
+
+
 
 /*CSS layout for the your templates section where the templates listed*/ 
 .templateslayout {
     display:grid;
     grid-template-columns:4fr 1fr;
 }
+
+
+.grid3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .grid4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .main1 {
+    margin: 5rem;
+  }
+
+
+.forstudents {
+    background-color: #1B0055;
+}
+  
+.howwork {
+    background-color: #0E0129;
+}
+  
+.main3 {
+    background-color: white;
+}
+
+
 
 
 

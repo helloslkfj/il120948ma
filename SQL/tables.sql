@@ -35,7 +35,7 @@ create table templates (
     id int(11) not null PRIMARY KEY AUTO_INCREMENT,
     email varchar(300) not null,
     title varchar(300) not null,
-    textt varchar(300) not null,
+    textt text not null,
     datentimeinteger varchar(300) not null,
     iv varchar(10000) not null
 );

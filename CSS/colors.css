@@ -1,14 +1,21 @@
 /* This is the file that contains all the color related classes like background, backgroundofbuttons, highlightcolor, etc */
 
-.highlight {
-    color:#DC143C;
-}
+
 
 .greensuccess {
     color:#259944;
 }
 
-.main1 {
-    background-color: #3A138D;
 
+.forstudents {
+    background-color: #1B0055;
 }
+  
+.howwork {
+    background-color: #0E0129;
+}
+  
+.main3 {
+    background-color: white;
+}
+

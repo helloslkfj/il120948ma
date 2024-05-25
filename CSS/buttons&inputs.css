@@ -33,8 +33,13 @@
     color: #3A138D;
     text-decoration: underline 1.5px;
     cursor: pointer;
-    transition: font-weight 0.15s;
-    margin-top: 20px;
+
+    transition: color 0.15s;
+    margin-top: 1rem;
+
+
+
+
   }
 
   .fineprint:hover {
