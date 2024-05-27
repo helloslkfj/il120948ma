@@ -23,7 +23,7 @@
       </div>
 
       <div>
-        <img src="../Images/paperairplanecoloured.png" height="300">
+        <img class="paperairplane" src="../Images/paperairplanecoloured.png" height="300">
       </div>
 
     </div>
@@ -81,17 +81,17 @@
   </div>
 
   <div class="main3">
-
+  
     <div class="pricing">
       Pricing
     </div>
 
-    <div class="grid2">
+    <div class="gridpricing">
 
       <div class="blurb3">
 
         <span class="subtitle2">Academic</span>
-        <ul>
+        <ul class="listprice">
           <li>$10/month</li>
           <br>
           <li>15 research emails/month</li>
@@ -102,7 +102,7 @@
       <div class="blurb3">
 
         <span class="subtitle2">Business</span>
-        <ul>
+        <ul class="listprice">
           <li>$8/month</li>
           <br>
           <li>100 business emails/month</li>
@@ -113,7 +113,7 @@
       <div class="blurb3">
 
         <span class="subtitle2">Deluxe</span>
-        <ul>
+        <ul class="listprice">
           <li>$20/month</li>
           <br>
           <li>20 research emails/month</li>
@@ -126,7 +126,7 @@
       <div class="blurb3">
 
         <span class="subtitle2">Elite</span>
-        <ul>
+        <ul class="listprice">
           <li>$30/month</li>
           <br>
           <li>30 research emails/month</li>
@@ -139,6 +139,8 @@
     </div>
 
   </div>
+
+</div>
 
 <?php 
     include 'footer-frontend.php';
