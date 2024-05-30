@@ -80,3 +80,21 @@
   cursor:pointer;
   color:#DC143C;
 }
+
+/*CSS for a button that is used across the site, right now this button style is being used just for the select resume button on resumes.php*/
+.basicbutton {
+    background-color:#d9d9d9;
+}
+
+.basicbutton:hover {
+    background-color:#6b6963;
+    color:#ffffff;
+    cursor:pointer;
+}
+
+/*CSS class that removes the original styling of the button tag*/
+.buttonstyleremove {
+    border: none;
+    cursor: pointer;
+    outline: none;
+  }

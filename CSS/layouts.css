@@ -99,7 +99,7 @@
 
 
 
-
+/*ATTENTION: used the same CSS layouts for both resumes and templates page*/
 /*CSS layout for the your templates section where the templates listed*/ 
 .templateslayout {
     display:grid;
@@ -129,6 +129,49 @@
   .main1 {
     margin: 5rem;
   }
+
+  /*for pricing*/
+  .gridpricing {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 3rem;
+  }
+
+
+
+  /*Tablets*/
+@media (max-width: 768px) {
+    .gridpricing {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .grid2 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+}
+
+/*Mobile*/
+@media (max-width: 500px) {
+    /*make in one column*/
+    .grid2 {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    /*remove image*/
+    .paperairplane {
+        display: none;
+    }
+
+    .gridpricing {
+        grid-template-columns: 1fr;
+    }
+
+
+   
+
+}
 
 
 
