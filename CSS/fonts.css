@@ -64,20 +64,27 @@
   font-size: 100px;
   color: #0E0129;
   padding: 4rem;
+  padding-bottom: 0;
+
 }
 
 .blurb3 {
   font-family: Work Sans;
   font-weight: 200;
-  font-size: 35px;
+  font-size: 30px;
   color: #0E0129;
 
   border: solid #0E0129;
   
   border-radius: 15px;
-  padding: 3rem;
-  margin: 4rem;
+  padding: 2rem;
+  margin: 1rem;
 
+}
+
+.listprice {
+  margin-left: 1rem;
+  margin-top: 1rem;
 }
 
 .subtitle2 {
@@ -87,6 +94,54 @@
   text-decoration: underline;
   margin-left: 1rem;
   margin-bottom: 2rem;
+}
+
+/*Tablets*/
+@media (max-width: 768px) {
+
+}
+
+/*Mobile*/
+@media (max-width: 500px) {
+  /*reduce font size*/
+  .blurb3 {
+    font-size: 20px;
+    padding: 1rem;
+    margin: 1rem;
+
+  }
+
+  .subtitle2 {
+    font-size: 30px;
+
+    margin: 2rem;
+    margin-left: 0;
+
+  }
+
+  .pricing {
+    font-size: 80px;
+
+  }
+
+  .listprice {
+    margin-left: 1rem;
+    margin-top: 1rem;
+  }
+
+  .blurb1 {
+
+    font-size: 30px;
+  }
+
+  .blurb2 {
+    text-align: justify;
+    font-size: 20px;
+  }
+
+  .subtitle {
+    font-size: 30px;
+  }
 }
 
 
