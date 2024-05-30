@@ -31,7 +31,7 @@
         }
         catch (Exception $e) {
             echo "Could not execute sql", $e -> getMessage();
-            exit("Problem!");
+            exit("<br>Problem!");
         }
 
         return $response;
@@ -72,7 +72,7 @@
             }
             catch (Exception $e) {
                 echo "Could not encrypt the set of data", $e -> getMessage();
-                exit("Problem!");
+                exit("<br>Problem!");
             }
         }
 
@@ -90,7 +90,7 @@
             }
             catch (Exception $e) {
                 echo "Could not encrypt the set of data", $e -> getMessage();
-                exit("Problem!");
+                exit("<br>Problem!");
             }
         }
 
@@ -115,7 +115,7 @@
                 }
                 catch (Exception $e) {
                     echo "Could not decrypt the set of data", $e -> getMessage();
-                    exit("Problem!");
+                    exit("<br>Problem!");
                 }
             }
         }
@@ -163,5 +163,19 @@
 
         return $ordered2darr;
     }
+
+    function generateRandomNum($length) {
+        $randomnum = [];
+        for ($i=0; $i<$length; $i++) {
+            $randomnum[] = rand(0, 9);
+        }
+
+        $actrandnum = implode("", $randomnum);
+
+        return $actrandnum;
+    }
+
+
+    
 
 ?>

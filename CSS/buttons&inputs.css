@@ -15,6 +15,11 @@
     width:40%;
 }
 
+/*CSS for the textarea width*/
+.generaltextarea {
+    width:60%;
+}
+
 /*name takes back to homepage*/
 .titlebutton {
     font-family: Work Sans;

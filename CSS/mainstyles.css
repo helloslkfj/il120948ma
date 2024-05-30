@@ -10,6 +10,27 @@
     margin:auto;
 }
 
+#resumeupload {
+    display:none;
+}
+
+.toppadding {
+    padding-top:10px;
+  }
+  
+.bottompadding {
+    padding-bottom:10px;
+}
+  
+.sidetosidepadding{
+    padding-right:10px;
+    padding-left:10px;
+}
+
+/* CSS cass for giving the elemnt a display of none*/
+.none {
+    display:none !important;
+}
 
 
 

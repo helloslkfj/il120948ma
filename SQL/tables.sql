@@ -39,3 +39,15 @@ create table templates (
     datentimeinteger varchar(300) not null,
     iv varchar(10000) not null
 );
+
+-- code for creating the resumes table which will store the templates of the users
+create table resumes (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    email varchar(300) not null,
+    resumename varchar(1000) not null,
+    resumelocation varchar(1000) not null,
+    resumetext text not null,
+    datentimeinteger varchar(800) not null,
+    iv varchar(10000) not null
+);
+

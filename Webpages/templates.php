@@ -73,7 +73,6 @@
             </div>
         </div>
         <?php 
-            $encemail = encryptSingleDataGivenIv([$_SESSION["user"]->email], $key, $_SESSION["user"]->iv);
             $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=? ORDER BY datentimeinteger DESC;", ["s"], [$encemail], "select", "nothing"));
             // have exit feature wehn updating
 
@@ -151,7 +150,7 @@
                     deleteformdata.append('delete', true);
                     deleteformdata.append('templatetitle', templatetitle);
 
-                    var confirmation = confirm('Are you sure you want to delete the template?');
+                    var confirmation = confirm('Are you sure you want to delete this template?');
 
                     if(confirmation == true) {
                         sendAJAXRequest('../PHP-backened/deletetemplates-backened.php', deleteformdata, reLoad);
