@@ -9,9 +9,15 @@
         <div></div>
         <div class="grid gap-r-15">
             <div class="research-inputgrid">
-                <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor">
+                <div class="grid">
+                    <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor">
+                    <p id="professorweberror" class="highlight"></p>
+                </div>
                 <div></div>
-                <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's publications">
+                <div class="grid">
+                    <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's publications">
+                    <p id="publicationweberror" class="highlight"></p>
+                </div>
             </div>
             <div class="research-inputgrid">
                 <div class="grid">
@@ -22,7 +28,7 @@
 
                         if(count($dectemplates) > 0) {
                     ?>
-                    <select name="templates"> <!-- what to do when you get stuck  on just create new; also make sure that when a user signs up you intialize certain templates to him/her-->
+                    <select name="templates"> 
                         <?php 
                             for($i=0;$i<count($dectemplates);$i++) {
                         ?>
@@ -33,6 +39,7 @@
                     <?php } else { ?>
                         <button class="center" name="createtemplate">Create a Template</button> 
                     <?php } ?>
+                    <p id="templateerror" class="highlight"></p>
                 </div>
                 <div></div>
                 <div class="grid">
@@ -53,6 +60,7 @@
                     <?php } else {?>
                         <button class="center" name="addresume">Add a Resume</button> 
                     <?php } ?>
+                    <p id="resumeerror" class="highlight"></p>
                 </div>
             </div>
 
@@ -66,22 +74,65 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $("input[name='professorwebpage']").keyup(()=>{
+                var professorwebdata = createFormDataObject([$("input[name='professorwebpage']")], ["professorwebpage"]);
+                console.log(professorwebdata);
+                sendAJAXRequest2('../PHP-backened/research-scrape.php', professorwebdata, reLoadandErrorHandle, "#professorweberror");
+            });
+            $("input[name='publicationwebpage']").keyup(()=>{
+                var publicationwebdata = createFormDataObject([$("input[name='publicationwebpage']")], ["publicationwebpage"]);
+                sendAJAXRequest2('../PHP-backened/research-scrape.php', publicationwebdata, reLoadandErrorHandle, "#publicationweberror")
+            });
+
             $("body").on("change", "select[name='templates']", function() {
                 if($("select[name='templates']").find(":selected").val() == "Create New") {
                     window.location.replace('templates.php');
-                }  
+                } else {
+                    var templatedata = createFormDataObject([$("select[name='templates']").find(":selected")], ["template"]);
+                    sendAJAXRequest2('../PHP-backened/research-scrape.php', templatedata, reLoadandErrorHandle, "#templateerror");
+                }
             });
             $("body").on("change", "select[name='resumes']", function() {
                 if($("select[name='resumes']").find(":selected").val() == "Add More") {
                     window.location.replace('resumes.php');
-                }  
+                } else {
+                    var resumedata = createFormDataObject([$("select[name='resumes']").find(":selected")], ["resume"]);
+                    sendAJAXRequest2('../PHP-backened/research-scrape.php', resumedata, reLoadandErrorHandle, "#resumeerror");
+                }
             });
+
             $("button[name='createtemplate']").click(()=>{
                 window.location.replace('templates.php')
             });
             $("button[name='addresume']").click(()=>{
                 window.location.replace('resumes.php')
             });
+
+            $("button[name='generateresearch']").click(()=>{
+                
+                var researchemailinfo = createFormDataObject([$("input[name='professorwebpage']"), $("input[name='publicationwebpage']"), $("select[name='templates']").find(":selected"), $("select[name='resumes']").find(":selected")], ["professorwebpage", "publicationwebpage", "template", "resume"]);
+
+                var instanterror = 0;
+                if(researchemailinfo.get("template") == 'null' || researchemailinfo.get("template") == 'undefined' || researchemailinfo.get("template") == "") {
+                    $("#templateerror").html('Please attach a template.');
+                    instanterror += 1;
+                }
+                if(researchemailinfo.get("resume") == 'null' || researchemailinfo.get("resume") == 'undefined' || researchemailinfo.get("resume") == "") {
+                    console.log(researchemailinfo.get("resume"));
+                    $("#resumeerror").html('Please attach a resume.');
+                    instanterror += 1;
+                }
+                if(instanterror > 0) {
+                    return;
+                }
+
+                //key up and cause changes in elements
+                //send the full request to research-scrape.php
+
+
+
+            });
+
         });
     </script>
 

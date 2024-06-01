@@ -99,7 +99,7 @@
                     ?>       
                         <div class="individualtemprow">
                             <i name="deletetemplate" value="<?php echo $dectemplates[$i][1]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-xl trashicon"></i>
-                            <button id="<?php echo $dectemplates[$i][1]; ?>" name="templateviewbutton">View</button>
+                            <button id="<?php echo $dectemplates[$i][1]; ?>" name="templateviewbutton">Update/View</button>
                         </div>
                     <?php } ?>
                 </div>

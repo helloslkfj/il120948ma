@@ -175,7 +175,18 @@
         return $actrandnum;
     }
 
+    function deleteIndexesfrom2DArray($twodarray, $indexesofdeletion) {
+        $newarray = [];
+        for($i=0; $i<count($twodarray); $i++) {
+            for($z=0; $z<count($twodarray[$i]); $z++) {
+                if(in_array($z, $indexesofdeletion) != true) {
+                    $newarray[] = $twodarray[$i][$z];
+                }
+            }
+        }
 
+        return $newarray;
+    }
     
 
 ?>

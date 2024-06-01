@@ -8,6 +8,6 @@
         just write stuff like first name and last name, then I will add the php for that 
         -->
 
-        <meta name="viewport" content="width=device-width, initial-scaled=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
