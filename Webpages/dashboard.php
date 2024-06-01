@@ -22,6 +22,13 @@
             if(isset($_GET['verification'])) {
         ?>
             <text class="greensuccess"><?php echo $_GET['verification']; ?></text>
+            <script type="text/javascript">
+                $(document).ready(()=>{
+                    setTimeout(function() {
+                        window.location.replace('dashboard.php');
+                    }, 5000);
+                });
+            </script>
         <?php } ?>
         <br>
         <div id="pageload">

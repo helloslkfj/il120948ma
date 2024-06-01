@@ -111,7 +111,7 @@
 
                 $templatearr = [$signupemail, "Basic Research Template", "Introduce the prof", strtotime(date("Y-m-d H:i:s"))]; //need to make this more of a proper template, but this is the basic research template inititalization
                 $enctemplatearr = encryptDataGivenIv($templatearr,$key, $tencryptedsignuparr[0]);
-                executeSQL($conn, "INSERT INTO templates(email, title, textt, datentimeinteger, iv) VALUES(?,?,?,?,?)", ["s","s","s","s","s"], array_merge($templatearr, $tencryptedsignuparr[0]), "insert", 4);
+                executeSQL($conn, "INSERT INTO templates(email, title, textt, datentimeinteger, iv) VALUES(?,?,?,?,?)", ["s","s","s","s","s"], array_merge($enctemplatearr, [$tencryptedsignuparr[0]]), "insert", 4);
 
                 //error handling is such that the fatal errors are posted on the signup screen notifying user that something has gone wrong; if insertion sql for user data failed then, they will see that they have to sign up again; for verfication insertion or mail fail then they will just resend verification as they will realize their number does not work or they didn't recieve it and they will know it has something to do with the error 
                 
