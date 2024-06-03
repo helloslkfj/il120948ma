@@ -1,100 +1,144 @@
 /* This is the file that contains all the different font classes with @font-face and then each different font having its class */
 /*sign up text on log in pages*/
-.signup {
-  text-align: center;
-  font-family: Work Sans;
-  font-weight: 400;
-  font-size: 40px;
-  color: #3A138D;
-  padding: 1rem;
-}
 
-.underline {
-  text-decoration:underline;
-}
+/*CSS for homepage and signup pages*/
+      .signup {
+        text-align: center;
+        font-family: Work Sans;
+        font-weight: 400;
+        font-size: 40px;
+        color: #3A138D;
+        padding: 1rem;
+      }
 
-/*error text*/
-.highlight {
-  color: red;
-  font-family: Work Sans;
+      .underline {
+        text-decoration:underline;
+      }
 
-}
+      /*error text*/
+      .highlight {
+        color: red;
+        font-family: Work Sans;
 
-/*homepage slogan*/
-.slogan {
-  font-family: Work Sans;
-  font-weight: 700;
-  font-size: 80px;
-  color: white;
-}
+      }
 
-/*homepage blurbs*/
-.blurb1 {
-  font-family: Work Sans;
-  font-weight: 200;
-  font-size: 40px;
-  color: white;
-  width: calc(90%);
-  margin-bottom: 9rem;
+      /*homepage slogan*/
+      .slogan {
+        font-family: Work Sans;
+        font-weight: 700;
+        font-size: 80px;
+        color: white;
+      }
 
-}
+      /*homepage blurbs*/
+      .blurb1 {
+        font-family: Work Sans;
+        font-weight: 200;
+        font-size: 40px;
+        color: white;
+        width: calc(90%);
+        margin-bottom: 9rem;
 
-.blurb2 {
-  font-family: Work Sans;
-  font-weight: 200;
-  font-size: 30px;
-  color: white;
-  padding: 5rem;
+      }
+
+      .blurb2 {
+        font-family: Work Sans;
+        font-weight: 200;
+        font-size: 30px;
+        color: white;
+        padding: 5rem;
 
 
-}
+      }
 
-.subtitle {
-  font-family: Work Sans;
-  font-weight: 700;
-  font-size: 50px;
-  color: white;
-  padding: 5rem;
-  padding-bottom: 1rem;
-}
+      .subtitle {
+        font-family: Work Sans;
+        font-weight: 700;
+        font-size: 50px;
+        color: white;
+        padding: 5rem;
+        padding-bottom: 1rem;
+      }
 
-.pricing {
-  font-family: Work Sans;
-  font-weight: 700;
-  font-size: 100px;
-  color: #0E0129;
-  padding: 4rem;
-  padding-bottom: 0;
+      .pricing {
+        font-family: Work Sans;
+        font-weight: 700;
+        font-size: 100px;
+        color: #0E0129;
+        padding: 4rem;
+        padding-bottom: 0;
 
-}
+      }
 
-.blurb3 {
-  font-family: Work Sans;
-  font-weight: 200;
-  font-size: 30px;
-  color: #0E0129;
+      .blurb3 {
+        font-family: Work Sans;
+        font-weight: 200;
+        font-size: 30px;
+        color: #0E0129;
 
-  border: solid #0E0129;
-  
-  border-radius: 15px;
-  padding: 2rem;
-  margin: 1rem;
+        border: solid #0E0129;
+        
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 1rem;
 
-}
+      }
 
-.listprice {
-  margin-left: 1rem;
-  margin-top: 1rem;
-}
+      .listprice {
+        margin-left: 1rem;
+        margin-top: 1rem;
+      }
 
-.subtitle2 {
-  font-family: Work Sans;
-  font-weight: 600;
-  font-size: 50px;
-  text-decoration: underline;
-  margin-left: 1rem;
-  margin-bottom: 2rem;
-}
+      .subtitle2 {
+        font-family: Work Sans;
+        font-weight: 600;
+        font-size: 50px;
+        text-decoration: underline;
+        margin-left: 1rem;
+        margin-bottom: 2rem;
+      }
+
+
+/*generic formatting*/
+      .gentitle {
+        font-family: Work Sans;
+        font-weight: 500;
+        font-size: 50px;
+        color: #3A138D;
+ 
+      }
+
+      .gensubtitle {
+        font-family: Work Sans;
+        font-weight: 300;
+        font-size: 30px;
+        color: #3A138D;
+        margin-bottom: 5px;
+      }
+
+      .gensubtitle2 {
+        font-family: Work Sans;
+        font-weight: 550;
+        font-size: 30px;
+        color: #3A138D;
+      }
+
+
+      .generictext {
+        font-family: Work Sans;
+        font-size: 20px;
+        font-weight: 300;
+        color: #3A138D;
+      }
+
+      .maintitle {
+        font-family: Work Sans;
+        font-size: 50px;
+        font-weight: 300;
+        color: white;
+      }
+
+
 
 /*Tablets*/
 @media (max-width: 768px) {
@@ -143,5 +187,15 @@
     font-size: 30px;
   }
 }
+
+.noline {
+  text-decoration: none;
+}
+
+
+
+
+
+
 
 

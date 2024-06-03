@@ -1,5 +1,6 @@
 /* This page contains all the classes with hover, inputfield classes, etc*/
 
+
 .textlink {
     color:black;
 }
@@ -20,82 +21,179 @@
     width:60%;
 }
 
-/*name takes back to homepage*/
-.titlebutton {
-    font-family: Work Sans;
-    font-size: 60px;
-    font-weight: 200;
-    background-color: transparent;
-    color: white;
-    border: none;
-    cursor: pointer;
-    
-}
 
-/*already have an account link*/
-.fineprint {
-    font-family: Work Sans;
-    font-weight: 300;
-    font-size: 20px;
-    color: #3A138D;
-    text-decoration: underline 1.5px;
-    cursor: pointer;
+/*homepage and login buttons*/
+      /*name takes back to homepage*/
+      .titlebutton {
+          font-family: Work Sans;
+          font-size: 60px;
+          font-weight: 200;
+          background-color: transparent;
+          color: white;
+          border: none;
+          cursor: pointer;
+          
+      }
 
-    transition: color 0.15s;
-    margin-top: 1rem;
+      /*already have an account link*/
+      .fineprint {
+          font-family: Work Sans;
+          font-weight: 300;
+          font-size: 20px;
+          color: #3A138D;
+          text-decoration: underline 1.5px;
+          cursor: pointer;
 
-}
+          transition: color 0.15s;
+          margin-top: 1rem;
 
-.fineprint:hover {
-    color: black;
-}
+      }
+
+      .fineprint:hover {
+          color: black;
+      }
+
+        /*get started button formatting*/
+        .gsbutton {
+          font-family: Work Sans;
+          font-weight: 200;
+          font-size: 25px;
+          background-color: transparent;
+          border-color: transparent;
+          color: white;
+          width: 160px;
+          cursor: pointer;
+          transition: font-weight 0.15s;
+          
+        }
+        
+        .gsbutton:hover {
+          font-weight: 300;
+        }
 
 
-/*submit button on log in pages*/
-.caccbutton {
-    background-color: #3A138D;
-    border: none;
-    color: white;
-    font-family: Work Sans;
-    font-weight: 200;
-    font-size: 20px;
-    border-radius: 5px;
-    width: 350px;
-    height: 40px;
-    margin: auto;
-    margin-top: 30px;
-    margin-bottom: 20px;
-    cursor: pointer;
-  
-}
-  
-  
-.caccbutton:hover {
-  opacity: 0.8;
-  box-shadow: 1px 1px 1px #3A138D;
-}
+      /*submit button on log in pages*/
+      .caccbutton {
+          background-color: #3A138D;
+          border: none;
+          color: white;
+          font-family: Work Sans;
+          font-weight: 200;
+          font-size: 20px;
+          border-radius: 5px;
+          width: 350px;
+          height: 40px;
+          margin: auto;
+          margin-top: 30px;
+          margin-bottom: 20px;
+          cursor: pointer;
+        
+      }
+        
+      .caccbutton:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px #3A138D;
+      }
 
+
+/*templates inputs*/
 .inputfield:focus::placeholder {
   color:transparent;
+}
+
+.inputfield {
+
+  border: solid 1px;
+  border-radius: 3px;
+  border-color: #3A138D;
 }
 
 
 /* CSS so that the trash icon (acts as an icon) gets colored when hovered over */
 .trashicon:hover {
-  cursor:pointer;
+
   color:#DC143C;
 }
 
-/*CSS for a button that is used across the site, right now this button style is being used just for the select resume button on resumes.php*/
-.basicbutton {
-    background-color:#d9d9d9;
+.trashicon {
+  color: #3A138D;
+  cursor: pointer;
 }
 
-.basicbutton:hover {
-    background-color:#6b6963;
-    color:#ffffff;
-    cursor:pointer;
-}
+/*CSS for generic shaped buttons*/
+      /*CSS for a button that is used across the site*/
+      .basicbutton {
+        background-color: #3A138D;
+        border: none;
+        color: white;
+        font-family: Work Sans;
+        font-weight: 200;
+        font-size: 20px;
+        border-radius: 5px;
+        padding: 0.7rem;
+        cursor: pointer;
+      }
+
+      .basicbutton:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px #3A138D;
+      }
+
+      /*square button*/
+      .squarebutton {
+        background-color: #3A138D;
+        border: none;
+        color: white;
+        font-family: Work Sans;
+        font-weight: 200;
+        font-size: 20px;
+        border-radius: 5px;
+        padding: 1rem;
+        cursor: pointer;
+      }
+
+      .squarebutton:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px #3A138D;
+      }
+
+      /*round button*/
+      .roundbutton {
+        background-color: #3A138D;
+        border: none;
+        color: white;
+        font-family: Work Sans;
+        font-weight: 200;
+        font-size: 20px;
+        border-radius: 25px;
+        padding: 0.7rem;
+        cursor: pointer;
+      }
+
+      .roundbutton:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px #3A138D;
+      }
+
+      /*thin button*/
+
+      .thinbutton {
+        background-color: #3A138D;
+        border: none;
+        color: white;
+        font-family: Work Sans;
+        font-weight: 200;
+        font-size: 20px;
+        border-radius: 5px;
+
+        cursor: pointer;
+      }
+
+      .thinbutton:hover {
+        opacity: 0.8;
+        box-shadow: 1px 1px 1px #3A138D;
+      }
+
 
 /*CSS class that removes the original styling of the button tag*/
 .buttonstyleremove {
@@ -103,3 +201,14 @@
     cursor: pointer;
     outline: none;
   }
+
+
+/*styles for types - not doing anything right now*/
+  ::placeholder {
+    font-family: Work Sans;
+    font-size: 15px;
+    color: #3A138D;
+    opacity: 0.8;
+  }
+
+  

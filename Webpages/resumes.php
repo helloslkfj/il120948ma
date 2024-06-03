@@ -4,18 +4,18 @@
 <div class="generalspace">
     <div></div>
     <div class="grid gap-r-15">
-        <h1>Resumes</h1>
+        <h1 class="center gentitle">Resumes</h1>
         <div class="grid gap-r-15">
             <div class="grid">
                 <i class="center fa-regular fa-cloud-arrow-up fa-9x"></i>
                 <input type="file" name="resumeupload" id="resumeupload">
-                <label for="resumeupload" class="center toppadding bottompadding sidetosidepadding basicbutton">Select Resume</label>
+                <label for="resumeupload" class="center toppadding bottompadding sidetosidepadding fineprint">Select Resume</label>
             </div>
             <div class="grid gap-r-5">
-                <p id="resumeuploadfile" class="center">No resume selected</p>
+                <p id="resumeuploadfile" class="center generictext">No resume selected</p>
                 <p id="resumeuploaderror" class="center highlight"></p>
             </div>
-            <button name="resumeuplaodsubmit" class="center">Upload</button>
+            <button name="resumeuplaodsubmit" class="center roundbutton">Upload</button>
         </div>
         <div id="resumetextfeedbackmain" class="grid gap-r-10 none">
             <div class="grid gap-r-5">
@@ -33,21 +33,21 @@
         ?>
         <br>
         <div class="grid">
-            <h3>Your Resumes</h3>
+            <h3 class="gensubtitle2">Your Resumes</h3>
             <div class="templateslayout">
                 <div class="grid gap-r-10">
                     <?php for($i=0;$i<count($decresumes);$i++) { ?>
                         <div class="individualtemprow">
-                            <text class="underline"><?php echo $decresumes[$i][0]; ?></text>
-                            <em> <?php echo "Last updated ".date("F d, Y", (int)$decresumes[$i][3])." at ".date("h:i A", (int)$decresumes[$i][3])." EST"; ?></em>
+                            <text class="underline generictext"><?php echo $decresumes[$i][0]; ?></text>
+                            <em class="generictext"> <?php echo "Last updated ".date("F d, Y", (int)$decresumes[$i][3])." at ".date("h:i A", (int)$decresumes[$i][3])." EST"; ?></em>
                         </div>
                     <?php } ?>
                 </div>
                 <div class="grid gap-r-10">
                     <?php for($i=0;$i<count($decresumes);$i++) {?>
                         <div class="individualtemprow">
-                            <i name="deleteresume" value="<?php echo $decresumes[$i][0]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-xl trashicon"></i>
-                            <button id="<?php echo $decresumes[$i][0]."||dasf-kkx.kk-afasf||".$decresumes[$i][1]; ?>" name="resumeviewbutton">View</button>
+                            <i name="deleteresume" value="<?php echo $decresumes[$i][0]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-2xl trashicon"></i>
+                            <button id="<?php echo $decresumes[$i][0]."||dasf-kkx.kk-afasf||".$decresumes[$i][1]; ?>" name="resumeviewbutton" class="roundbutton">View</button>
                         </div>
                     <?php }?>
                 </div>

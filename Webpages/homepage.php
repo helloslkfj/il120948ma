@@ -5,8 +5,6 @@
 <!--Add the html code for the home page below (you are in the body tag of the homepage)-->
 
 <div class="main1">
-    
-    <a href=signup.php style="color: white;">Just placeholder. Click this to go to signup page.</a>
 
     <div class="slogan">
       Let us do the writing.

@@ -22,6 +22,14 @@
 
 }
 
+.line1 {
+  width: calc(90%);
+  height: 1px;
+  border-bottom: 0.3px solid white;
+  margin: auto;
+
+}
+
 @media (max-width: 500px) {
 
   .box {

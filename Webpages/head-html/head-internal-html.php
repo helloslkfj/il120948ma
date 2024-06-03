@@ -6,13 +6,52 @@
 
         <!--include the html code for the header of the external pages like signup and login where the user is not supposed to be logged in -->
         <!-- the code below just has a signout button and displays the persons first name -->
-        <div class="grid">
-            <text><?php echo substr($_SESSION["user"]->fname, 0, 10) ?></text>
-            <form method="POST" onsubmit="return false" enctype="multipart/form-data">
-                <a href="dashboard.php">Dashboard</a>
-                <button class="center" name="logout" type="submit">Logout</button>
+        
+        <div class="header">
+
+        <div class="grid3">
+
+            <div class="title">
+
+                <div class="logo">
+                    <img src="../Images/Lyrethin.png" height="60">
+                </div>
+
+                <div class="webname">
+
+                    <!--I wanna link the name to the homepage-->
+                    <a href="homepage.php">
+
+                        <button class="titlebutton">Calliope</button>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+
+        
+            <text class="maintitle center">Welcome, <?php echo substr($_SESSION["user"]->fname, 0, 10) ?>!</text>
+
+            <div class="center">
+                <br>
+
+                <form method="POST" onsubmit="return false" enctype="multipart/form-data">
+                <div>
+                <a href="dashboard.php" class="gsbutton noline">
+                    Dashboard
+                </a>
+                </div>
+
+                <button class="gsbutton" name="logout" type="submit">Logout</button>
+
             </form>
-        <div>
+            </div>
+            
+
+        </div>
+        </div>
 
         
         <br>

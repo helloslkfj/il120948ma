@@ -8,15 +8,15 @@
     <div></div>
     <div class="grid gap-r-15">
         <div class="grid gap-r-5">
-            <h1>Templates</h1>
+            <h1 class="gentitle center">Templates</h1>
             <form class="grid gap-r-10" method="POST" onsubmit="return false" enctype="multipart/form-data">
                 <div class="grid"> 
                     <?php 
                         if(isset($_SESSION["template"])) {
                     ?> 
                         <div class="generaltwocolumns center gap-c-10">
-                            <em><?php echo $_SESSION["template"]->title; ?></em>
-                            <button name="exittemplate">Exit</button>
+                            <em class="generictext"><?php echo $_SESSION["template"]->title; ?></em>
+                            <button name="exittemplate" class="thinbutton">Exit</button>
                         </div>
 
                         <script>
@@ -35,7 +35,7 @@
                             });
                         </script>
                     <?php } ?>
-                    <text>Template Title</text>
+                    <text class="gensubtitle">Template Title</text>
                     <?php 
                         if(isset($_SESSION["template"])) {
                     ?>
@@ -48,7 +48,7 @@
                     <text id="templatetitleerror" class="highlight"></text>
                 </div>
                 <div class="grid">
-                    <text>Text of the Template</text>
+                    <text class="gensubtitle">Text of the Template</text>
                     <?php if(isset($_SESSION["template"])) { ?>
                     <textarea class="inputfield" name="templatetext" type="text" placeholder="Ex. blah blah blah" rows=15 cols=1><?php echo $_SESSION["template"]->text; ?></textarea>
                     <?php } else { ?>
@@ -59,11 +59,11 @@
                 <?php 
                     if(isset($_SESSION["template"])) {
                 ?>
-                    <button name="updatetemplate" type="submit">Update</button>
+                    <button name="updatetemplate" type="submit" class="squarebutton">Update</button>
                 <?php 
                     } else {
                 ?>
-                    <button name="createnewtemplate" type="submit">Create New</button>
+                    <button name="createnewtemplate" type="submit" class="squarebutton">Create New</button>
                 <?php } ?>
             </form>
             <div class="grid">
@@ -81,15 +81,15 @@
             $dectemplates = order2DArray_BasedOnValue($dectemplates, 3, "DESC");
         ?>
         <div class="grid gap-r-5">
-            <h3>Your Templates</h3>
+            <h3 class="gensubtitle2">Your Templates</h3>
             <div class="templateslayout">
                 <div class="grid gap-r-10">
                     <?php 
                         for($i=0;$i<count($dectemplates);$i++) {
                     ?>  
                         <div class="individualtemprow">
-                            <text class="underline"><?php echo $dectemplates[$i][1]; ?></text>
-                            <em> <?php echo "Last updated ".date("F d, Y", (int)$dectemplates[$i][3])." at ".date("h:i A", (int)$dectemplates[$i][3])." EST"; ?></em>
+                            <text class="underline generictext"><?php echo $dectemplates[$i][1]; ?></text>
+                            <em class="generictext"> <?php echo "Last updated ".date("F d, Y", (int)$dectemplates[$i][3])." at ".date("h:i A", (int)$dectemplates[$i][3])." EST"; ?></em>
                         </div>
                     <?php } ?>
                 </div>
@@ -98,8 +98,8 @@
                         for($i=0;$i<count($dectemplates);$i++) {
                     ?>       
                         <div class="individualtemprow">
-                            <i name="deletetemplate" value="<?php echo $dectemplates[$i][1]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-xl trashicon"></i>
-                            <button id="<?php echo $dectemplates[$i][1]; ?>" name="templateviewbutton">Update/View</button>
+                            <i name="deletetemplate" value="<?php echo $dectemplates[$i][1]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-2xl trashicon"></i>
+                            <button id="<?php echo $dectemplates[$i][1]; ?>" name="templateviewbutton" class="roundbutton">Edit/View</button>
                         </div>
                     <?php } ?>
                 </div>

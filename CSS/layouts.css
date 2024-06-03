@@ -97,6 +97,17 @@
 
 }
 
+/*move buttons to right*/
+.grid1 {
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+  }
+
 
 
 /*ATTENTION: used the same CSS layouts for both resumes and templates page*/
@@ -215,6 +226,16 @@
 
    
 
+}
+
+/*homepage more columns*/
+.grid3 {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr;
+}
+
+.right {
+    text-align: right;
 }
 
 
