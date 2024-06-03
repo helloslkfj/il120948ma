@@ -66,6 +66,8 @@
 
             <!-- payment integration with stripe will be done later we will just have saved, whether subscription of the user is active or not, thats all we need
             Stripe handles the reccuring billing by itself-->
+            <p id="researchemailerror" class="highlight"></p>
+
             <button class="generatebutton center" name="generateresearch">Generate</button>
 
         </div>
@@ -111,6 +113,7 @@
             $("button[name='generateresearch']").click(()=>{
                 
                 var researchemailinfo = createFormDataObject([$("input[name='professorwebpage']"), $("input[name='publicationwebpage']"), $("select[name='templates']").find(":selected"), $("select[name='resumes']").find(":selected")], ["professorwebpage", "publicationwebpage", "template", "resume"]);
+                researchemailinfo.append('generateresemail', true);
 
                 var instanterror = 0;
                 if(researchemailinfo.get("template") == 'null' || researchemailinfo.get("template") == 'undefined' || researchemailinfo.get("template") == "") {
@@ -122,12 +125,15 @@
                     $("#resumeerror").html('Please attach a resume.');
                     instanterror += 1;
                 }
+                keyUpAllElements(["input[name='professorwebpage']", "input[name='publicationwebpage']"]);
+                changeUpAllElements(["select[name='templates']", "select[name='resumes']"]);
+
                 if(instanterror > 0) {
                     return;
                 }
 
-                //key up and cause changes in elements
-                //send the full request to research-scrape.php
+                sendAJAXRequest2('../PHP-backened/research-scrape.php', researchemailinfo, reLoadandErrorHandle, "#researchemailerror");
+
 
 
 

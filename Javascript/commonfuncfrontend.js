@@ -51,8 +51,13 @@ function keyUpAllElements(elementarray) {
     for (let i=0;i<elementarray.length;i++) {
         $(elementarray[i]).trigger('keyup');
     }
-
     return;
+}
+
+function changeUpAllElements(elementarray) {
+    for (let i=0; i<elementarray.length; i++) {
+        $(elementarray[i]).trigger('change');
+    }
 }
 
 function createDataObject(elements, varnames) {

@@ -55,6 +55,11 @@
         $error += 1;
     }
 
+    if(isset($_POST['generatereseamil'])) {
+        if($error < 1) {
+            
+        }
+    }
 
     //handle the full request and start scraping
 ?>

@@ -51,3 +51,13 @@ create table resumes (
     iv varchar(10000) not null
 );
 
+-- code for creating the professor website database which will store the websites of the professor
+create table profwebpages (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    professorname varchar(1000) not null, -- for comparision remember to just look at the link; for each searched link (like the other two links) -> they have their own entry
+    linktowebsite varchar(1000) not null,
+    webtext text not null
+);
+
+-- code for creating the publications database which will store the links of the publications of the professors
+-- do the code!!
