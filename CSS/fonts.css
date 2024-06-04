@@ -104,7 +104,7 @@
         font-family: Work Sans;
         font-weight: 500;
         font-size: 50px;
-        color: #3A138D;
+        color: black;
  
       }
 
@@ -112,7 +112,7 @@
         font-family: Work Sans;
         font-weight: 300;
         font-size: 30px;
-        color: #3A138D;
+        color: black;
         margin-bottom: 5px;
       }
 
@@ -120,19 +120,26 @@
         font-family: Work Sans;
         font-weight: 550;
         font-size: 30px;
-        color: #3A138D;
+        color: black;
       }
       
       .generictext {
         font-family: Work Sans;
         font-size: 20px;
         font-weight: 300;
-        color: #3A138D;
+        color: black;
       }
 
       .maintitle {
         font-family: Work Sans;
         font-size: 50px;
+        font-weight: 300;
+        color: white;
+      }
+
+      .dashtext {
+        font-family: Work Sans;
+        font-size: 25px;
         font-weight: 300;
         color: white;
       }

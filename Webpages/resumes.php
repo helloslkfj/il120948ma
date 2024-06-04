@@ -7,7 +7,7 @@
         <h1 class="center gentitle">Resumes</h1>
         <div class="grid gap-r-15">
             <div class="grid">
-                <i class="center fa-regular fa-cloud-arrow-up fa-9x"></i>
+                <i class="center fa-regular fa-cloud-arrow-up fa-9x cloudicon"></i>
                 <input type="file" name="resumeupload" id="resumeupload">
                 <label for="resumeupload" class="center toppadding bottompadding sidetosidepadding fineprint">Select Resume</label>
             </div>
@@ -33,9 +33,9 @@
         ?>
         <br>
         <div class="grid">
-            <h3 class="gensubtitle2">Your Resumes</h3>
+            <h3 class="gensubtitle2 marginbottom">Your Resumes</h3>
             <div class="templateslayout">
-                <div class="grid gap-r-10">
+                <div class="grid gap-r-15">
                     <?php for($i=0;$i<count($decresumes);$i++) { ?>
                         <div class="individualtemprow">
                             <text class="underline generictext"><?php echo $decresumes[$i][0]; ?></text>
@@ -43,7 +43,7 @@
                         </div>
                     <?php } ?>
                 </div>
-                <div class="grid gap-r-10">
+                <div class="grid gap-r-15">
                     <?php for($i=0;$i<count($decresumes);$i++) {?>
                         <div class="individualtemprow">
                             <i name="deleteresume" value="<?php echo $decresumes[$i][0]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-2xl trashicon"></i>

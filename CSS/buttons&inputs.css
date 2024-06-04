@@ -105,7 +105,8 @@
 
   border: solid 1px;
   border-radius: 3px;
-  border-color: #3A138D;
+  border-color: black;
+  box-shadow: 0.7px 0.7px 0.7px black;
 }
 
 
@@ -119,6 +120,8 @@
   color: #3A138D;
   cursor: pointer;
 }
+
+
 
 /*CSS for generic shaped buttons*/
       /*CSS for a button that is used across the site*/
@@ -207,7 +210,7 @@
   ::placeholder {
     font-family: Work Sans;
     font-size: 15px;
-    color: #3A138D;
+    color: black;
     opacity: 0.8;
   }
 

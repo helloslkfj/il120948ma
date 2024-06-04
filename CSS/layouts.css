@@ -228,15 +228,26 @@
 
 }
 
-/*homepage more columns*/
+/*dashboard more columns*/
 .grid3 {
     display: grid;
-    grid-template-columns: 1fr 4fr 1fr;
+    grid-template-columns: 4fr 1fr 1fr;
 }
 
+/*extra classes*/
 .right {
     text-align: right;
 }
+
+.marginbottom {
+    margin-bottom: 2rem;
+}
+
+.inline {
+    display: inline-flex;
+}
+
+
 
 
 

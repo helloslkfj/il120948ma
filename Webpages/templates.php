@@ -35,6 +35,8 @@
                             });
                         </script>
                     <?php } ?>
+                    <br>
+
                     <text class="gensubtitle">Template Title</text>
                     <?php 
                         if(isset($_SESSION["template"])) {
@@ -47,6 +49,7 @@
                     <?php  } ?>
                     <text id="templatetitleerror" class="highlight"></text>
                 </div>
+                <br>
                 <div class="grid">
                     <text class="gensubtitle">Text of the Template</text>
                     <?php if(isset($_SESSION["template"])) { ?>
@@ -81,9 +84,9 @@
             $dectemplates = order2DArray_BasedOnValue($dectemplates, 3, "DESC");
         ?>
         <div class="grid gap-r-5">
-            <h3 class="gensubtitle2">Your Templates</h3>
+            <h3 class="gensubtitle2 marginbottom">Your Templates</h3>
             <div class="templateslayout">
-                <div class="grid gap-r-10">
+                <div class="grid gap-r-15">
                     <?php 
                         for($i=0;$i<count($dectemplates);$i++) {
                     ?>  
@@ -93,7 +96,7 @@
                         </div>
                     <?php } ?>
                 </div>
-                <div class="grid gap-r-10">
+                <div class="grid gap-r-15">
                     <?php 
                         for($i=0;$i<count($dectemplates);$i++) {
                     ?>       

@@ -32,21 +32,23 @@
 
 
         
-            <text class="maintitle center">Welcome, <?php echo substr($_SESSION["user"]->fname, 0, 10) ?>!</text>
+            <text class="dashtext center">Welcome, <?php echo substr($_SESSION["user"]->fname, 0, 10) ?>!</text>
 
             <div class="center">
-                <br>
 
-                <form method="POST" onsubmit="return false" enctype="multipart/form-data">
-                <div>
-                <a href="dashboard.php" class="gsbutton noline">
+
+                <form method="POST" onsubmit="return false" enctype="multipart/form-data" class="inline">
+                
+  
+                <a href="dashboard.php" class="gsbutton noline right">
                     Dashboard
                 </a>
-                </div>
+
 
                 <button class="gsbutton" name="logout" type="submit">Logout</button>
 
-            </form>
+                </form>
+
             </div>
             
 
