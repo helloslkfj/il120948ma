@@ -51,13 +51,19 @@ create table resumes (
     iv varchar(10000) not null
 );
 
--- code for creating the professor website database which will store the websites of the professor
+-- code for creating the professor website (used for only research emails) database which will store the websites of the professor (primary links)
 create table profwebpages (
     id int(11) not null PRIMARY KEY AUTO_INCREMENT,
-    professorname varchar(1000) not null, -- for comparision remember to just look at the link; for each searched link (like the other two links) -> they have their own entry
+    professorname varchar(200) not null,
     linktowebsite varchar(1000) not null,
-    webtext text not null
+    notestext text not null, -- contains text of the other pages based on the professor as well,  has synthesized that information for that professor; like it has written notes on his research, autobiography etc
+    iv varchar(10000) not null
 );
 
--- code for creating the publications database which will store the links of the publications of the professors
--- do the code!!
+-- code for webpage database (used for both corporate and research emails) (all links --> primary and secondary);  all the publications are in here as well 
+create table webpages (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    linktowebsite varchar(1000) not null,
+    webtext text not null,
+    iv varchar(10000) not null
+);

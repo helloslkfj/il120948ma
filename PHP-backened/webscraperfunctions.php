@@ -11,13 +11,16 @@
             $fresponse = curl_exec($firstScrape);
         }
         catch (Exception $e) {
-            echo "Error", $e ->getMessage();
+            echo "Error", $e ->getMessage(), "<br>";
+            $fresponse = "error";
         }
         if (strpos(curl_error($firstScrape), "Operation timed out") !== false) {
             $fresponse = "timeout";
         }
+
         curl_close($firstScrape);
-        if ($fresponse != "timeout") {
+
+        if ($fresponse != "timeout" or $fresponse != "error") {
             //nodejs html extraction
             $linkinfo = json_encode(array("link" => $link));
             $scrapeCurl = curl_init();
@@ -35,7 +38,8 @@
                 $response = $responseobj->html;
             }
             catch (Exception $e) {
-                echo "Error", $e ->getMessage();
+                echo "Error", $e ->getMessage(), "<br>";
+                $response ="error";
             }
 
             if (strpos(curl_error($scrapeCurl), "Operation timed out") !== false) {
@@ -47,7 +51,7 @@
             return $response;
         }
         else {
-            return "timeout";
+            return "error";
         }
     }
 
@@ -60,7 +64,7 @@
             $dom->loadHTML($html);
         }
         catch (Exception $e) {
-            echo "Error loading HTML: ", $e -> getMessage();
+            echo "Error loading HTML: ", $e -> getMessage(), "<br>";
         }
 
         libxml_use_internal_errors(false);
@@ -141,12 +145,52 @@
 
     function getAnythingFromHTML($link, $removetags, $tagsforextraction, $property) {
         $html = getHTMLfromlink($link);
+        if($html == "error" or $html == "timeout") {
+            return "";
+        }
         $html = removetagsfromHTML($removetags, $html);
         $extractedanything = anythingExtract($html, $tagsforextraction, $property);
 
         $out = removeSpaceFromText(implode(" ", implodeon2Darr($extractedanything)));
 
         return $out;
+    }
+
+    function getLinksFromHTML($link, $removetags, $tagsforextraction, $property) {
+        $html = getHTMLfromlink($link);
+        if($html == "error" or $html == "timeout") {
+            return "Error: Could not obtain HTML data";
+        }
+        $html = removetagsfromHTML($removetags, $html);
+        $extractedanything = anythingExtract($html, $tagsforextraction, $property);
+        $out = implode("<br>", getAllElementsin1Dfrom2Darr($extractedanything));
+
+        return $out;
+    }
+
+    function givetwoImportantResearchLinks($profname, $text, $link, $API_KEY) {
+        $everylinks = getLinksFromHTML($link, ['script'], ['a', 'button'], 'href');
+        $prompt = "Given this text data from a website (link:".$link."): ".$text." and also these are the links of the site: ".$everylinks." where they are separated by a '<br>' tag. ||| Recognize that these links separated by '<br>' tags are extracted hrefs from anchor tags on the website. Get two links that you seem will provide the most information on ".$profname."'s research and professional background from ".$everylinks.". If this seems like a lab website, obtain two links out of all the available links that will be most likely about the lab's research, the professor's professional background and research projects. Answer to this prompt MUST BE IN THE FORM OF: LINK1|.|LINK2. DO NOT INCLUDE ANYTHING ELSE. Also remember for each of the two links, make sure to provide the full url like https://www.whatever.com. If the link you found is like a page on the website (most likely) itself then just add the website link:".$link." to it so it is a full url that leads to that page.";
+        $prompt = substr($prompt, 0, 50000);
+        $twolinks = communicatetoOpenAILLM("gpt-3.5-turbo-0125", "Assistant on a web application that extracts important information from html data", $prompt, $API_KEY); 
+        $twolinksarr = explode('|.|', $twolinks);
+        if(count($twolinksarr) != 2) {
+            return "error";
+        }
+        else {
+            return $twolinksarr;
+        }
+    }
+
+    function makeNotesOnProfessor($profname, $proftext, $API_KEY) {
+        $prompt = "Make very detailed notes on ".$profname."'s research work and professional experience. Also make sure to detail the specific research projects and works that ".$profname." has conducted or is currently being done in the lab. Write in the most detail as possible and don't miss any important information to ".$profname."'s research and experience as a researcher. As output, please just provide the notes.";
+        $profnotes = communicatetoOpenAILLM("gpt-3.5-turbo-0125", "Assistant on a web application that performs effective note-taking given information", $prompt, $API_KEY);
+        if($profnotes == null) {
+            echo "Error: LLM could not be connected to. Please try again or if the issue persists, contact our support team";
+            exit();
+        }
+
+        return $profnotes;
     }
 
     //$out = getAnythingFromHTML("https://www.sickkids.ca/en/staff/k/joseph-kuzma/", ['head', 'header', 'footer', 'script'], [ 'body'], 'text');
@@ -218,7 +262,7 @@
             curl_close($ch);
         }
         catch (Exception $e) {
-            echo "Error Building Connection with OpenAI LLM: ", $e -> getMessage();
+            echo "Error building connection with LLM. Please try again later or contact our support team if the issue persists: ", $e -> getMessage();
         }
 
         return $actualresponse;

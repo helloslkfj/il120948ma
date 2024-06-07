@@ -187,6 +187,17 @@
 
         return $newarray;
     }
+
+    function getAllElementsin1Dfrom2Darr($arr) {
+        $oneD_arr = array();
+        for($i=0;$i<count($arr);$i++) {
+            for($g=0; $g<count($arr[$i]);$g++) {
+                $oneD_arr[] = $arr[$i][$g];
+            }
+        }
+
+        return $oneD_arr;
+    }
     
 
 ?>

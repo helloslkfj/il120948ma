@@ -10,16 +10,21 @@
         <div class="grid gap-r-15">
             <div class="research-inputgrid">
                 <div class="grid">
+                    <input name="professorname" type="text" placeholder="The full name of the professor">
+                    <p id="professornameerror" class="highlight"></p>
+                </div>
+                <div></div>
+                <div class="grid">
                     <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor">
                     <p id="professorweberror" class="highlight"></p>
                 </div>
-                <div></div>
+            </div>
+            <div class="research-inputgrid">
                 <div class="grid">
                     <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's publications">
                     <p id="publicationweberror" class="highlight"></p>
                 </div>
-            </div>
-            <div class="research-inputgrid">
+                <div></div>
                 <div class="grid">
                     <text>Select template</text>
                     <?php 
@@ -41,7 +46,8 @@
                     <?php } ?>
                     <p id="templateerror" class="highlight"></p>
                 </div>
-                <div></div>
+            </div>
+            <div class="research-inputgrid">
                 <div class="grid">
                     <text>Select a resume</text>
                     <?php 
@@ -62,11 +68,16 @@
                     <?php } ?>
                     <p id="resumeerror" class="highlight"></p>
                 </div>
+                <div></div>
+                <div></div>
             </div>
 
             <!-- payment integration with stripe will be done later we will just have saved, whether subscription of the user is active or not, thats all we need
             Stripe handles the reccuring billing by itself-->
-            <p id="researchemailerror" class="highlight"></p>
+            <div class="grid gap-r-5">
+                <text>All error:</text>
+                <p id="researchemailerror" class="highlight"></p>
+            </div>
 
             <button class="generatebutton center" name="generateresearch">Generate</button>
 
@@ -76,21 +87,24 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $("input[name='professorname']").keyup(()=>{
+                var professornamedata = createFormDataObject(["input[name='professorname']"], ["professorname"]);
+                sendAJAXRequest2('../PHP-backened/research-scrape.php', professornamedata, reLoadandErrorHandle, "#professornameerror");
+            });
             $("input[name='professorwebpage']").keyup(()=>{
-                var professorwebdata = createFormDataObject([$("input[name='professorwebpage']")], ["professorwebpage"]);
-                console.log(professorwebdata);
+                var professorwebdata = createFormDataObject(["input[name='professorwebpage']"], ["professorwebpage"]);
                 sendAJAXRequest2('../PHP-backened/research-scrape.php', professorwebdata, reLoadandErrorHandle, "#professorweberror");
             });
             $("input[name='publicationwebpage']").keyup(()=>{
-                var publicationwebdata = createFormDataObject([$("input[name='publicationwebpage']")], ["publicationwebpage"]);
-                sendAJAXRequest2('../PHP-backened/research-scrape.php', publicationwebdata, reLoadandErrorHandle, "#publicationweberror")
+                var publicationpubdata = createFormDataObject(["input[name='publicationwebpage']"], ["publicationwebpage"]);
+                sendAJAXRequest2('../PHP-backened/research-scrape.php', publicationpubdata, reLoadandErrorHandle, "#publicationweberror")
             });
 
             $("body").on("change", "select[name='templates']", function() {
                 if($("select[name='templates']").find(":selected").val() == "Create New") {
                     window.location.replace('templates.php');
                 } else {
-                    var templatedata = createFormDataObject([$("select[name='templates']").find(":selected")], ["template"]);
+                    var templatedata = createFormDataObject1([$("select[name='templates']").find(":selected")], ["template"]);
                     sendAJAXRequest2('../PHP-backened/research-scrape.php', templatedata, reLoadandErrorHandle, "#templateerror");
                 }
             });
@@ -112,7 +126,7 @@
 
             $("button[name='generateresearch']").click(()=>{
                 
-                var researchemailinfo = createFormDataObject([$("input[name='professorwebpage']"), $("input[name='publicationwebpage']"), $("select[name='templates']").find(":selected"), $("select[name='resumes']").find(":selected")], ["professorwebpage", "publicationwebpage", "template", "resume"]);
+                var researchemailinfo = createFormDataObject1([$("input[name='professorname']"), $("input[name='professorwebpage']"), $("input[name='publicationwebpage']"), $("select[name='templates']").find(":selected"), $("select[name='resumes']").find(":selected")], ["professorname", "professorwebpage", "publicationwebpage", "template", "resume"]);
                 researchemailinfo.append('generateresemail', true);
 
                 var instanterror = 0;
@@ -125,7 +139,7 @@
                     $("#resumeerror").html('Please attach a resume.');
                     instanterror += 1;
                 }
-                keyUpAllElements(["input[name='professorwebpage']", "input[name='publicationwebpage']"]);
+                keyUpAllElements(["input[name='professorwebpage']", "input[name='publicationwebpage']", "input[name='professorname']"]);
                 changeUpAllElements(["select[name='templates']", "select[name='resumes']"]);
 
                 if(instanterror > 0) {

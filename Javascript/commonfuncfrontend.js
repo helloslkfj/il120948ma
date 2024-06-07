@@ -80,6 +80,16 @@ function createFormDataObject(elements, varnames) {
     return formdataobject;
 }
 
+function createFormDataObject1(elements, varnames) {
+    var formdataobject = new FormData();
+
+    for (i=0; i<elements.length; i++) {
+        formdataobject.append(varnames[i], elements[i].val());
+    }
+
+    return formdataobject;
+}
+
 function reLoadandErrorHandle(input, varname) {
     if(input == 'true') {
         location.reload();
