@@ -176,16 +176,18 @@
     }
 
     function deleteIndexesfrom2DArray($twodarray, $indexesofdeletion) {
-        $newarray = [];
+        $new2darray = [];
         for($i=0; $i<count($twodarray); $i++) {
+            $new1darray = [];
             for($z=0; $z<count($twodarray[$i]); $z++) {
                 if(in_array($z, $indexesofdeletion) != true) {
-                    $newarray[] = $twodarray[$i][$z];
+                    $new1darray[] = $twodarray[$i][$z];
                 }
             }
+            $new2darray[] = $new1darray;
         }
 
-        return $newarray;
+        return $new2darray;
     }
 
     function getAllElementsin1Dfrom2Darr($arr) {
@@ -197,6 +199,12 @@
         }
 
         return $oneD_arr;
+    }
+
+    function getSpecificAttributeDecryptedinList($attribute, $table, $conn, $key) {
+        $encattributearr = getDatafromSQLResponse([$attribute, "iv"], executeSQL($conn, "SELECT * FROM ".$table, "nothing", "nothing", "select", "nothing"));
+        $decattributearr = getAllElementsin1Dfrom2Darr(deleteIndexesfrom2DArray(decryptFullData($encattributearr, $key, 1), [1]));
+        return $decattributearr;
     }
     
 

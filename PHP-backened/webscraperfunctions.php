@@ -159,7 +159,7 @@
     function getLinksFromHTML($link, $removetags, $tagsforextraction, $property) {
         $html = getHTMLfromlink($link);
         if($html == "error" or $html == "timeout") {
-            return "Error: Could not obtain HTML data";
+            return "error";
         }
         $html = removetagsfromHTML($removetags, $html);
         $extractedanything = anythingExtract($html, $tagsforextraction, $property);
@@ -183,7 +183,8 @@
     }
 
     function makeNotesOnProfessor($profname, $proftext, $API_KEY) {
-        $prompt = "Make very detailed notes on ".$profname."'s research work and professional experience. Also make sure to detail the specific research projects and works that ".$profname." has conducted or is currently being done in the lab. Write in the most detail as possible and don't miss any important information to ".$profname."'s research and experience as a researcher. As output, please just provide the notes.";
+        $prompt = "Make very detailed notes on ".$profname."'s research work and professional experience. Also make sure to detail the specific research projects and works that ".$profname." has conducted or is currently being done in the lab. Write in the most detail as possible and don't miss any important information to ".$profname."'s research and experience as a researcher. As output, please just provide the notes. Here is text containing all the information about the ".$profname."'s research work and professional experience:".$proftext;
+        $prompt = substr($prompt, 0, 50000);
         $profnotes = communicatetoOpenAILLM("gpt-3.5-turbo-0125", "Assistant on a web application that performs effective note-taking given information", $prompt, $API_KEY);
         if($profnotes == null) {
             echo "Error: LLM could not be connected to. Please try again or if the issue persists, contact our support team";
@@ -191,6 +192,19 @@
         }
 
         return $profnotes;
+    }
+
+    function getIvfortheDataRowwithXVar($table, $conn, $key, $attributesarr, $uservaluearr) {
+        $encdataarr = getDatafromSQLResponse(array_merge($attributesarr, ["iv"]), executeSQL($conn, "SELECT * FROM ".$table, "nothing", "nothing", "select", "nothing"));
+        $decdataarr = decryptFullData($encdataarr, $key, count($attributesarr));
+        for($i=0; $i<count($decdataarr); $i++) {
+            if(array_slice($decdataarr[$i], 0, count($attributesarr)) == $uservaluearr) {
+                return $decdataarr[$i][count($attributesarr)];
+                break;
+            }
+        }
+
+        return "not found";
     }
 
     //$out = getAnythingFromHTML("https://www.sickkids.ca/en/staff/k/joseph-kuzma/", ['head', 'header', 'footer', 'script'], [ 'body'], 'text');

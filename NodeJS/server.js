@@ -7,7 +7,10 @@ const port = 3000;
 server.use(express.json());
 
 async function webScrape(url) {
-    const browser = await puppet.launch();
+    const browser = await puppet.launch({
+        ignoreHTTPSErrors: true,
+        headless: true
+    });
     const page = await browser.newPage();
     await page.goto(url);
     const content = await page.content();
