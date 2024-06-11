@@ -10,7 +10,7 @@
 
         <div class="header">
 
-        <div class="grid1">
+        <div class="generaltwocolumns">
 
             <div class="title">
 
@@ -31,7 +31,7 @@
 
             </div>
 
-            <div class="buttons">
+            <div class="buttons right">
                 <br>
                 
                 <a href="dashboard.php">

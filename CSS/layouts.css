@@ -98,10 +98,7 @@
 }
 
 /*move buttons to right*/
-.grid1 {
-    display: grid;
-    grid-template-columns: 5fr 1fr;
-  }
+
 
   .buttons {
     display: grid;
@@ -224,15 +221,12 @@
     }
 
 
+
+
    
 
 }
 
-/*dashboard more columns*/
-.grid3 {
-    display: grid;
-    grid-template-columns: 4fr 1fr 1fr;
-}
 
 /*extra classes*/
 .right {
@@ -246,6 +240,53 @@
 .inline {
     display: inline-flex;
 }
+
+.noborder {
+    border: none;
+}
+
+/*position buttons not at edge of homepage headers*/
+.buttons {
+    width: calc(90%);
+}
+
+/*dropdown formatting*/
+
+.dropdown {
+    width: calc(90%);
+    position: relative;
+    top: 3rem;
+}
+
+.menu {
+    background-color: #3A138D;
+
+
+
+}
+
+.menugrid {
+    position: relative;
+    top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.dashtext {
+    transition: font-weight 150ms;
+}
+.dashtext:hover {
+    cursor: pointer;
+    font-weight: 350;
+}
+
+
+
+
+
+
+
+
 
 
 

@@ -9,7 +9,7 @@
         
         <div class="header">
 
-        <div class="grid3">
+        <div class="generaltwocolumns">
 
             <div class="title">
 
@@ -31,32 +31,50 @@
             </div>
 
 
-        
-            <text class="dashtext center">Welcome, <?php echo substr($_SESSION["user"]->fname, 0, 10) ?>!</text>
+            <div class="right dropdown">
 
-            <div class="center">
+                <div>
+                <text class="dashtext" data-dropdown-button><?php echo substr($_SESSION["user"]->fname, 0, 10) ?></text>
+                </div>
+
+                <div class="menugrid">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div class="menu">
 
 
-                <form method="POST" onsubmit="return false" enctype="multipart/form-data" class="inline">
-                
-  
-                <a href="dashboard.php" class="gsbutton noline right">
-                    Dashboard
-                </a>
+                        <form method="POST" onsubmit="return false" enctype="multipart/form-data">
+                        
+                            <div>
+                            <a href="dashboard.php" class="gsbutton noline noborder right">
+                                Dashboard
+                            </a>
+                            </div>
+                            
 
+                            <div>
+                            <button class="gsbutton" name="logout" type="submit">Logout</button>
+                            </div>
+                        
 
-                <button class="gsbutton" name="logout" type="submit">Logout</button>
+                        </form>
 
-                </form>
+                    </div>
+
+                </div>
 
             </div>
             
 
         </div>
+
         </div>
 
         
         <br>
+
+
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
