@@ -43,9 +43,9 @@
             $error += 1;
             echo "The text of your template must be atleast two characters long.";
         }
-        else if(strlen($templatetext) > 800) {
+        else if(strlen($templatetext) > 2000) {
             $error += 1;
-            echo "The text of your template must be no greater than 800 characters.";
+            echo "The text of your template must be no greater than 2000 characters.";
         }
     }
     else {

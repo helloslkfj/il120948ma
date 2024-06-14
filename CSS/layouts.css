@@ -233,6 +233,10 @@
     text-align: right;
 }
 
+.left {
+    text-align: left;
+}
+
 .marginbottom {
     margin-bottom: 2rem;
 }

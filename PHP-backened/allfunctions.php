@@ -4,4 +4,5 @@
     include_once __DIR__.'/webscraperfunctions.php';
     include_once __DIR__.'/templatefunctions.php';
     include_once __DIR__.'/resumefunctions.php';
+    include_once __DIR__.'/emailwritingfunctions.php';
 ?>

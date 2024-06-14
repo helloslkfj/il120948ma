@@ -1,7 +1,6 @@
 <?php
     include_once __DIR__.'/head-code/headinternal-code.php';
     include_once __DIR__.'/../PHP-backened/header-backened-code/headerincludes-backened.php';
-
 ?>
 
     <!-- Here create the inputs for research and the generate button-->
@@ -120,8 +119,15 @@
                 <text>All error:</text>
                 <p id="researchemailerror" class="highlight"></p>
             </div>
+            
+            <div class="generaltwocolumns">
+                <div class="right">
+                    <button class="generatebutton center" name="generateresearch">Generate</button>
+                </div>
+                <div id="loader" class="left">
 
-            <button class="generatebutton center" name="generateresearch">Generate</button>
+                </div>
+            </div>
 
         </div>
         <div></div>
@@ -212,7 +218,7 @@
                 }
 
                 changeUpAllElements(["select[name='templates']", "select[name='resumes']"]);
-                
+                $("#loader").html("<i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i>");
                 sendAJAXRequest2('../PHP-backened/research-scrape.php', researchemailinfo, reLoadandErrorHandle, "#researchemailerror");
 
             });

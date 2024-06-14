@@ -89,7 +89,19 @@
     }
 
     if(isset($_POST['generateresemail'])) {
+        //if you click this you destroy the previous email stuff, right commands fo that
+
         if($error < 1) {
+            //if you click generate during regeenrate phase then you will just create a new email and lose it, we already add the record of email to the database the first time around
+
+            if(isset($_SESSION["researchemailinfo"])) {
+                unset($_SESSION["researchemailinfo"]);
+            }
+
+            if(isset($_SESSION["researchemail"])) {
+                unset($_SESSION["researchemail"]);
+            }
+
             //try to check the publication table and the notes there similar to prof notes checking
             //then you just have to check in the webpages --> everything is in there which is in the common function itself
             //put the important research text function and try to condense the original function
@@ -187,9 +199,42 @@
                 executeSQL($conn, "INSERT INTO profwebpages(professorname, linktowebsite, notestext, iv) VALUES(?,?,?,?)", ["s","s","s","s"], array_merge($encprofwebinfodata, [$_SESSION["user"]->iv]), "insert", 3);
             }
 
-            echo $publicationnotes;
-            echo "<br>";
-            echo $profnotes;
+            //this session was only set for error handling and is not updated
+            if(isset($_SESSION["researchemailrequestobj"])) {
+                unset($_SESSION["researchemailrequestobj"]);
+            }
+
+            //if someone abuses generate email button where they keep trying our algoirhtm to process more text
+            
+            //edit the inputs so it is also a scientist
+
+            //create research email info session so if as ur writing the email, it is refreshed, you don't have to go through extraction again
+            // also make it so that if you refresh then no info is lost and it just keeps going from this point onward
+
+
+            $researchemail = createResearchEmail($conn, $key, $encemail, $_SESSION["user"]->fname, $_SESSION["researchemailinfo"]->professorname, $_SESSION["researchemailinfo"]->professornotes, $_SESSION["researchemailinfo"]->publicationnotes, $_SESSION["researchemailinfo"]->template, $_SESSION["researchemailinfo"]->resume, $Open_API_Key);
+            
+            //edit the object to have a subject
+            $researchemailinfobj =  new stdClass();
+            $_SESSION["researchemailinfo"] = createResearchEmailInfo($researchemailinfobj, $professorname, $profnotes, $publicationnotes, $template, $resume, $researchemail);
+
+            //research email and corporate email counts are not encrypted as there is no useful information in them
+            //$researchemailcount = (int)getDatafromSQLResponse(["researchemails"], executeSQL($conn, "SELECT researchemails FROM users WHERE email=?", ["s"], [$encemail], "select", "nothing"))[0][0];
+            //$researchemailcount += 1;
+
+            //adding count of the research email
+            //executeSQL($conn, "UPDATE users SET researchemails=? WHERE email=?", ["i", "s"], [$researchemailcount, $encemail], "update", "nothing");
+
+            //insert the research email into the research emails database with standard encryption
+            
+
+            //need to create research email table, have email in it
+            //for the users table add a column of researchemail count and corporate email count
+            //create the research email function
+
+
+            //idea for different subscription plans just have a lockout mechanism for the scripts they can't use like academic cannot use corporate email scripts, etc
+            //also for those with access, have block out mechanism added that checks how many emails they can have so when you surpass that then the script cannot be accessed
         }
         else {
             echo "There are errors in your inputs<br>";

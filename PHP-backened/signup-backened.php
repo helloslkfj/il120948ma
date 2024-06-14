@@ -107,7 +107,23 @@
                 $encverificationarr = encryptDataGivenIv($verificationarr, $key, $tencryptedsignuparr[0]);
                 executeSQL($conn, $verificationsql, ["s", "s", "s", "s"], array_merge($encverificationarr, [$tencryptedsignuparr[0]]), "insert", 3);
 
-                $templatearr = [$signupemail, "Basic Research Template", "Introduce the prof", strtotime(date("Y-m-d H:i:s"))]; //need to make this more of a proper template, but this is the basic research template inititalization
+                $basictemplatetext = "- Say hello to the researcher/professor
+
+                1st Paragraph:
+                - Discuss how I am very interested in their general area of research (1 sentence)
+                - Then mention their publication and start discussing specifically what I found interesting (2-3 sentences)
+
+                2nd Paragraph:
+                - Introduce me and where I am currently studying (if in university include my degree major/specialization or if in high school, just say that I am a high school student then the name of the high school) (1 sentence)
+                - Talk about 1 or 2 specific experiences which are aligned  with the researcher/professor's research work (if there is no direct aligned experience, write about experience that shows you will be helpful to the professor) (1-2 sentences)
+                - Indicate what I want to work on in the future (just choose one of the main focuses of the lab so I seem aligned with the researcher and professor)
+
+                3rd Paragraph:
+                - Ask for a volunteer position at the lab and ask if they are free to meet to discuss this further
+
+                4th Paragraph:
+                - End it off with Regards, myname ";
+                $templatearr = [$signupemail, "Basic Research Template", $basictemplatetext, strtotime(date("Y-m-d H:i:s"))]; //need to make this more of a proper template, but this is the basic research template inititalization
                 $enctemplatearr = encryptDataGivenIv($templatearr,$key, $tencryptedsignuparr[0]);
                 executeSQL($conn, "INSERT INTO templates(email, title, textt, datentimeinteger, iv) VALUES(?,?,?,?,?)", ["s","s","s","s","s"], array_merge($enctemplatearr, [$tencryptedsignuparr[0]]), "insert", 4);
 
