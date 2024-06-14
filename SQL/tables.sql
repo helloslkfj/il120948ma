@@ -48,7 +48,7 @@ create table templates (
 );
 
 --code for updating old templates table
-ALTER TABLE templates MODIFY COLUMN longtext not null;
+ALTER TABLE templates MODIFY COLUMN textt longtext not null;
 
 -- code for creating the resumes table which will store the templates of the users
 create table resumes (

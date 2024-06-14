@@ -211,13 +211,15 @@
             //create research email info session so if as ur writing the email, it is refreshed, you don't have to go through extraction again
             // also make it so that if you refresh then no info is lost and it just keeps going from this point onward
 
+            //exit feature for email --> session_destroy()
+            $researchemailinfobj =  new stdClass();
+            $_SESSION["researchemailinfo"] = createResearchEmailInfo($researchemailinfobj, $professorname, $profnotes, $publicationnotes, $template, $resume);
+
 
             $researchemail = createResearchEmail($conn, $key, $encemail, $_SESSION["user"]->fname, $_SESSION["researchemailinfo"]->professorname, $_SESSION["researchemailinfo"]->professornotes, $_SESSION["researchemailinfo"]->publicationnotes, $_SESSION["researchemailinfo"]->template, $_SESSION["researchemailinfo"]->resume, $Open_API_Key);
             
+            echo "<textarea>".$researchemail."</textarea>";
             //edit the object to have a subject
-            $researchemailinfobj =  new stdClass();
-            $_SESSION["researchemailinfo"] = createResearchEmailInfo($researchemailinfobj, $professorname, $profnotes, $publicationnotes, $template, $resume, $researchemail);
-
             //research email and corporate email counts are not encrypted as there is no useful information in them
             //$researchemailcount = (int)getDatafromSQLResponse(["researchemails"], executeSQL($conn, "SELECT researchemails FROM users WHERE email=?", ["s"], [$encemail], "select", "nothing"))[0][0];
             //$researchemailcount += 1;

@@ -1,11 +1,10 @@
 <?php 
-    function createResearchEmailInfo($obj, $professorname, $profnotes, $pubnotes, $template, $resume, $researchemailtext) {
+    function createResearchEmailInfo($obj, $professorname, $profnotes, $pubnotes, $template, $resume) {
         $obj->professorname = $professorname;
         $obj->professornotes = $profnotes;
         $obj->publicationnotes = $pubnotes;
         $obj->template = $template;
         $obj->resume = $resume;
-        $obj->researchemailtext = $researchemailtext;
 
         return $obj;
     }
