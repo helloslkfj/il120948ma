@@ -56,7 +56,7 @@ create table profwebpages (
     id int(11) not null PRIMARY KEY AUTO_INCREMENT,
     professorname varchar(200) not null,
     linktowebsite varchar(1000) not null,
-    notestext text not null, -- contains text of the other pages based on the professor as well,  has synthesized that information for that professor; like it has written notes on his research, autobiography etc
+    notestext longtext not null, -- contains text of the other pages based on the professor as well,  has synthesized that information for that professor; like it has written notes on his research, autobiography etc
     iv varchar(10000) not null
 );
 
@@ -64,6 +64,14 @@ create table profwebpages (
 create table webpages (
     id int(11) not null PRIMARY KEY AUTO_INCREMENT,
     linktowebsite varchar(1000) not null,
-    webtext text not null,
+    webtext longtext not null,
+    iv varchar(10000) not null
+);
+
+-- code for publication database (has the publicaiton link and publication notes)
+create table publications (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    publicationlink varchar(1000) not null,
+    publicationnotes longtext not null,
     iv varchar(10000) not null
 );

@@ -14,13 +14,15 @@
             echo "Error", $e ->getMessage(), "<br>";
             $fresponse = "error";
         }
-        if (strpos(curl_error($firstScrape), "Operation timed out") !== false) {
+
+        $position = strpos(curl_error($firstScrape), "Operation timed out");
+        if ($position !== false) {
             $fresponse = "timeout";
         }
 
         curl_close($firstScrape);
 
-        if ($fresponse != "timeout" or $fresponse != "error") {
+        if ($fresponse != "timeout" && $fresponse != "error") {
             //nodejs html extraction
             $linkinfo = json_encode(array("link" => $link));
             $scrapeCurl = curl_init();
@@ -182,18 +184,6 @@
         }
     }
 
-    function makeNotesOnProfessor($profname, $proftext, $API_KEY) {
-        $prompt = "Make very detailed notes on ".$profname."'s research work and professional experience. Also make sure to detail the specific research projects and works that ".$profname." has conducted or is currently being done in the lab. Write in the most detail as possible and don't miss any important information to ".$profname."'s research and experience as a researcher. As output, please just provide the notes. Here is text containing all the information about the ".$profname."'s research work and professional experience:".$proftext;
-        $prompt = substr($prompt, 0, 50000);
-        $profnotes = communicatetoOpenAILLM("gpt-3.5-turbo-0125", "Assistant on a web application that performs effective note-taking given information", $prompt, $API_KEY);
-        if($profnotes == null) {
-            echo "Error: LLM could not be connected to. Please try again or if the issue persists, contact our support team";
-            exit();
-        }
-
-        return $profnotes;
-    }
-
     function getIvfortheDataRowwithXVar($table, $conn, $key, $attributesarr, $uservaluearr) {
         $encdataarr = getDatafromSQLResponse(array_merge($attributesarr, ["iv"]), executeSQL($conn, "SELECT * FROM ".$table, "nothing", "nothing", "select", "nothing"));
         $decdataarr = decryptFullData($encdataarr, $key, count($attributesarr));
@@ -207,8 +197,171 @@
         return "not found";
     }
 
+    function createResearchEmailRequestObject($researchemailrequestobj, $professorname, $profwebpage, $pubweb, $template, $resume) {
+        $researchemailrequestobj->professorname = $professorname;
+        $researchemailrequestobj->professorwebpage = $profwebpage;
+        $researchemailrequestobj->publicationwebpage = $pubweb;
+        $researchemailrequestobj->template = $template;
+        $researchemailrequestobj->resume = $resume;
+
+        return $researchemailrequestobj;
+    }
+
+//create a function for just generally getting important research text (two specific types --> professor webpage and publication page) with in-built error handling
+//create a function for creating notes on a professor or publication even when it is above the memory window the LLM of 16,483 tokens (split it up and keep processing)
+//have an if(isset($_POST["textinput")) for this so if it is not set put nothing
+    function generalErrorforUnsuccessfulScrape($type, $professorname, $link, $otherlink, $template, $resume) {
+        $researchemailrequestobj = new stdClass();
+
+        if($type == "professorwebpage") {
+            $_SESSION["researchemailrequestobj"] = createResearchEmailRequestObject($researchemailrequestobj, $professorname, $link, $otherlink, $template, $resume);
+        }
+        else {
+            $_SESSION["researchemailrequestobj"] = createResearchEmailRequestObject($researchemailrequestobj, $professorname, $otherlink, $link, $template, $resume);
+        }
+
+        if($type == "professorwebpage") {
+            $_SESSION["profwebextraction-error"] = "true";
+        }
+        if($type == "publication") {
+            $_SESSION["publicationextraction-error"] = "true";
+        }
+
+        echo "true";
+        exit();
+    }
+
+    function getImportantResearchText($conn, $key, $link, $otherlink, $type, $textinput, $professorname, $template, $resume) {
+        $decwebpagelinks = getSpecificAttributeDecryptedinList("linktowebsite", "webpages", $conn, $key);
+
+        if(in_array($link, $decwebpagelinks)) {
+            $iv = getIvfortheDataRowwithXVar("webpages", $conn, $key, ["linktowebsite"], [$link]);
+            $enctext = getDatafromSQLResponse(["webtext", "iv"], executeSQL($conn, "SELECT webtext, iv FROM webpages WHERE linktowebsite=?", ["s"], [encryptSingleDataGivenIv([$link], $key, $iv)], "select", "nothing"));
+            $text = getAllElementsin1Dfrom2Darr(deleteIndexesfrom2DArray(decryptFullData($enctext, $key, 1), [1]))[0];
+            
+            if(strlen($text)<30) {
+                $textupdatenum = 0;
+                if($type=="professorwebpage") {
+                    if(isset($_POST["profwebpagetextinput"])) {
+                        $textupdatenum += 1;
+                        $text = $textinput;
+                        executeSQL($conn, "UPDATE webpages SET webtext=? WHERE linktowebsite=?", ["s", "s"], encryptDataGivenIv([$textinput, $link], $key, $iv), "update", "nothing");
+                    }
+                }
+                else {
+                    if(isset($_POST["publicationtextinput"])){
+                        $textupdatenum += 1;
+                        $text = $textinput;
+                        executeSQL($conn, "UPDATE webpages SET webtext=? WHERE linktowebsite=?", ["s", "s"], encryptDataGivenIv([$textinput, $link], $key, $iv), "update", "nothing");
+                    }
+                }
+                
+                if($textupdatenum == 0) {
+                    generalErrorforUnsuccessfulScrape($type, $professorname, $link, $otherlink, $template, $resume);
+                }
+            }
+        }
+        else {
+            $text = getAnythingFromHTML($link, ['head', 'header', 'footer', 'script'], ['body'], 'text');
+
+            if(strlen($text)<30) {
+                $textinputnum = 0;
+                if($type=="professorwebpage") {
+                    if(isset($_POST["profwebpagetextinput"])) {
+                        $textinputnum += 1;
+                        $text = $textinput;
+                        executeSQL($conn, "INSERT INTO webpages(linktowebsite, webtext, iv) VALUES(?, ?, ?)", ["s", "s", "s"], array_merge(encryptDataGivenIv([$link, $textinput], $key, $_SESSION["user"]->iv), [$_SESSION["user"]->iv]), "insert", 2);
+                    }
+                }
+                else {
+                    if(isset($_POST["publicationtextinput"])){
+                        $textinputnum += 1;
+                        $text = $textinput;
+                        executeSQL($conn, "INSERT INTO webpages(linktowebsite, webtext, iv) VALUES(?, ?, ?)", ["s", "s", "s"], array_merge(encryptDataGivenIv([$link, $textinput], $key, $_SESSION["user"]->iv), [$_SESSION["user"]->iv]), "insert", 2);
+                    }
+                }
+
+                if($textinputnum == 0) {
+                    generalErrorforUnsuccessfulScrape($type, $professorname, $link, $otherlink, $template, $resume);
+                }
+            }
+        }
+
+        return $text;
+    }
+
+    function textSplit($text, $maxcharacterlength, $maxoveralllength) {
+        $text = substr($text, 0, $maxoveralllength);
+    
+        if(strlen($text)>$maxcharacterlength) {
+            $textsplitarr = [];
+    
+            for($i=0; $i<strlen($text); $i=($i+$maxcharacterlength)) {
+                $textsection = substr($text, $i, $maxcharacterlength);
+                $textsplitarr[]= $textsection;
+            }
+        }
+    
+        return $textsplitarr;
+    }
+
+    function createNotes($model, $roleofsystem, $qprompt, $text, $API_Key) {
+        $notesarr = [];
+
+        if(strlen($text) > 10000) {
+            $textarr = explode("|\.uejd/|", $text);
+            $notesarr = [];
+
+            for($g=0;$g<count($textarr);$g=$g+2){
+                if(strlen($textarr[$g+1])> 10000) {
+                    $partialsectnotesarr = [];
+                    $textsplitarr = textSplit($textarr[$g+1], 10000, 100000);
+
+                    for($i=0; $i<count($textsplitarr); $i++) {
+                        $actualprompt = $qprompt." ".$textarr[$g]." ".$textsplitarr[$i];
+                        $partialsectnotes = communicatetoOpenAILLM($model, $roleofsystem, $actualprompt, $API_Key);
+                        $partialsectnotesarr[] = $partialsectnotes;
+                    }
+
+                    $notesarr[] = implode(" ", $partialsectnotesarr);
+                }
+                else {
+                    $actualprompt = $qprompt." ".$textarr[$g].": ".$textarr[$g+1];
+                    $notesarr[] = communicatetoOpenAILLM($model, $roleofsystem, $actualprompt, $API_Key);
+                }
+            }
+
+            $notes = implode(" ", $notesarr);
+        }
+        else {
+            $actualprompt = $qprompt." ".$text;
+            $notes = communicatetoOpenAILLM($model, $roleofsystem, $actualprompt, $API_Key);
+        }
+
+        return $notes;
+    }
+
+    function makeNotesOnProfessor($profname, $proftext, $API_Key) {
+        $qprompt = "Make very detailed notes on ".$profname."'s research work and professional experience based on the information provided. Also make sure to detail the specific research projects and works that ".$profname." has conducted or is currently being done in the lab. Write in the most detail as possible and don't miss any important information to ".$profname."'s research and experience as a researcher. As output, please just provide the notes. Here is text containing information about the ".$profname."'s research work and professional experience: ";
+        
+        $profnotes = createNotes("gpt-3.5-turbo-0125", "Assistant on a web application that performs effective note-taking given information", $qprompt, $proftext, $API_Key);
+
+        return $profnotes;
+    }
+
+    function makeNotesonPublication($profname, $pubtext, $API_Key) {
+        $qprompt = "Make very detailed note on ".$profname."'s publication. Write the notes in such a way that they capture all the information discussed in the publication (don't miss anything) and remember to outline the conclusions. Here is the text of the publication: ";
+
+        $pubnotes = createNotes("gpt-3.5-turbo-0125", "Assistant on a web application that performs effective note-taking given information", $qprompt, $pubtext, $API_Key);
+
+        return $pubnotes;
+    }
+
+
     //$out = getAnythingFromHTML("https://www.sickkids.ca/en/staff/k/joseph-kuzma/", ['head', 'header', 'footer', 'script'], [ 'body'], 'text');
 
+    //someone can insert bad notes which can make the writing bad
+    //We will look into this later, probably cleaning databases if the notes don't look good using
 
     //echo strlen($out);
 
@@ -276,7 +429,14 @@
             curl_close($ch);
         }
         catch (Exception $e) {
-            echo "Error building connection with LLM. Please try again later or contact our support team if the issue persists: ", $e -> getMessage();
+            echo "Error building connection with LLM. Please try again later or contact our support team if the issue persists: ", $e -> getMessage(), "<br>";
+        }
+
+        if($actualresponse == null) {
+            echo "Error: LLM could not be connected to. Please try again or if the issue persists, contact our support team<br>";
+
+            print_r($response);
+            exit();
         }
 
         return $actualresponse;

@@ -23,10 +23,8 @@
             $error += 1;
         }
         else {
-            $emailivdata_encrypted = getDatafromSQLResponse(["email", "iv"], executeSQL($conn, "SELECT email, iv FROM users", "nothing", "nothing", "select", "nothing"));
-            $email_arr = collapse2DArrayto1D(decryptFullData($emailivdata_encrypted, $key, 1));
+            $email_arr = getSpecificAttributeDecryptedinList("email", "users", $conn, $key);
             
-
             if(in_array($signupemail, $email_arr)) {
                 echo "This email is already signed up";
                 $error +=1;

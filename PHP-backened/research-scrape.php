@@ -42,6 +42,22 @@
         $error += 1;
     }
 
+    if(isset($_POST["profwebpagetextinput"])) { 
+        $profwebpagetextinput = $_POST["profwebpagetextinput"];
+        if(strlen($profwebpagetextinput) < 30) {
+            $error += 1;
+            echo "The professor webpage text inputted must be greater than 30 characters<br>";
+        }
+    }
+
+    if(isset($_POST["publicationtextinput"])) {
+        $publicationtextinput = $_POST["publicationtextinput"];
+        if(strlen($publicationtextinput) < 30) {
+            $error += 1;
+            echo "The publication text inputted must be greater than 30 characters<br>";
+        }
+    }
+
     if(isset($_POST['template'])) {
         $template = $_POST['template'];
 
@@ -74,6 +90,38 @@
 
     if(isset($_POST['generateresemail'])) {
         if($error < 1) {
+            //try to check the publication table and the notes there similar to prof notes checking
+            //then you just have to check in the webpages --> everything is in there which is in the common function itself
+            //put the important research text function and try to condense the original function
+            
+            $encpublicationlinks = getDatafromSQLResponse(["publicationlink", "iv"], executeSQL($conn, "SELECT * FROM publications", "nothing", "nothing", "select", "nothing"));
+            $decpublicationlinks = collapse2DArrayto1D(deleteIndexesfrom2DArray(decryptFullData($encpublicationlinks, $key, 1), [1]));
+
+            if(in_array($publicationwebpage, $decpublicationlinks)) {
+                $iv = getIvfortheDataRowwithXVar("publications", $conn, $key, ["publicationlink"], [$publicationwebpage]);
+                $encpublicationnotes = getDatafromSQLResponse(["publicationnotes", "iv"], executeSQL($conn, "SELECT * FROM publications WHERE publicationlink=?", ["s"], [encryptSingleDataGivenIv([$publicationwebpage], $key, $iv)], "select", "nothing"));
+                $decpublicationnotes = deleteIndexesfrom2DArray(decryptFullData($encpublicationnotes, $key, 1), [1]);
+
+                $publicationnotes = $decpublicationnotes[0][0];
+            }
+            else {
+                if(isset($_POST["publicationtextinput"])) {
+                    $publicationtext = getImportantResearchText($conn, $key, $publicationwebpage, $professorwebpage, "publication", $publicationtextinput, $professorname, $template, $resume);
+                }
+                else {
+                    $publicationtext = getImportantResearchText($conn, $key, $publicationwebpage, $professorwebpage, "publication", "", $professorname, $template, $resume);
+                }
+
+                if(isset($_SESSION["publicationextraction-error"])) {
+                    unset($_SESSION["publicationextraction-error"]);
+                }
+
+                $formattedpublicationtext = "Publication: |\.uejd/|".$publicationtext;
+                $publicationnotes = makeNotesOnPublication($professorname, $formattedpublicationtext, $Open_API_Key);
+
+                executeSQL($conn, "INSERT publications(publicationlink, publicationnotes, iv) VALUES (?,?,?)", ["s","s","s"], array_merge(encryptDataGivenIv([$publicationwebpage, $publicationnotes], $key, $_SESSION["user"]->iv), [$_SESSION["user"]->iv]), "insert", 2);
+            }
+
             $encexistingprofwebpages = getDatafromSQLResponse(["professorname", "linktowebsite", "iv"], executeSQL($conn, "SELECT * FROM profwebpages", "nothing", "nothing", "select", "nothing"));
             $decexistingprofwebpages = deleteIndexesfrom2DArray(decryptFullData($encexistingprofwebpages, $key, 2), [2]);
 
@@ -87,8 +135,6 @@
                 }
             } 
 
-            //apply getSpecificAttributeDecryptedinList in all code
-
             if($foundprofwebpage > 0) { //main purpose is to just provide the profnotes for this split if and elese section
                 $iv = getIvfortheDataRowwithXVar("profwebpages", $conn, $key, ["professorname", "linktowebsite"], [$professorname, $professorwebpage]);
 
@@ -96,43 +142,16 @@
                 $profnotes = decryptFullData($encprofessornotes, $key, 1)[0][0];
             }
             else {
-                $decwebpagelinks = getSpecificAttributeDecryptedinList("linktowebsite", "webpages", $conn, $key); //getting the webpage links in the webpage database
-
-                if(in_array($professorwebpage, $decwebpagelinks)) {
-                    $iv =  getIvfortheDataRowwithXVar("webpages", $conn, $key, ["linktowebsite"], [$professorwebpage]);
-                    $encprofessortext = getDatafromSQLResponse(["webtext", "iv"], executeSQL($conn, "SELECT webtext, iv FROM webpages WHERE linktowebsite=?", ["s"], [encryptSingleDataGivenIv([$professorwebpage], $key, $iv)], "select", "nothing"));
-                    $professortext = getAllElementsin1Dfrom2Darr(deleteIndexesfrom2DArray(decryptFullData($encprofessortext, $key, 1), [1]))[0]; // this professor text could have been from a second hand link so it can be nothing or it can something; it depends
-                    if(strlen($professortext) < 1) {
-                        // have to error handling for when you can't load website --> set a session of email request and put the error in there then it makes a box for you to put text --> then you don't do deep search, same thing for the bottom after the arrow
-                        // also have to do error handling for dom document in webscraping --> same thing of setting a session of email request and pust the error in there then it makes a box for you to just copy and past the text --> 
-
-                        exit(); //if session variable has error than we don't exit --> update that link in the database and put the text
-
-                        //make a function for this process
-                    }
-                    //don't do anyhting to db if theres already stuff in the database
+                if(isset($_POST["profwebpagetextinput"])) {
+                    $professortext = getImportantResearchText($conn, $key, $professorwebpage, $publicationwebpage, "professorwebpage", $profwebpagetextinput, $professorname, $template, $resume);
                 }
                 else {
-                    $professortext = getAnythingFromHTML($professorwebpage, ['head', 'header', 'footer', 'script'], ['body'], 'text'); //if the session of error is set then we just don't do this and make professortext = "";
-                    if(strlen($professortext) < 2) { 
-                        // have to error handling for when you can't load website --> set a session of email request and put the error in there then it makes a box for you to put text --> then you don't do deep search, same thing for the bottom after the arrow
-                        // also have to do error handling for dom document in webscraping --> same thing of setting a session of email request and pust the error in there then it makes a box for you to just copy and past the text --> 
-
-                        exit(); //if session variable has error than we don't exit --> insert that link in the database and put the text
-                    }
-                    else {
-                        //add the professor text and link to the database through insertion
-                        $decpwebpageinsert = [$professorwebpage, $professortext];
-                        $encpwebpageinsert = encryptDataGivenIv($decpwebpageinsert, $key, $_SESSION["user"]->iv);
-
-                        executeSQL($conn, "INSERT INTO webpages(linktowebsite, webtext, iv) VALUES(?,?,?)", ["s", "s", "s"], array_merge($encpwebpageinsert, [$_SESSION["user"]->iv]), "insert", 2);
-                    }
+                    $professortext = getImportantResearchText($conn, $key, $professorwebpage, $publicationwebpage, "professorwebpage", "", $professorname, $template, $resume);
                 }
-    
                 $alllinks = getLinksFromHTML($professorwebpage, ['script'], ['a', 'button'], 'href'); // --> if there was an error here in getting the page or loading it in dom document, it will be caught by the previous error so no handling
                 $twoimportantresearchlinks = givetwoImportantResearchLinks($professorname, $professortext, $professorwebpage, $Open_API_Key);
-    
-                if($alllinks== "error" or $twoimportantresearchlinks == "error") {
+        
+                if($alllinks== "error" || $twoimportantresearchlinks == "error") {
                     $link1text = "";
                     $link2text = "";
                 }
@@ -149,33 +168,36 @@
                             $$linktextvarname = $linktext; 
                         }
                         else { 
-                            //for searches you have to be able to get the iv that is in the database for that row of data
+                                //for searches you have to be able to get the iv that is in the database for that row of data
                             $iv = getIvfortheDataRowwithXVar("webpages", $conn, $key, ["linktowebsite"], [$twoimportantresearchlinks[$i]]);
                             $$linktextvarname = deleteIndexesfrom2DArray(decryptFullData(getDatafromSQLResponse(["webtext", "iv"], executeSQL($conn, "SELECT * FROM webpages WHERE linktowebsite=?", ["s"], [encryptSingleDataGivenIv([$twoimportantresearchlinks[$i]], $key, $iv)], "select", "nothing")), $key, 1), [1])[0][0];
                         }
                     }
                 }
 
+                if(isset($_SESSION["profwebextraction-error"])) {
+                    unset($_SESSION["profwebextraction-error"]);
+                }
+
                 //professor notes text creation and insertion
-                $totalprofessortext = "Professor Website: ".$professortext."<br> Important website 1 concerning professor research: ".$link1text."<br> Important website 2 concerning professor's research: ".$link2text;
-
-
-                echo $totalprofessortext;
-
+                $totalprofessortext = "Professor Website: |\.uejd/|".$professortext."|\.uejd/| <br> Important website 1 concerning professor research: |\.uejd/|".$link1text."|\.uejd/| <br> Important website 2 concerning professor's research: |\.uejd/|".$link2text;
                 $profnotes = makeNotesOnProfessor($professorname, $totalprofessortext, $Open_API_Key);
                 $decprofwebinfodata = [$professorname, $professorwebpage, $profnotes];
                 $encprofwebinfodata = encryptDataGivenIv($decprofwebinfodata, $key, $_SESSION["user"]->iv);
                 executeSQL($conn, "INSERT INTO profwebpages(professorname, linktowebsite, notestext, iv) VALUES(?,?,?,?)", ["s","s","s","s"], array_merge($encprofwebinfodata, [$_SESSION["user"]->iv]), "insert", 3);
-                
             }
 
-           //get the notes and insert it into the database.
-
+            echo $publicationnotes;
+            echo "<br>";
+            echo $profnotes;
         }
         else {
             echo "There are errors in your inputs<br>";
         }
+        
     }
+
+    //write the email as it is able to scrape the data and write notes and handle errors
 
     //$textofmain = getAnythingFromHTML($link, ['head', 'header', 'footer', 'script'], ['body'], 'text');
     //givetwoImportantResearchLinks('Tim Bussey', $textofmain, 'https://tcnlab.ca/our-team/', $Open_API_Key);
