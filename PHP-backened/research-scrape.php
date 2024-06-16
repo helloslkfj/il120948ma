@@ -89,18 +89,14 @@
     }
 
     if(isset($_POST['generateresemail'])) {
-        //if you click this you destroy the previous email stuff, right commands fo that
+        //if you click generate during regeenrate phase then you will just create a new email and lose it, we already add the record of email to the database the first time around
+
+        if(isset($_SESSION["researchemailinfo"])){ 
+            unset($_SESSION["researchemailinfo"]);
+        }
 
         if($error < 1) {
-            //if you click generate during regeenrate phase then you will just create a new email and lose it, we already add the record of email to the database the first time around
 
-            if(isset($_SESSION["researchemailinfo"])) {
-                unset($_SESSION["researchemailinfo"]);
-            }
-
-            if(isset($_SESSION["researchemail"])) {
-                unset($_SESSION["researchemail"]);
-            }
 
             //try to check the publication table and the notes there similar to prof notes checking
             //then you just have to check in the webpages --> everything is in there which is in the common function itself
@@ -204,30 +200,35 @@
                 unset($_SESSION["researchemailrequestobj"]);
             }
 
-            //if someone abuses generate email button where they keep trying our algoirhtm to process more text
-            
-            //edit the inputs so it is also a scientist
+            //if someone abuses generate email button where they keep trying our algoirhtm to process more text, just have a break mechanism
+
+            //edit the inputs so it is also a researcher
 
             //create research email info session so if as ur writing the email, it is refreshed, you don't have to go through extraction again
-            // also make it so that if you refresh then no info is lost and it just keeps going from this point onward
 
-            //exit feature for email --> session_destroy()
+            //need to do this exit feature for email like if you want to use a different email --> unset error session and email request session and thus inpputs
+
+            $researchemail = createResearchEmail($conn, $key, $encemail, $_SESSION["user"]->fname, $professorname, $profnotes, $publicationnotes, $template, $resume, $Open_API_Key);
+            $researchemailsubject = createResearchEmailSubject($_SESSION["user"]->fname, $professorname, $researchemail, $Open_API_Key);
+            $emailid = generateEmailId();
+
             $researchemailinfobj =  new stdClass();
-            $_SESSION["researchemailinfo"] = createResearchEmailInfo($researchemailinfobj, $professorname, $profnotes, $publicationnotes, $template, $resume);
-
-
-            $researchemail = createResearchEmail($conn, $key, $encemail, $_SESSION["user"]->fname, $_SESSION["researchemailinfo"]->professorname, $_SESSION["researchemailinfo"]->professornotes, $_SESSION["researchemailinfo"]->publicationnotes, $_SESSION["researchemailinfo"]->template, $_SESSION["researchemailinfo"]->resume, $Open_API_Key);
+            $_SESSION["researchemailinfo"] = createResearchEmailInfo($researchemailinfobj, $professorname, $profnotes, $publicationnotes, $template, $resume, $emailid, $researchemail, $researchemailsubject);
             
-            echo "<textarea>".$researchemail."</textarea>";
-            //edit the object to have a subject
             //research email and corporate email counts are not encrypted as there is no useful information in them
-            //$researchemailcount = (int)getDatafromSQLResponse(["researchemails"], executeSQL($conn, "SELECT researchemails FROM users WHERE email=?", ["s"], [$encemail], "select", "nothing"))[0][0];
-            //$researchemailcount += 1;
+            $researchemailcount = (int)getDatafromSQLResponse(["researchemails"], executeSQL($conn, "SELECT researchemails FROM users WHERE email=?", ["s"], [$encemail], "select", "nothing"))[0][0];
+            $researchemailcount += 1;
 
             //adding count of the research email
-            //executeSQL($conn, "UPDATE users SET researchemails=? WHERE email=?", ["i", "s"], [$researchemailcount, $encemail], "update", "nothing");
+            executeSQL($conn, "UPDATE users SET researchemails=? WHERE email=?", ["i", "s"], [$researchemailcount, $encemail], "update", "nothing");
 
             //insert the research email into the research emails database with standard encryption
+            $decresearchemailinputsarr = [$emailid, $_SESSION["user"]->email, $professorname, $professorwebpage, $publicationwebpage, $researchemailsubject, $researchemail, $resume, "nothing", strtotime(date("Y-m-d H:i:s"))];
+            executeSQL($conn, "INSERT INTO researchemails(emailid, useremail, professorname, professorwebpage, publicationlink, resemailsubject, resemailtext, resumename, rating1to10, datentimeinteger, iv) VALUES(?,?,?,?,?,?,?,?,?,?,?);", ["s","s", "s", "s", "s", "s", "s", "s", "s", "s", "s"], array_merge(encryptDataGivenIv($decresearchemailinputsarr, $key, $_SESSION["user"]->iv), [$_SESSION["user"]->iv]), "insert", 10);
+
+            echo "true";
+
+
             
 
             //need to create research email table, have email in it

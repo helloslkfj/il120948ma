@@ -92,6 +92,7 @@ create table publications (
 -- code for research email table (has the email of the user, the professor, the profwebpage link, the publication link, the actual email written by the system)
 create table researchemails (
     id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    emailid text not null,
     useremail varchar(1000) not null,
     professorname varchar(200) not null,
     professorwebpage varchar(1000) not null,
@@ -99,5 +100,12 @@ create table researchemails (
     resemailsubject varchar(1000) not null,
     resemailtext longtext not null,
     resumename varchar(1000) not null,
-    rating1to10 varchar(1000) not null
+    rating1to10 varchar(1000) not null,
+    datentimeinteger text not null,
+    iv varchar(10000) not null
 );
+
+--code for modifying researchemails tables (iv column has been added)
+ALTER TABLE researchemails ADD COLUMN iv varchar(10000) not null;
+ALTER TABLE researchemails ADD COLUMN datentimeinteger text not null AFTER rating1to10;
+ALTER TABLE researchemails ADD COLUMN emailid text not null AFTER id;

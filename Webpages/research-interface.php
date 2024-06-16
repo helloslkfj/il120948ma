@@ -1,28 +1,36 @@
 <?php
-    include_once __DIR__.'/head-code/headinternal-code.php';
+    include_once __DIR__.'/head-internal.php';
     include_once __DIR__.'/../PHP-backened/header-backened-code/headerincludes-backened.php';
+
 ?>
 
     <!-- Here create the inputs for research and the generate button-->
-
+    <br>
+    <br>
     <div class="generaldashspace">
         <div></div>
         <div class="grid gap-r-15">
+            <h2>Research Email Generator</h2>
+            <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
+                <div>
+                    <a id="exitcurrentemail" class="underline textlink">Exit</a><text> current email generation process if you want to change your links</text>
+                </div>
+            <?php } ?>
             <div class="research-inputgrid">
                 <div class="grid">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
-                        <input name="professorname" type="text" placeholder="The full name of the professor" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
+                        <input name="professorname" type="text" placeholder="The full name of the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
                     <?php } else { ?>
-                        <input name="professorname" type="text" placeholder="The full name of the professor">
+                        <input name="professorname" type="text" placeholder="The full name of the professor/researcher">
                     <?php } ?>
                     <p id="professornameerror" class="highlight"></p>
                 </div>
                 <div></div>
                 <div class="grid">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
-                        <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
+                        <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
                     <?php } else {?>
-                        <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor">
+                        <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher">
                     <?php }?>
                     <p id="professorweberror" class="highlight"></p>
                 </div>
@@ -30,9 +38,9 @@
             <div class="research-inputgrid">
                 <div class="grid">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) { ?>
-                        <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
+                        <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
                     <?php } else {?>
-                        <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's publications">
+                        <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications">
                     <?php } ?>
                     <p id="publicationweberror" class="highlight"></p>
                 </div>
@@ -97,7 +105,7 @@
                 <div class="grid gap-r-5">
                     <text class="highlight">Professor Webpage Error</text>
                     <div class="grid">
-                        <textarea name="profwebpagetextinput" type="text" placeholder="Error has occured where the professor's website cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the professor's webpage to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the webpage, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the proffessor's webpage. Once you are done, just click generate again and we will now use this provided professor webpage text for getting context on the professor. Do not worry about it including unnecessary text pieces, etc as our model will automatically take out the relevant information." rows=8 cols=1></textarea>
+                        <textarea name="profwebpagetextinput" type="text" placeholder="Error has occured where the professor's/researcher's website cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the professor's webpage to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the webpage, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the professor's/researcher's webpage. Once you are done, just click generate again and we will now use this provided professor/researcher webpage text for getting context on the professor/researcher. Do not worry about it including unnecessary text pieces, etc as our model will automatically take out the relevant information." rows=8 cols=1></textarea>
                         <p id="profwebpagetextinputerror" class="highlight"></p>
                     </div>
                 </div>
@@ -108,7 +116,7 @@
                 <div class="grid gap-r-5">
                     <text class="highlight">Publication Error</text>
                     <div class="grid">
-                        <textarea name="publicationtextinput" type="text" placeholder="Error has occured where the publication site cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the publication site to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the site, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the publication. Once you are done, just click generate again and we will now use this provided publication text for writing your personalized cold email. Do not worry about including unnecessary text pieces like the header of the site, etc as our algorithm will automatically take out the relevant information." rows=8 cols=1></textarea>
+                        <textarea name="publicationtextinput" type="text" placeholder="Error has occured where the professor's/researcher's website cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the professor's webpage to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the webpage, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the professor's/researcher's webpage. Once you are done, just click generate again and we will now use this provided professor/researcher webpage text for getting context on the professor/researcher. Do not worry about it including unnecessary text pieces, etc as our model will automatically take out the relevant information." rows=8 cols=1></textarea>
                         <p id="publicationtextinputerror" class="highlight"></p>
                     </div>
                 </div>
@@ -128,6 +136,37 @@
 
                 </div>
             </div>
+            <br>
+            <?php if(isset($_SESSION["researchemailinfo"])) { ?>
+                <div id="generatedemailgrid" class="grid gap-r-10">
+                    <h4>Generated Research Email:</h4>
+                    <text>Here is the generated research email</text>
+                    <div class="grid">
+                        <text>Subject:</text>
+                        <input name="emailsubject" value="<?php echo $_SESSION["researchemailinfo"]->researchemailsubject; ?>" readonly></input>
+                    </div>
+                    <div class="grid">
+                        <textarea name="emailbody" cols=1 rows=10 readonly><?php echo $_SESSION["researchemailinfo"]->researchemail; ?></textarea>
+                    </div>
+                    
+                    <div class="generalthreecolumns gap-c-10">
+                        <div class="right">
+                            <button name="doneemail" class="center sidetosidepadding">Done</button>
+                        </div>
+                        <div class="grid">
+                            <button name="copyemail" class="center sidetosidepadding">Copy</button>
+                        </div>
+                        <?php if($_SESSION["researchemailinfo"]->attempts < 2) {?>
+                            <div class="left">
+                                <div id="regenerateloader"></div> <button name="regeneratebutton" class="center sidetosidepadding">Regenerate</button>
+                            </div>
+                        <?php } else { ?>
+                            <div></div>
+                        <?php }?>
+                    </div>
+
+                </div>
+            <?php } ?>
 
         </div>
         <div></div>
@@ -135,6 +174,35 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+            $("#exitcurrentemail").click(()=>{
+                var exitemaildata = createFormDataObject([], []);
+                exitemaildata.append('exitemail', 'true');
+                sendAJAXRequest('../PHP-backened/researchinterfacebackened.php',exitemaildata,reLoad);
+            });
+
+            $("button[name='copyemail']").click(()=>{
+                var emailsubject = $("input[name='emailsubject']").val();
+                var emailbody = $("textarea[name='emailbody']").val();
+
+                var totalemailtext = emailsubject+"\n\n"+emailbody;
+
+                navigator.clipboard.writeText(totalemailtext);
+                $("button[name='copyemail']").html("Copied");
+            });
+
+            $("button[name='doneemail']").click(()=>{
+                var doneemaildata = createFormDataObject([], []);
+                doneemaildata.append('doneemail', 'true');
+                sendAJAXRequest("../PHP-backened/researchinterfacebackened.php",doneemaildata, reLoad);
+            });
+
+            $("button[name='regeneratebutton']").click(()=>{
+                var regeneratebuttondata = createFormDataObject([], []);
+                regeneratebuttondata.append('regenerate', 'true');
+                $("#regenerateloader").html("<i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i>");
+                sendAJAXRequest("../PHP-backened/researchinterfacebackened.php", regeneratebuttondata, reLoad);
+            });
+
             $("input[name='professorname']").keyup(()=>{
                 var professornamedata = createFormDataObject(["input[name='professorname']"], ["professorname"]);
                 sendAJAXRequest2('../PHP-backened/research-scrape.php', professornamedata, reLoadandErrorHandle, "#professornameerror");
@@ -174,16 +242,16 @@
             });
 
             $("button[name='createtemplate']").click(()=>{
-                window.location.replace('templates.php')
+                window.location.replace('templates.php');
             });
             $("button[name='addresume']").click(()=>{
-                window.location.replace('resumes.php')
+                window.location.replace('resumes.php');
             });
 
             $("button[name='generateresearch']").click(()=>{
                 var inputnamesarr = ["professorname", "professorwebpage", "publicationwebpage", "template", "resume"];
                 var inputsarr = [$("input[name='professorname']"), $("input[name='professorwebpage']"), $("input[name='publicationwebpage']"), $("select[name='templates']").find(":selected"), $("select[name='resumes']").find(":selected")];
-                var keyupelementsarr = ["input[name='professorname']", "input[name='publicationwebpage']", "input[name='professorname']"];
+                var keyupelementsarr = ["input[name='professorname']", "input[name='professorwebpage']", "input[name='publicationwebpage']"];
 
                 if($("textarea[name='profwebpagetextinput']").val() != undefined) {
                     inputnamesarr.push("profwebpagetextinput");
@@ -219,7 +287,12 @@
 
                 changeUpAllElements(["select[name='templates']", "select[name='resumes']"]);
                 $("#loader").html("<i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i>");
-                sendAJAXRequest2('../PHP-backened/research-scrape.php', researchemailinfo, reLoadandErrorHandle, "#researchemailerror");
+                sendAJAXRequest2('../PHP-backened/research-scrape.php', researchemailinfo, function(input, varname) {
+                    $("#loader").html("");
+                    //the generate grid is just nothing if there is no reload as only reload reload indicated email
+                    $("#generatedemailgrid").html("");
+                    reLoadandErrorHandle(input, varname); 
+                }, "#researchemailerror");
 
             });
 
@@ -227,5 +300,5 @@
     </script>
 
 <?php 
-    include 'footer-frontend.php';
+    include __DIR__.'/footer-frontend.php';
 ?>

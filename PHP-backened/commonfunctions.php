@@ -206,6 +206,33 @@
         $decattributearr = getAllElementsin1Dfrom2Darr(deleteIndexesfrom2DArray(decryptFullData($encattributearr, $key, 1), [1]));
         return $decattributearr;
     }
+
+    function insertElementIntoTwoDarray($twodarray, $newelementvalue) {
+        for($i=0;$i<count($twodarray);$i++) {
+            $twodarray[$i][] = $newelementvalue;
+        }
+
+        return $twodarray;
+    }
+
+    //use this function when conducting string comparision
+    function normalizeString($str) {
+        // Trim leading and trailing whitespace
+        $str = trim($str);
+
+        // Replace multiple whitespace characters with a single space
+        $str = preg_replace('/\s+/', ' ', $str);
+
+        // Normalize newlines to "\n"
+        $str = str_replace(["\r\n", "\r"], "\n", $str);
+
+        // Remove non-printable control characters (except newline, carriage return, and tab)
+        $str = preg_replace('/[^\P{C}\n\r\t]/u', '', $str);
+
+        // Convert encoding to UTF-8
+
+        return $str;
+    }
     
 
 ?>

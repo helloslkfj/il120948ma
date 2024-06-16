@@ -107,6 +107,7 @@
 
 
 
+
 /*ATTENTION: used the same CSS layouts for both resumes and templates page*/
 /*CSS layout for the your templates section where the templates listed*/ 
 .templateslayout {
@@ -124,6 +125,31 @@
 .generaltwocolumns {
     display:grid;
     grid-template-columns:1fr 1fr;
+}
+
+/*CSS layout for creating three side by side columns*/
+.generalthreecolumns {
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+}
+
+/*CSS layout for the search grid on emails interface*/
+.searchgrid {
+    display:grid;
+    grid-template-columns:4fr 1fr;
+  }
+
+/*CSS layout for the emails being displayed on your emails page and it is the CSS for the layout*/
+.majoremailgrid {
+    display:grid;
+    grid-template-columns:0.04fr 2fr 1fr 0.04fr;
+    grid-column-gap:5px;
+}
+
+/*CSS layout for the save and copy buttons  of the email display*/
+.saveandcopygrid {
+    display:grid;
+    grid-template-columns:6fr 1.1fr 0.1fr;
 }
 
 /*two columns for homepage*/
@@ -229,6 +255,10 @@
 
 
 /*extra classes*/
+.centernongrid {
+    text-align:center;
+}
+
 .right {
     text-align: right;
 }

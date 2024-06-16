@@ -6,18 +6,19 @@
         <div class="outerdashnav">
             <div class="innerdashnav">
                 <div class="grid">
-                    <text class="textlink" id="research">Research</text>
+                    <a class="textlink" href="research-interface.php">Research</a>
                 </div>
                 <div class="grid">
-                    <text class="textlink" id="corporate">Corporate</text>
+                    <a class="textlink" href="">Corporate</a>
                 </div>
                 <div class="grid">
-                    <text class="textlink" id="analytics">Analytics</text>
+                    <a class="textlink" href="emails-interface.php">Your Emails</a>
                 </div>
             </div>
             <div></div>
         </div>
         <br>
+
         <?php 
             if(isset($_GET['verification'])) {
         ?>
@@ -31,20 +32,9 @@
             </script>
         <?php } ?>
         <br>
-        <div id="pageload">
-
-        </div>
+    
     </div>
 
-    <script type="text/javascript">
-        $(document).ready(() => {
-            $("#research").click(()=>{
-                $("#pageload").load("research-interface.php");
-            })
-        })
-
-    </script>
-
 <?php
-    include 'footer-frontend.php';
+    include __DIR__.'/footer-frontend.php';
 ?>
