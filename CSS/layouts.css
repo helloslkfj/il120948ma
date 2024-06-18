@@ -53,6 +53,7 @@
 .innerdashnav {
     display:grid;
     grid-template-columns:1fr 1fr 1fr;
+
 }
 
 /* CSS for any page loaded in page load from the dashboard so that they have appropriate space on both sides*/
@@ -279,6 +280,26 @@
     border: none;
 }
 
+.fit {
+    width: fit-content;
+}
+
+.width90 {
+    width: calc(90%);
+}
+
+.width50 {
+    width: calc(50%);
+}
+
+.auto {
+    margin: auto;
+}
+
+.roundcorner {
+    border-radius: 5px;
+}
+
 /*position buttons not at edge of homepage headers*/
 .buttons {
     width: calc(90%);
@@ -313,6 +334,8 @@
     cursor: pointer;
     font-weight: 350;
 }
+
+
 
 
 

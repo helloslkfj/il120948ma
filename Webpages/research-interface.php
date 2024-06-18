@@ -10,14 +10,15 @@
     <div class="generaldashspace">
         <div></div>
         <div class="grid gap-r-15">
-            <h2>Research Email Generator</h2>
+            <div class="poppins white size30 marginbottom">Research Email Generator</div>
             <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
                 <div>
                     <a id="exitcurrentemail" class="underline textlink">Exit</a><text> current email generation process if you want to change your links</text>
                 </div>
             <?php } ?>
-            <div class="research-inputgrid">
-                <div class="grid">
+
+            <div class="marginbottom">
+                <div class="grid marginbottom">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
                         <input name="professorname" type="text" placeholder="The full name of the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
                     <?php } else { ?>
@@ -25,7 +26,7 @@
                     <?php } ?>
                     <p id="professornameerror" class="highlight"></p>
                 </div>
-                <div></div>
+                <div class="poppins white size20">Links</div>
                 <div class="grid">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
                         <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
@@ -35,8 +36,9 @@
                     <p id="professorweberror" class="highlight"></p>
                 </div>
             </div>
-            <div class="research-inputgrid">
-                <div class="grid">
+
+            <div class="marginbottom">
+                <div class="grid marginbottom">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) { ?>
                         <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
                     <?php } else {?>
@@ -46,7 +48,7 @@
                 </div>
                 <div></div>
                 <div class="grid">
-                    <text>Select template</text>
+                    <div class="poppins white size20">Select template</div>
                     <?php 
                         $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=?;", ["s"], [$encemail], "select", "nothing"));
                         $dectemplates = decryptFullData($enctemplates, $key, 4);
@@ -71,9 +73,9 @@
                     <p id="templateerror" class="highlight"></p>
                 </div>
             </div>
-            <div class="research-inputgrid">
+            <div>
                 <div class="grid">
-                    <text>Select a resume</text>
+                    <div class="poppins white size20">Select a resume</div>
                     <?php 
                         $encresumes = getDatafromSQLResponse(["resumename", "resumelocation", "iv"], executeSQL($conn, "SELECT * FROM resumes WHERE email=?", ["s"], [$encemail], "select", "nothing"));
                         $decresumes = decryptFullData($encresumes, $key, 2);

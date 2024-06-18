@@ -207,11 +207,13 @@
 
 
 /*styles for types - not doing anything right now*/
-  ::placeholder {
-    font-family: Work Sans;
-    font-size: 15px;
-    color: black;
-    opacity: 0.8;
-  }
+::placeholder {
+  color: black;
+  font-family: Poppins;
+}
 
+
+.pointer {
+  cursor: pointer;
+}
   

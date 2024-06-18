@@ -41,3 +41,12 @@
 }
 
 
+.roundborder {
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 200px;
+  margin: 0.3rem;
+  padding: 0.5rem;
+}
+
+

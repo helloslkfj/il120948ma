@@ -2,20 +2,57 @@
     include_once __DIR__.'/head-internal.php';
 ?>
 
-    <div class="grid">
-        <div class="outerdashnav">
-            <div class="innerdashnav">
-                <div class="grid">
-                    <a class="textlink" href="research-interface.php">Research</a>
+    <div>
+        <br>
+        <br>
+        <br>
+        <div>
+
+            <div class="generalthreecolumns fit auto centernongrid">
+
+     
+
+                <div>
+                    <a href="research-interface.php">
+                        <button class="roundborder purplefill pointer">
+                           <div class="worksans weight300 white size20">
+                                Research
+                            </div>
+
+                            <div class="worksans weight200 white">
+                                Generate emails tailored to specific professors and labs.
+                            </div>
+
+                        </button>
+                    </a>
                 </div>
-                <div class="grid">
-                    <a class="textlink" href="">Corporate</a>
+
+                <div>
+                    <a href="">
+                        <button class="roundborder purplefill worksans weight300 white pointer size20">Corporate</button>
+                    </a>
                 </div>
-                <div class="grid">
-                    <a class="textlink" href="emails-interface.php">Your Emails</a>
+
+                <div>
+                    <a href="emails-interface.php">
+                        <button class="roundborder purplefill pointer">
+                            <div class="worksans weight300 white size20">
+                                Your Emails
+
+                            </div>
+
+                            <div class="worksans weight200 white">
+                                Your comprehensive record of research and corporate emails.
+                            </div>
+                        </button>
+                    </a>
                 </div>
+
+
+
             </div>
-            <div></div>
+
+            
         </div>
         <br>
 
@@ -34,6 +71,30 @@
         <br>
     
     </div>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 <?php
     include __DIR__.'/footer-frontend.php';

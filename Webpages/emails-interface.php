@@ -51,7 +51,7 @@
 
             </script>
             <?php for($i=0;$i<count($totalemailarr);$i++) { ?>
-                <div class="grid boxshadow">
+                <div class="grid boxshadow whitefill roundcorner">
                     <div class="majoremailgrid">
                         <div></div>
                         <div class="grid gap-r-10">
