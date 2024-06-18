@@ -32,3 +32,11 @@
 .purple {
     color: #3a138d;
 }
+
+.purplefill {
+    background-color: #3a138d;
+}
+
+.whitefill {
+    background-color: white;
+}

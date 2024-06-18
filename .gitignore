@@ -5,3 +5,11 @@ vendor
 WebFiles/Resumes
 
 composer.phar
+
+NodeJS/node_modules
+
+
+NodeJS/.DS_Store
+
+NodeJS/node_modules/.DS_Store
+
