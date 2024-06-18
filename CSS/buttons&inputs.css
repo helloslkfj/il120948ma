@@ -56,8 +56,8 @@
         /*get started button formatting*/
         .gsbutton {
           font-family: Work Sans;
-          font-weight: 200;
-          font-size: 25px;
+          font-weight: 100;
+          font-size: 20px;
           background-color: transparent;
           border-color: transparent;
           color: white;
@@ -68,7 +68,7 @@
         }
         
         .gsbutton:hover {
-          font-weight: 300;
+          font-weight: 200;
         }
 
 
@@ -215,5 +215,58 @@
 
 .pointer {
   cursor: pointer;
+}
+
+/*signup input*/
+.epass {
+
+  font-family: Work Sans;
+  font-weight: 300;
+  font-size: 20px;
+  color: #3A138D;
+  border: solid;
+  border-radius: 5px;
+  border-color: #3A138D;
+
+  margin: auto;
+  width: 350px;
+  height: 40px;
+  margin-top: 2rem;
+
+}
+
+.generateinput {
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 16px;
+  border: solid;
+  border-radius: 5px;
+  border-color: black;
+  height: 35px;
+
+}
+
+.generateoutput {
+  font-family: Poppins;
+  font-weight: 300;
+  font-size: 13px;
+  border: solid;
+  border-radius: 5px;
+  border-color: black;
+  height: fit-content;
+}
+
+.linebutton {
+  font-family: Poppins;
+  font-size: 20px;
+  border: none;
+  background-color: white;
+  text-decoration: underline;
+  color: black;
+  cursor: pointer;
+}
+
+.linebutton:hover {
+  color: #3a138d;
 }
   

@@ -6,6 +6,10 @@
         <br>
         <br>
         <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <div>
 
             <div class="generalthreecolumns fit auto centernongrid">
@@ -18,10 +22,14 @@
                            <div class="worksans weight300 white size20">
                                 Research
                             </div>
+                            <br>
 
                             <div class="worksans weight200 white">
                                 Generate emails tailored to specific professors and labs.
                             </div>
+
+                            <br>
+                            <br>
 
                         </button>
                     </a>
@@ -29,7 +37,19 @@
 
                 <div>
                     <a href="">
-                        <button class="roundborder purplefill worksans weight300 white pointer size20">Corporate</button>
+                        <button class="roundborder purplefill pointer">
+                            
+                            <div class="worksans weight300 white size20">Corporate</div>
+                            <br>
+
+                            <div class="worksans weight200 white">
+                                Generate emails to break the ice with companies!
+                            </div>
+
+                            <br>
+                            <br>
+
+                        </button>
                     </a>
                 </div>
 
@@ -40,10 +60,12 @@
                                 Your Emails
 
                             </div>
+                            <br>
 
                             <div class="worksans weight200 white">
                                 Your comprehensive record of research and corporate emails.
                             </div>
+                            <br>
                         </button>
                     </a>
                 </div>
@@ -55,6 +77,25 @@
             
         </div>
         <br>
+        <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    
 
         <?php 
             if(isset($_GET['verification'])) {
@@ -72,29 +113,7 @@
     
     </div>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+   
 
 <?php
     include __DIR__.'/footer-frontend.php';

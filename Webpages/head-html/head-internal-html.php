@@ -9,7 +9,7 @@
         
         <div class="header">
 
-        <div class="generaltwocolumns">
+        <div class="templateslayout">
 
             <div class="title">
 
@@ -31,38 +31,36 @@
             </div>
 
 
-            <div class="right dropdown">
+            <div>
+                <br>
+                <br>
+                <br>
 
-                <div>
-                <text class="dashtext" data-dropdown-button><?php echo substr($_SESSION["user"]->fname, 0, 10) ?></text>
-                </div>
-
-                <div class="menugrid">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div class="menu">
-
-
-                        <div>
-                            <a href="dashboard.php">
-                                <button class="gsbutton noborder right">Dashboard</button>
-                            </a>
-                        </div>
-
-                        <form method="POST" onsubmit="return false" enctype="multipart/form-data">
+           
+               <!-- <div class="worksans weight300 size30 white"><?php echo substr($_SESSION["user"]->fname, 0, 10) ?></div> -->
       
+                <div class="inline">
 
-                            <div>
-                            <button class="gsbutton right" name="logout" type="submit">Logout</button>
-                            </div>
-                        
-
-                        </form>
-
+                    <div>
+                        <a href="dashboard.php">
+                            <button class="gsbutton">Dashboard</button>
+                        </a>
                     </div>
 
+                    <form method="POST" onsubmit="return false" enctype="multipart/form-data">
+
+
+            
+                        <button class="gsbutton" name="logout" type="submit">Logout</button>
+        
+                    
+
+                    </form>
+
                 </div>
+             
+
+  
 
             </div>
             
@@ -78,7 +76,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body style="margin: 0;">
+    <body style="margin: 0; background-color: #3a138d;">
         <script type="text/javascript">
             $("button[name='logout']").click(() => {
                 var totalemptydata = giveEmptyData();

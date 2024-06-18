@@ -7,10 +7,12 @@
     <!-- Here create the inputs for research and the generate button-->
     <br>
     <br>
-    <div class="generaldashspace">
+
+    <div>
+    <div class="container">
         <div></div>
         <div class="grid gap-r-15">
-            <div class="poppins white size30 marginbottom">Research Email Generator</div>
+            <div class="poppins size50 marginbottom center">Research Email Generator</div>
             <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
                 <div>
                     <a id="exitcurrentemail" class="underline textlink">Exit</a><text> current email generation process if you want to change your links</text>
@@ -20,18 +22,18 @@
             <div class="marginbottom">
                 <div class="grid marginbottom">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
-                        <input name="professorname" type="text" placeholder="The full name of the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
+                        <input class="generateinput" name="professorname" type="text" placeholder="The full name of the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
                     <?php } else { ?>
-                        <input name="professorname" type="text" placeholder="The full name of the professor/researcher">
+                        <input class="generateinput" name="professorname" type="text" placeholder="The full name of the professor/researcher">
                     <?php } ?>
                     <p id="professornameerror" class="highlight"></p>
                 </div>
-                <div class="poppins white size20">Links</div>
+                <div class="poppins size30">Links</div>
                 <div class="grid">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
-                        <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
+                        <input class="generateinput" name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
                     <?php } else {?>
-                        <input name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher">
+                        <input class="generateinput" name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher">
                     <?php }?>
                     <p id="professorweberror" class="highlight"></p>
                 </div>
@@ -40,22 +42,22 @@
             <div class="marginbottom">
                 <div class="grid marginbottom">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) { ?>
-                        <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
+                        <input class="generateinput" name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
                     <?php } else {?>
-                        <input name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications">
+                        <input class="generateinput" name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications">
                     <?php } ?>
                     <p id="publicationweberror" class="highlight"></p>
                 </div>
                 <div></div>
                 <div class="grid">
-                    <div class="poppins white size20">Select template</div>
+                    <div class="poppins size30">Select template</div>
                     <?php 
                         $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=?;", ["s"], [$encemail], "select", "nothing"));
                         $dectemplates = decryptFullData($enctemplates, $key, 4);
 
                         if(count($dectemplates) > 0) {
                     ?>
-                    <select name="templates"> 
+                    <select class="generateinput" name="templates"> 
                         <?php 
                             for($i=0;$i<count($dectemplates);$i++) {
                                 if(isset($_SESSION["researchemailrequestobj"]) == true && $_SESSION["researchemailrequestobj"]->template == $dectemplates[$i][1]) {
@@ -75,13 +77,13 @@
             </div>
             <div>
                 <div class="grid">
-                    <div class="poppins white size20">Select a resume</div>
+                    <div class="poppins size30">Select a resume</div>
                     <?php 
                         $encresumes = getDatafromSQLResponse(["resumename", "resumelocation", "iv"], executeSQL($conn, "SELECT * FROM resumes WHERE email=?", ["s"], [$encemail], "select", "nothing"));
                         $decresumes = decryptFullData($encresumes, $key, 2);
                         if(count($decresumes) > 0) {
                     ?>
-                    <select name="resumes">
+                    <select class="generateinput" name="resumes">
                         <?php 
                             for($i=0;$i<count($decresumes);$i++) {
                                 if(isset($_SESSION["researchemailrequestobj"]) == true && $_SESSION["researchemailrequestobj"]->resume == $decresumes[$i][0]) {
@@ -132,36 +134,41 @@
             
             <div class="generaltwocolumns">
                 <div class="right">
-                    <button class="generatebutton center" name="generateresearch">Generate</button>
+                    <button class="roundbutton center" name="generateresearch">Generate</button>
                 </div>
                 <div id="loader" class="left">
 
                 </div>
             </div>
             <br>
+            <br>
+            <br>
             <?php if(isset($_SESSION["researchemailinfo"])) { ?>
                 <div id="generatedemailgrid" class="grid gap-r-10">
-                    <h4>Generated Research Email:</h4>
-                    <text>Here is the generated research email</text>
+                 
+          
                     <div class="grid">
-                        <text>Subject:</text>
-                        <input name="emailsubject" value="<?php echo $_SESSION["researchemailinfo"]->researchemailsubject; ?>" readonly></input>
+                        <div class="poppins;">Subject</div>
+                        <input class="generateinput" name="emailsubject" value="<?php echo $_SESSION["researchemailinfo"]->researchemailsubject; ?>" readonly></input>
                     </div>
                     <div class="grid">
-                        <textarea name="emailbody" cols=1 rows=10 readonly><?php echo $_SESSION["researchemailinfo"]->researchemail; ?></textarea>
+                        <textarea class="generateoutput" name="emailbody" cols=1 rows=10 readonly><?php echo $_SESSION["researchemailinfo"]->researchemail; ?></textarea>
                     </div>
                     
-                    <div class="generalthreecolumns gap-c-10">
-                        <div class="right">
-                            <button name="doneemail" class="center sidetosidepadding">Done</button>
+                    <div class="generalthreecolumns gap-c-10 auto fit">
+                        <div>
+                            <button name="doneemail" class="center roundbutton">Done</button>
                         </div>
-                        <div class="grid">
-                            <button name="copyemail" class="center sidetosidepadding">Copy</button>
+
+                        <div>
+                            <button name="copyemail" class="center linebutton">Copy</button>
                         </div>
+
                         <?php if($_SESSION["researchemailinfo"]->attempts < 2) {?>
-                            <div class="left">
-                                <div id="regenerateloader"></div> <button name="regeneratebutton" class="center sidetosidepadding">Regenerate</button>
+                            <div>
+                                <div id="regenerateloader"></div> <button name="regeneratebutton" class="center linebutton">Regenerate</button>
                             </div>
+
                         <?php } else { ?>
                             <div></div>
                         <?php }?>
@@ -171,8 +178,16 @@
             <?php } ?>
 
         </div>
-        <div></div>
+   
+        <br>
+        <br>
     </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <script type="text/javascript">
         $(document).ready(function() {
