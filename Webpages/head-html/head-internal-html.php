@@ -44,17 +44,17 @@
                     <div class="menu">
 
 
-                        <form method="POST" onsubmit="return false" enctype="multipart/form-data">
-                        
-                            <div>
-                            <a href="dashboard.php" class="gsbutton noline noborder right">
-                                Dashboard
+                        <div>
+                            <a href="dashboard.php">
+                                <button class="gsbutton noborder right">Dashboard</button>
                             </a>
-                            </div>
-                            
+                        </div>
+
+                        <form method="POST" onsubmit="return false" enctype="multipart/form-data">
+      
 
                             <div>
-                            <button class="gsbutton" name="logout" type="submit">Logout</button>
+                            <button class="gsbutton right" name="logout" type="submit">Logout</button>
                             </div>
                         
 
@@ -72,13 +72,13 @@
         </div>
 
         
-        <br>
+        
 
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
-    <body style="margin: 0; background-color: #3a138d;">
+    <body style="margin: 0;">
         <script type="text/javascript">
             $("button[name='logout']").click(() => {
                 var totalemptydata = giveEmptyData();
