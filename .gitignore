@@ -5,3 +5,6 @@ vendor
 WebFiles/Resumes
 
 composer.phar
+
+NodeJS/node_modules
+
