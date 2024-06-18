@@ -3,6 +3,7 @@
     Also, it should include code for the links and the general footer for the website
 -->
 <div class="whitefill">
+    <br>
 <div class="generalthreecolumns centernongrid auto">
     <div>
 

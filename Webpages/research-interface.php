@@ -19,7 +19,7 @@
                 </div>
             <?php } ?>
 
-            <div class="marginbottom">
+            
                 <div class="grid marginbottom">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
                         <input class="generateinput" name="professorname" type="text" placeholder="The full name of the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
@@ -28,7 +28,9 @@
                     <?php } ?>
                     <p id="professornameerror" class="highlight"></p>
                 </div>
+
                 <div class="poppins size30">Links</div>
+
                 <div class="grid">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
                         <input class="generateinput" name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
@@ -37,9 +39,9 @@
                     <?php }?>
                     <p id="professorweberror" class="highlight"></p>
                 </div>
-            </div>
+            
 
-            <div class="marginbottom">
+            
                 <div class="grid marginbottom">
                     <?php if(isset($_SESSION["researchemailrequestobj"])) { ?>
                         <input class="generateinput" name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
@@ -48,8 +50,9 @@
                     <?php } ?>
                     <p id="publicationweberror" class="highlight"></p>
                 </div>
-                <div></div>
-                <div class="grid">
+
+                
+                <div class="grid marginbottom">
                     <div class="poppins size30">Select template</div>
                     <?php 
                         $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=?;", ["s"], [$encemail], "select", "nothing"));
@@ -74,8 +77,9 @@
                     <?php } ?>
                     <p id="templateerror" class="highlight"></p>
                 </div>
-            </div>
-            <div>
+
+     
+        
                 <div class="grid">
                     <div class="poppins size30">Select a resume</div>
                     <?php 
@@ -100,9 +104,8 @@
                     <?php } ?>
                     <p id="resumeerror" class="highlight"></p>
                 </div>
-                <div></div>
-                <div></div>
-            </div>
+                
+           
             
             <!-- professor webpage text input form once the session of error for professor webpage is set (errorhandling) -->
             <?php if(isset($_SESSION["profwebextraction-error"]) == true and $_SESSION["profwebextraction-error"] == true) {?>
@@ -133,13 +136,17 @@
             </div>
             
             <div class="generaltwocolumns">
+
                 <div class="right">
                     <button class="roundbutton center" name="generateresearch">Generate</button>
                 </div>
+
                 <div id="loader" class="left">
 
                 </div>
+
             </div>
+
             <br>
             <br>
             <br>
@@ -157,16 +164,16 @@
                     
                     <div class="generalthreecolumns gap-c-10 auto fit">
                         <div>
-                            <button name="doneemail" class="center roundbutton">Done</button>
+                            <button name="doneemail" class="center linebutton poppins size20">Done</button>
                         </div>
 
                         <div>
-                            <button name="copyemail" class="center linebutton">Copy</button>
+                            <button name="copyemail" class="center linebutton poppins size20">Copy</button>
                         </div>
 
                         <?php if($_SESSION["researchemailinfo"]->attempts < 2) {?>
                             <div>
-                                <div id="regenerateloader"></div> <button name="regeneratebutton" class="center linebutton">Regenerate</button>
+                                <div id="regenerateloader"></div> <button name="regeneratebutton" class="center linebutton poppins size20">Regenerate</button>
                             </div>
 
                         <?php } else { ?>
@@ -303,7 +310,7 @@
                 }
 
                 changeUpAllElements(["select[name='templates']", "select[name='resumes']"]);
-                $("#loader").html("<i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i>");
+                $("#loader").html("<i class='center purple fa-regular fa-gear fa-spin sidetosidepadding fa-2xl'></i>");
                 sendAJAXRequest2('../PHP-backened/research-scrape.php', researchemailinfo, function(input, varname) {
                     $("#loader").html("");
                     //the generate grid is just nothing if there is no reload as only reload reload indicated email

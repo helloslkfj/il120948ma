@@ -1,7 +1,8 @@
 <?php
     include_once __DIR__.'/head-internal.php';
 ?>
-<div class="generalspace">
+<br>
+<div class="container">
     <div></div>
     <div class="grid gap-r-15">
         <h1 class="center gentitle">Resumes</h1>
@@ -56,6 +57,14 @@
     </div>
     <div></div>
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
 <!-- have a feature where we send the text back and then it shows it and you click done, just to let the user know what we extracted -->
 <script type="text/javascript">
     function showTextExtract (response) {

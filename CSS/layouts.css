@@ -280,6 +280,10 @@
     width: calc(50%);
 }
 
+.width100 {
+    width: calc(100%);
+}
+
 .auto {
     margin: auto;
 }

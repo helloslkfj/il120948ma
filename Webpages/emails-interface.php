@@ -6,14 +6,14 @@
 ?>
 <br>
 <br>
-<div class="generaldashspace">
+<div class="container">
     <div></div>
     <div class="grid gap-r-15">
-        <h2>Your Emails</h2>
+        <div class="poppins purple size50 center">Your Emails</div>
         <div class="searchgrid gap-c-10">
-            <input name="searchemails" placeholder="Search..."></input>
-            <div class="left">
-                <button name="" class="center sidetosidepadding">Search</button>
+            <input class="generateinput" name="searchemails" placeholder="Search..."></input>
+            <div class="right">
+                <button name="" class="center searchbutton width90 weight200 white worksans size20">Search</button>
             </div>
         </div>
         <br>
@@ -51,40 +51,41 @@
 
             </script>
             <?php for($i=0;$i<count($totalemailarr);$i++) { ?>
-                <div class="grid boxshadow whitefill roundcorner">
+                <div class="grid boxshadow roundcorner">
                     <div class="majoremailgrid">
                         <div></div>
                         <div class="grid gap-r-10">
                             <br>
-                            <div class="grid">
-                                <h4>Subject</h4>
-                                <input name="<?php echo "subject|".$totalemailarr[$i][0]; ?>" value="<?php echo $totalemailarr[$i][1]; ?>"></input>
+                            <div class="grid marginbottom">
+                                <div class="poppins size20">Subject</div>
+                                <input class="generateinput" name="<?php echo "subject|".$totalemailarr[$i][0]; ?>" value="<?php echo $totalemailarr[$i][1]; ?>"></input>
                             </div>
+
                             <div class="grid">
-                                <h4>Email</h4>
-                                <textarea name="<?php echo "email|".$totalemailarr[$i][0]; ?>" rows=14 cols=1><?php echo $totalemailarr[$i][2]; ?></textarea>
+                                <div class="poppins size20">Email</div>
+                                <textarea class="generateoutput" name="<?php echo "email|".$totalemailarr[$i][0]; ?>" rows=14 cols=1><?php echo $totalemailarr[$i][2]; ?></textarea>
                             </div>
                             <br>
                         </div>
                         <div class="right">
                             <br>
                             <img height="20">
-                            <text class="center purple">Type: <?php echo $totalemailarr[$i][4]?></text>
+                            <text class="center poppins purple">Type: <?php echo $totalemailarr[$i][4]?></text>
                             <br>
                         </div>
                         <div></div>
                     </div>
                     <div class="saveandcopygrid">
                         <div>
-                            <text class="sidetosidepadding">If the <em>Save</em> button is not popping up despite changes: 1. change a character 2. click <em>Save</em> 3. change that character back 4. click <em>Save</em> once again.</text>
+                            <div class="poppins sidetosidepadding">If the <em>Save</em> button is not popping up despite changes: 1. change a character 2. click <em>Save</em> 3. change that character back 4. click <em>Save</em> once again.</div>
                         </div>
                         <div class="grid">
                             <div class="generaltwocolumns">
-                                <div id="<?php echo "saveemailholder".$totalemailarr[$i][0]; ?>" class="grid">
-                                    <text>Saved</text>
-                                    <!-- <button name="<?php // echo "saveemailbtn|".$totalemailarr[$i][0]; ?>" class="center sidetosidepadding dynamic">Save</button> -->
+                                <div id="<?php echo "saveemailholder".$totalemailarr[$i][0]; ?>" class="grid poppins size20">
+                                    <text class="poppins size20">Saved</text>
+                                    <!-- <button name="<?php // echo "saveemailbtn|".$totalemailarr[$i][0]; ?>" class="center sidetosidepadding dynamic linebutton">Save</button> -->
                                 </div>
-                                <button name="<?php echo 'copyemail|'.$totalemailarr[$i][0]; ?>" class="center sidetosidepadding">Copy</button>
+                                <button name="<?php echo 'copyemail|'.$totalemailarr[$i][0]; ?>" class="center linebutton size20">Copy</button>
                             </div>
                             <br>
                         </div>
@@ -145,9 +146,15 @@
         </div>
     </div>
     <div></div>
+    <br>
+    <br>
 </div>
 
 <br>
+<br>
+<br>
+<br>
+
 <?php 
     include_once __DIR__.'/footer-frontend.php';
 ?>  

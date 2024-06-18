@@ -15,22 +15,22 @@
             <form method="POST" onsubmit="return false" enctype="multipart/form-data">
    
                 <div>
-                    <input name="firstname" type="text" placeholder="First Name" class="epass">
+                    <input name="firstname" type="text" placeholder="First Name" class="epass ">
                     <p id="fnameerror" class="highlight"></p>
                 </div>
 
                 <div>
-                    <input name="signupemail" type="text" placeholder="Email" class="epass">
+                    <input name="signupemail" type="text" placeholder="Email" class="epass ">
                     <p id="signupemailerror" class="highlight"></p>
                 </div>
 
                 <div>
-                    <input name="signuppassword" type="password" placeholder="Password" class="epass">
+                    <input name="signuppassword" type="password" placeholder="Password" class="epass ">
                     <p id="signuppassworderror" class="highlight"></p>
                 </div>
 
                 <div>
-                    <input name="signuprepassword" type="password" placeholder="Retype your Password" class="epass">
+                    <input name="signuprepassword" type="password" placeholder="Retype your Password" class="epass ">
                     <p id="signuprepassworderror" class="highlight"></p>
                 </div>
                 
@@ -46,9 +46,15 @@
 
             <div class="line2"></div>
 
+            <br>
 
-            <div class="fineprint">
-                <a href="login.php">Have an account?</a>
+
+            <div>
+                <a href="login.php">
+
+                    <button class="size20 worksans weight300 linebutton">Have an account?</button>
+
+                </a>
             </div>
 
 

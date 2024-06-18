@@ -3,8 +3,8 @@
     include_once __DIR__.'/../PHP-backened/header-backened-code/start-backened.php';
     include_once __DIR__.'/../PHP-backened/secrets.php'; //secrets includes the secrets code and the head-background-friend.php which has the commonfunctions and all other functions needed for programming
 ?>
-
-<div class="generalspace">
+<br>
+<div class="container">
     <div></div>
     <div class="grid gap-r-15">
         <div class="grid gap-r-5">
@@ -41,11 +41,11 @@
                     <?php 
                         if(isset($_SESSION["template"])) {
                     ?>
-                    <input class="inputfield" name="templatetitle" type="text" placeholder="Ex. Professor outreach" value="<?php echo $_SESSION["template"]->title; ?>">
+                    <input class="generateinput" name="templatetitle" type="text" placeholder="Ex. Professor outreach" value="<?php echo $_SESSION["template"]->title; ?>">
                     <?php 
                         } else {
                     ?>
-                    <input class="inputfield" name="templatetitle" type="text" placeholder="Ex. Professor outreach">
+                    <input class="generateinput" name="templatetitle" type="text" placeholder="Ex. Professor outreach">
                     <?php  } ?>
                     <text id="templatetitleerror" class="highlight"></text>
                 </div>
@@ -53,9 +53,9 @@
                 <div class="grid">
                     <text class="gensubtitle">Text of the Template</text>
                     <?php if(isset($_SESSION["template"])) { ?>
-                    <textarea class="inputfield" name="templatetext" type="text" placeholder="Ex. blah blah blah" rows=15 cols=1><?php echo $_SESSION["template"]->text; ?></textarea>
+                    <textarea class="generateoutput" name="templatetext" type="text" placeholder="Ex. blah blah blah" rows=15 cols=1><?php echo $_SESSION["template"]->text; ?></textarea>
                     <?php } else { ?>
-                        <textarea class="inputfield" name="templatetext" type="text" placeholder="Ex. blah blah blah" rows=15 cols=1></textarea>
+                        <textarea class="generateoutput" name="templatetext" type="text" placeholder="Ex. blah blah blah" rows=15 cols=1></textarea>
                     <?php } ?>
                     <p id="templatetexterror" class="highlight"></p>
                 </div>
@@ -165,7 +165,15 @@
 
     </div>
     <div></div>
+    
+    
 </div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <?php 
     include 'footer-frontend.php';

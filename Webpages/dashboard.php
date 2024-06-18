@@ -43,7 +43,7 @@
                             <br>
 
                             <div class="worksans weight200 white">
-                                Generate emails to break the ice with companies!
+                                Generate emails to break the ice with companies.
                             </div>
 
                             <br>

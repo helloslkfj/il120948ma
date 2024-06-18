@@ -29,10 +29,14 @@
 
         <div class="line2"></div>
 
+        <br>
 
-        <div class="fineprint">
 
-                <a href="signup.php">Don't have an account yet?</a>
+        <div>
+
+                <a href="signup.php">
+                    <button class="linebutton worksans weight300 size20">Don't have an account yet?</button>
+                </a>
             
         </div>
 
