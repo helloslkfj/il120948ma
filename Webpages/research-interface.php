@@ -141,8 +141,10 @@
                     <button class="roundbutton center" name="generateresearch">Generate</button>
                 </div>
 
-                <div id="loader" class="left">
+                <div>
+                    <div id="loader" class="left">
 
+                    </div>
                 </div>
 
             </div>
@@ -223,7 +225,7 @@
             $("button[name='regeneratebutton']").click(()=>{
                 var regeneratebuttondata = createFormDataObject([], []);
                 regeneratebuttondata.append('regenerate', 'true');
-                $("#regenerateloader").html("<i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i>");
+                $("#regenerateloader").html("<div><i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i></div>");
                 sendAJAXRequest("../PHP-backened/researchinterfacebackened.php", regeneratebuttondata, reLoad);
             });
 
@@ -310,7 +312,7 @@
                 }
 
                 changeUpAllElements(["select[name='templates']", "select[name='resumes']"]);
-                $("#loader").html("<i class='center purple fa-regular fa-gear fa-spin sidetosidepadding fa-2xl'></i>");
+                $("#loader").html("<div><i class='center purple fa-regular fa-gear fa-spin sidetosidepadding fa-2xl'></i></div>");
                 sendAJAXRequest2('../PHP-backened/research-scrape.php', researchemailinfo, function(input, varname) {
                     $("#loader").html("");
                     //the generate grid is just nothing if there is no reload as only reload reload indicated email
