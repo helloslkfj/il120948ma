@@ -14,7 +14,7 @@
         </div>
 
         <div class="">
-            <a href="">
+            <a href="plans.php">
                 <button class="poppins weight300 footerbutton">Plans</button>
             </a>
 

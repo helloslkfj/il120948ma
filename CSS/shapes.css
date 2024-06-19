@@ -65,3 +65,18 @@
 
 }
 
+
+.table {
+  border: solid 0.8px grey;
+  border-radius: 2px;
+
+}
+
+.rightborder {
+  border-right: solid 0.8px;
+}
+
+
+greyborder {
+  border-color: grey;
+}
