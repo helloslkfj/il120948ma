@@ -5,7 +5,7 @@
 <div class="container">
     <div></div>
     <div class="grid gap-r-15">
-        <h1 class="center gentitle">Resumes</h1>
+        <div class="center poppins size50">Resumes</div>
         <div class="grid gap-r-15">
             <div class="grid">
                 <i class="center fa-regular fa-cloud-arrow-up fa-9x cloudicon"></i>
@@ -13,7 +13,7 @@
                 <label for="resumeupload" class="center toppadding bottompadding sidetosidepadding fineprint">Select Resume</label>
             </div>
             <div class="grid gap-r-5">
-                <p id="resumeuploadfile" class="center generictext">No resume selected</p>
+                <p id="resumeuploadfile" class="center poppins size20">No resume selected</p>
                 <p id="resumeuploaderror" class="center highlight"></p>
             </div>
             <button name="resumeuplaodsubmit" class="center roundbutton">Upload</button>
@@ -34,13 +34,13 @@
         ?>
         <br>
         <div class="grid">
-            <h3 class="gensubtitle2 marginbottom">Your Resumes</h3>
+            <div class="poppins size30 marginbottom">Your Resumes</div>
             <div class="templateslayout">
                 <div class="grid gap-r-15">
                     <?php for($i=0;$i<count($decresumes);$i++) { ?>
                         <div class="individualtemprow">
-                            <text class="underline generictext"><?php echo $decresumes[$i][0]; ?></text>
-                            <em class="generictext"> <?php echo "Last updated ".date("F d, Y", (int)$decresumes[$i][3])." at ".date("h:i A", (int)$decresumes[$i][3])." EST"; ?></em>
+                            <text class="underline poppins size20"><?php echo $decresumes[$i][0]; ?></text>
+                            <em class="poppins size20 weight200"> <?php echo "Last updated ".date("F d, Y", (int)$decresumes[$i][3])." at ".date("h:i A", (int)$decresumes[$i][3])." EST"; ?></em>
                         </div>
                     <?php } ?>
                 </div>
@@ -48,7 +48,7 @@
                     <?php for($i=0;$i<count($decresumes);$i++) {?>
                         <div class="individualtemprow">
                             <i name="deleteresume" value="<?php echo $decresumes[$i][0]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-2xl trashicon"></i>
-                            <button id="<?php echo $decresumes[$i][0]."||dasf-kkx.kk-afasf||".$decresumes[$i][1]; ?>" name="resumeviewbutton" class="roundbutton">View</button>
+                            <button id="<?php echo $decresumes[$i][0]."||dasf-kkx.kk-afasf||".$decresumes[$i][1]; ?>" name="resumeviewbutton" class="linebutton poppins size20">View</button>
                         </div>
                     <?php }?>
                 </div>
@@ -56,6 +56,16 @@
         </div>
     </div>
     <div></div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="width90 auto">
+<a href="research-interface.php">
+    <button class="backbutton worksans size20">Back</button>
+</a>
 </div>
 
 <br>

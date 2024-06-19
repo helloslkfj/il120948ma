@@ -103,7 +103,7 @@
 /*CSS layout for each individual template row under the Your Templates Section to add the last updated text; also used for delete button*/
 .individualtemprow {
     display:grid;
-    grid-template-columns:1fr 3fr;
+    grid-template-columns:2fr 3fr;
 }
 
 /*CSS layout for creating two side by side columns*/
@@ -256,6 +256,10 @@
     margin-bottom: 2rem;
 }
 
+.marginleft {
+    margin-left: 2rem;
+}
+
 .inline {
     display: inline-flex;
 }
@@ -297,7 +301,6 @@
     width: calc(90%);
 }
 
-/*dropdown formatting*/
 
 
 

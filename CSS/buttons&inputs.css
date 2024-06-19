@@ -269,6 +269,17 @@
   color: #3a138d;
 }
 
+.footerbutton {
+  border: none;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+}
+
+.footerbutton:hover {
+  text-decoration: underline 0.8px;
+}
+
 .searchbar {
   font-family: Poppins;
   font-weight: 300;
@@ -296,4 +307,27 @@
   opacity: 0.8;
   box-shadow: 1px 1px 1px #3A138D;
 }
+
+.backbutton {
+  background-color: white;
+  border: none;
+  color: #3A138D;
+
+
+  font-weight: 200;
+  border-radius: 25px;
+  width: 100px;
+  padding: 0.7rem;
+  cursor: pointer;
+  transition: ease-in-out font-weight 0.15s;
+  
+}
+
+.backbutton:hover {
+  font-weight: 300;
+
+}
+
+
+
   

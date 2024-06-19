@@ -60,75 +60,11 @@
         padding-bottom: 1rem;
       }
 
-      .pricing {
-        font-family: Work Sans;
-        font-weight: 700;
-        font-size: 100px;
-        color: #0E0129;
-        padding: 4rem;
-        padding-bottom: 0;
+     
 
-      }
-
-      .blurb3 {
-        font-family: Work Sans;
-        font-weight: 200;
-        font-size: 30px;
-        color: #0E0129;
-
-        border: solid #0E0129;
-        
-        border-radius: 15px;
-        padding: 2rem;
-        margin: 1rem;
-
-      }
-
-      .listprice {
-        margin-left: 1rem;
-        margin-top: 1rem;
-      }
-
-      .subtitle2 {
-        font-family: Work Sans;
-        font-weight: 600;
-        font-size: 50px;
-        text-decoration: underline;
-        margin-left: 1rem;
-        margin-bottom: 2rem;
-      }
 
 
 /*generic formatting*/
-      .gentitle {
-        font-family: Work Sans;
-        font-weight: 500;
-        font-size: 50px;
-        color: black;
- 
-      }
-
-      .gensubtitle {
-        font-family: Work Sans;
-        font-weight: 300;
-        font-size: 30px;
-        color: black;
-        margin-bottom: 5px;
-      }
-
-      .gensubtitle2 {
-        font-family: Work Sans;
-        font-weight: 550;
-        font-size: 30px;
-        color: black;
-      }
-      
-      .generictext {
-        font-family: Work Sans;
-        font-size: 20px;
-        font-weight: 300;
-        color: black;
-      }
 
       .maintitle {
         font-family: Work Sans;
@@ -154,30 +90,6 @@
 /*Mobile*/
 @media (max-width: 500px) {
   /*reduce font size*/
-  .blurb3 {
-    font-size: 20px;
-    padding: 1rem;
-    margin: 1rem;
-
-  }
-
-  .subtitle2 {
-    font-size: 30px;
-
-    margin: 2rem;
-    margin-left: 0;
-
-  }
-
-  .pricing {
-    font-size: 80px;
-
-  }
-
-  .listprice {
-    margin-left: 1rem;
-    margin-top: 1rem;
-  }
 
   .blurb1 {
 
@@ -215,6 +127,10 @@
 
 .weight300 {
   font-weight: 300;
+}
+
+.weight400 {
+  font-weight: 400;
 }
 
 .weight500 {

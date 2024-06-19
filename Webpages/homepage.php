@@ -78,69 +78,7 @@
 
   </div>
 
-  <div class="main3">
-  
-    <div class="pricing">
-      Pricing
-    </div>
-
-    <div class="gridpricing">
-
-      <div class="blurb3">
-
-        <span class="subtitle2">Academic</span>
-        <ul class="listprice">
-          <li>$10/month</li>
-          <br>
-          <li>15 research emails/month</li>
-        </ul>
-
-      </div>
-
-      <div class="blurb3">
-
-        <span class="subtitle2">Business</span>
-        <ul class="listprice">
-          <li>$8/month</li>
-          <br>
-          <li>100 business emails/month</li>
-        </ul> 
-
-      </div>
-
-      <div class="blurb3">
-
-        <span class="subtitle2">Deluxe</span>
-        <ul class="listprice">
-          <li>$20/month</li>
-          <br>
-          <li>20 research emails/month</li>
-          <br>
-          <li>200 business emails/month</li>
-        </ul> 
-
-      </div>
-
-      <div class="blurb3">
-
-        <span class="subtitle2">Elite</span>
-        <ul class="listprice">
-          <li>$30/month</li>
-          <br>
-          <li>30 research emails/month</li>
-          <br>
-          <li>500 business emails/month</li>
-        </ul> 
-
-      </div>
-
-    </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+   
 
   </div>
  

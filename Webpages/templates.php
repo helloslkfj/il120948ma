@@ -8,7 +8,7 @@
     <div></div>
     <div class="grid gap-r-15">
         <div class="grid gap-r-5">
-            <h1 class="gentitle center">Templates</h1>
+            <div class="poppins center size50">Templates</div>
             <form class="grid gap-r-10" method="POST" onsubmit="return false" enctype="multipart/form-data">
                 <div class="grid"> 
                     <?php 
@@ -37,7 +37,7 @@
                     <?php } ?>
                     <br>
 
-                    <text class="gensubtitle">Template Title</text>
+                    <text class="poppins size30">Template Title</text>
                     <?php 
                         if(isset($_SESSION["template"])) {
                     ?>
@@ -51,7 +51,7 @@
                 </div>
                 <br>
                 <div class="grid">
-                    <text class="gensubtitle">Text of the Template</text>
+                    <text class="poppins size30">Text of the Template</text>
                     <?php if(isset($_SESSION["template"])) { ?>
                     <textarea class="generateoutput" name="templatetext" type="text" placeholder="Ex. blah blah blah" rows=15 cols=1><?php echo $_SESSION["template"]->text; ?></textarea>
                     <?php } else { ?>
@@ -75,6 +75,8 @@
                 <p id="templategeneralerror" class="highlight"></p>
             </div>
         </div>
+        <br>
+        <br>
         <?php 
             $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=? ORDER BY datentimeinteger DESC;", ["s"], [$encemail], "select", "nothing"));
             // have exit feature wehn updating
@@ -84,15 +86,15 @@
             $dectemplates = order2DArray_BasedOnValue($dectemplates, 3, "DESC");
         ?>
         <div class="grid gap-r-5">
-            <h3 class="gensubtitle2 marginbottom">Your Templates</h3>
+            <div class="poppins size30 marginbottom">Your Templates</div>
             <div class="templateslayout">
                 <div class="grid gap-r-15">
                     <?php 
                         for($i=0;$i<count($dectemplates);$i++) {
                     ?>  
                         <div class="individualtemprow">
-                            <text class="underline generictext"><?php echo $dectemplates[$i][1]; ?></text>
-                            <em class="generictext"> <?php echo "Last updated ".date("F d, Y", (int)$dectemplates[$i][3])." at ".date("h:i A", (int)$dectemplates[$i][3])." EST"; ?></em>
+                            <text class="underline poppins size20"><?php echo $dectemplates[$i][1]; ?></text>
+                            <em class="poppins size20 weight200"> <?php echo "Last updated ".date("F d, Y", (int)$dectemplates[$i][3])." at ".date("h:i A", (int)$dectemplates[$i][3])." EST"; ?></em>
                         </div>
                     <?php } ?>
                 </div>
@@ -102,7 +104,7 @@
                     ?>       
                         <div class="individualtemprow">
                             <i name="deletetemplate" value="<?php echo $dectemplates[$i][1]; ?>" class="fa-sharp fa-solid fa-circle-trash center fa-2xl trashicon"></i>
-                            <button id="<?php echo $dectemplates[$i][1]; ?>" name="templateviewbutton" class="roundbutton">Edit/View</button>
+                            <button id="<?php echo $dectemplates[$i][1]; ?>" name="templateviewbutton" class="linebutton poppins size20">Edit/View</button>
                         </div>
                     <?php } ?>
                 </div>
@@ -170,6 +172,25 @@
 </div>
 
 <br>
+<br>
+<br>
+
+<div class="width90 auto">
+<a href="research-interface.php">
+    <button class="backbutton worksans size20">Back</button>
+</a>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br><br>
 <br>
 <br>
 <br>
