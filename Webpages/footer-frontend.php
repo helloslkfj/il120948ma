@@ -37,13 +37,13 @@
         </div>
 
         <div class="">
-            <a href="">
+            <a href="about.php">
                 <button class="poppins weight300 footerbutton">About</button>
             </a>
 
             <br>
            
-            <a href="">
+            <a href="tos.php">
                 <button class="poppins weight300 footerbutton">Terms of Service</button>
 
             </a>
