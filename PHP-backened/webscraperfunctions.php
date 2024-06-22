@@ -207,6 +207,16 @@
         return $researchemailrequestobj;
     }
 
+    function createCorporateEmailRequestObject($corporateemailrequestobj, $personname, $personwebpage, $companywebpage, $template, $resume) {
+        $corporateemailrequestobj->personname = $personname;
+        $corporateemailrequestobj->personwebpage = $personwebpage;
+        $corporateemailrequestobj->companywebpage = $companywebpage;
+        $corporateemailrequestobj->template = $template;
+        $corporateemailrequestobj->resume = $resume;
+
+        return $corporateemailrequestobj;
+    }
+
 //create a function for just generally getting important research text (two specific types --> professor webpage and publication page) with in-built error handling
 //create a function for creating notes on a professor or publication even when it is above the memory window the LLM of 16,483 tokens (split it up and keep processing)
 //have an if(isset($_POST["textinput")) for this so if it is not set put nothing
@@ -225,6 +235,26 @@
         }
         if($type == "publication") {
             $_SESSION["publicationextraction-error"] = "true";
+        }
+
+        echo "true";
+        exit();
+    }
+
+    function generalCorporateErrorforUnsuccessfulScrape($type, $personname, $link, $otherlink, $template, $resume) {
+        $corporateemailrequestobj = new stdClass();
+
+        if ($type == "personwebpage") {
+            $_SESSION["corporateemailrequestobj"] = createCorporateEmailRequestObject($corporateemailrequestobj, $personname, $link, $otherlink, $template, $resume);
+        } else {
+            $_SESSION["corporateemailrequestobj"] = createCorporateEmailRequestObject($corporateemailrequestobj, $personname, $$otherlink, $link, $template, $resume);
+        }
+
+        if($type == "personwebpage") {
+            $_SESSION["personwebextraction-error"] = "true";
+        }
+        if($type == "companywebpage") {
+            $_SESSION["companywebextraction-error"] = "true";
         }
 
         echo "true";
@@ -288,6 +318,39 @@
         }
 
         return $text;
+    }
+
+    function getImportantCorporateText($conn, $key, $link, $otherlink, $type, $textinput, $personname, $resume, $template) {
+        $decwebpagelinks = getSpecificAttributeDecryptedinList("linktowebsite", "webpages", $conn, $key);
+
+        if(in_array($link, $decwebpagelinks)) {
+            $iv = getIvfortheDataRowwithXVar("webpages", $conn, $key, ["linktowebsite"], [$link]);
+            $enctext = getDatafromSQLResponse(["webtext", "iv"], executeSQL($conn, "SELECT webtext, iv FROM webpages WHERE linktowebsite=?", ["s"], [encryptSingleDataGivenIv([$link], $key, $iv)], "select", "nothing"));
+            $text = getAllElementsin1Dfrom2Darr(deleteIndexesfrom2DArray(decryptFullData($enctext, $key, 1), [1]))[0];
+            
+            if(strlen($text)<30) {
+                $textupdatenum = 0;
+                if($type=="personwebpage") {
+                    if(isset($_POST["personwebpagetextinput"])) {
+                        $textupdatenum += 1;
+                        $text = $textinput;
+                        executeSQL($conn, "UPDATE webpages SET webtext=? WHERE linktowebsite=?", ["s", "s"], encryptDataGivenIv([$textinput, $link], $key, $iv), "update", "nothing");
+                    }
+                }
+                else {
+                    if(isset($_POST["companywebpagetextinput"])){
+                        $textupdatenum += 1;
+                        $text = $textinput;
+                        executeSQL($conn, "UPDATE webpages SET webtext=? WHERE linktowebsite=?", ["s", "s"], encryptDataGivenIv([$textinput, $link], $key, $iv), "update", "nothing");
+                    }
+                }
+                
+                if($textupdatenum == 0) {
+                    // need to add the corporate error function generalErrorforUnsuccessfulScrape($type, $professorname, $link, $otherlink, $template, $resume);
+                }
+            }
+        }
+
     }
 
     function textSplit($text, $maxcharacterlength, $maxoveralllength) {

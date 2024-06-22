@@ -61,7 +61,11 @@
                                 <input class="generateinput" name="<?php echo "subject|".$totalemailarr[$i][0]; ?>" value="<?php echo $totalemailarr[$i][1]; ?>"></input>
                             </div>
 
-                            <div class="grid">
+                            <div class="left">
+                                <button name="<?php echo "viewbtn|".$totalemailarr[$i][0]; ?>" class="center">View</button>
+                            </div>
+
+                            <div id="<?php echo "emailcover".$totalemailarr[$i][0]; ?>" class="grid none">
                                 <div class="poppins size20">Email</div>
                                 <textarea class="generateoutput" name="<?php echo "email|".$totalemailarr[$i][0]; ?>" rows=14 cols=1><?php echo $totalemailarr[$i][2]; ?></textarea>
                             </div>
@@ -75,7 +79,7 @@
                         </div>
                         <div></div>
                     </div>
-                    <div class="saveandcopygrid">
+                    <div id="<?php echo "bottomsectioncover".$totalemailarr[$i][0]; ?>" class="saveandcopygrid none">
                         <div>
                             <div class="poppins sidetosidepadding">If the <em>Save</em> button is not popping up despite changes: 1. change a character 2. click <em>Save</em> 3. change that character back 4. click <em>Save</em> once again.</div>
                         </div>
@@ -96,6 +100,18 @@
 
                 <script type="text/javascript">
                     $(document).ready(()=>{
+                        $("button[name='<?php echo 'viewbtn|'.$totalemailarr[$i][0]; ?>']").click(()=> {
+                            $("<?php echo '#emailcover'.$totalemailarr[$i][0]; ?>").toggleClass('none');
+                            $("<?php echo '#bottomsectioncover'.$totalemailarr[$i][0]; ?>").toggleClass('none');
+
+                            if($("button[name='<?php echo 'viewbtn|'.$totalemailarr[$i][0]; ?>']").html() == "View") {
+                                $("button[name='<?php echo 'viewbtn|'.$totalemailarr[$i][0]; ?>']").html("Close");
+                            }
+                            else {
+                                $("button[name='<?php echo 'viewbtn|'.$totalemailarr[$i][0]; ?>']").html("View");
+                            }
+                        });
+
                         $("input[name='<?php echo "subject|".$totalemailarr[$i][0]; ?>'], textarea[name='<?php echo "email|".$totalemailarr[$i][0]; ?>']").on('keyup', ()=>{
                             var emaildata = createFormDataObject(["input[name='<?php echo "subject|".$totalemailarr[$i][0]; ?>']", "textarea[name='<?php echo "email|".$totalemailarr[$i][0]; ?>']"], ["emailsubject", "emailbody"]);
                             emaildata.append('emailid', '<?php echo $totalemailarr[$i][0];?>');

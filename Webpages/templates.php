@@ -110,60 +110,6 @@
                 </div>
             </div>
         </div>
-        
-
-        <script type="text/javascript">
-            $(document).ready(() => {
-                var url = "../PHP-backened/templates-backened.php";
-
-                $("input[name='templatetitle']").keyup(()=> {
-                    var templatetitledata = createDataObject(["input[name='templatetitle']"], ["templatetitle"]);
-                    errorHandle(url, templatetitledata, "#templatetitleerror");
-                });
-
-                $("textarea[name='templatetext']").keyup(()=> {
-                    var templatetextdata = createDataObject(["textarea[name='templatetext']"], ["templatetext"]);
-                    errorHandle(url, templatetextdata, "#templatetexterror");
-                });
-
-                $("button[name='createnewtemplate']").click(() => {
-                    var templateformdata = createFormDataObject(["input[name='templatetitle']", "textarea[name='templatetext']"], ["templatetitle", "templatetext"]);
-                    keyUpAllElements(["input[name='templatetitle']", "textarea[name='templatetext']"]);
-                    sendAJAXRequest2(url, templateformdata, reLoadandErrorHandle, "#templategeneralerror");
-                });
-
-                $("button[name='updatetemplate']").click(() => {
-                    var templateformdata = createFormDataObject(["input[name='templatetitle']", "textarea[name='templatetext']"], ["templatetitle", "templatetext"]);
-                    keyUpAllElements(["input[name='templatetitle']", "textarea[name='templatetext']"]);
-                    sendAJAXRequest2(url, templateformdata, reLoadandErrorHandle, "#templategeneralerror");
-                });
-
-                $("button[name='templateviewbutton']").click(function() { //arrow functions get the this value from just the environment and how it was created, while the normal function looks at what object called it to get this
-                    var viewformdata = new FormData();
-                    var templatetitle = $(this).attr('id');
-
-                    viewformdata.append('view', true);
-                    viewformdata.append('templatetitle', templatetitle);
-
-                    sendAJAXRequest('../PHP-backened/viewtemplate-backened.php', viewformdata, reLoad);
-                });
-
-                $("i[name='deletetemplate']").click(function() {
-                    var deleteformdata = new FormData();
-                    var templatetitle = $(this).attr('value');
-
-                    deleteformdata.append('delete', true);
-                    deleteformdata.append('templatetitle', templatetitle);
-
-                    var confirmation = confirm('Are you sure you want to delete this template?');
-
-                    if(confirmation == true) {
-                        sendAJAXRequest('../PHP-backened/deletetemplates-backened.php', deleteformdata, reLoad);
-                    }
-                });
-
-            });
-        </script>
 
     </div>
     <div></div>
@@ -176,8 +122,8 @@
 <br>
 
 <div class="width90 auto">
-<a href="research-interface.php">
-    <button class="backbutton worksans size20">Back</button>
+<a>
+    <button name="backbuttonforresumesandtemplates" class="backbutton worksans size20">Back</button>
 </a>
 </div>
 
@@ -195,6 +141,63 @@
 <br>
 <br>
 <br>
+
+<script type="text/javascript">
+    $(document).ready(() => {
+        var url = "../PHP-backened/templates-backened.php";
+
+        $("button[name='backbuttonforresumesandtemplates']").click(()=>{
+            window.location.assign(document.referrer);
+        });
+
+        $("input[name='templatetitle']").keyup(()=> {
+            var templatetitledata = createDataObject(["input[name='templatetitle']"], ["templatetitle"]);
+            errorHandle(url, templatetitledata, "#templatetitleerror");
+        });
+
+        $("textarea[name='templatetext']").keyup(()=> {
+            var templatetextdata = createDataObject(["textarea[name='templatetext']"], ["templatetext"]);
+            errorHandle(url, templatetextdata, "#templatetexterror");
+        });
+
+        $("button[name='createnewtemplate']").click(() => {
+            var templateformdata = createFormDataObject(["input[name='templatetitle']", "textarea[name='templatetext']"], ["templatetitle", "templatetext"]);
+            keyUpAllElements(["input[name='templatetitle']", "textarea[name='templatetext']"]);
+            sendAJAXRequest2(url, templateformdata, reLoadandErrorHandle, "#templategeneralerror");
+        });
+
+        $("button[name='updatetemplate']").click(() => {
+            var templateformdata = createFormDataObject(["input[name='templatetitle']", "textarea[name='templatetext']"], ["templatetitle", "templatetext"]);
+            keyUpAllElements(["input[name='templatetitle']", "textarea[name='templatetext']"]);
+            sendAJAXRequest2(url, templateformdata, reLoadandErrorHandle, "#templategeneralerror");
+        });
+
+        $("button[name='templateviewbutton']").click(function() { //arrow functions get the this value from just the environment and how it was created, while the normal function looks at what object called it to get this
+            var viewformdata = new FormData();
+            var templatetitle = $(this).attr('id');
+
+            viewformdata.append('view', true);
+            viewformdata.append('templatetitle', templatetitle);
+
+            sendAJAXRequest('../PHP-backened/viewtemplate-backened.php', viewformdata, reLoad);
+        });
+
+        $("i[name='deletetemplate']").click(function() {
+            var deleteformdata = new FormData();
+            var templatetitle = $(this).attr('value');
+
+            deleteformdata.append('delete', true);
+            deleteformdata.append('templatetitle', templatetitle);
+
+            var confirmation = confirm('Are you sure you want to delete this template?');
+
+            if(confirmation == true) {
+                sendAJAXRequest('../PHP-backened/deletetemplates-backened.php', deleteformdata, reLoad);
+            }
+        });
+
+    });
+</script>
 
 <?php 
     include 'footer-frontend.php';

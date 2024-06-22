@@ -63,8 +63,8 @@
 <br>
 
 <div class="width90 auto">
-<a href="research-interface.php">
-    <button class="backbutton worksans size20">Back</button>
+<a>
+    <button name="backbuttonforresumesandtemplates" class="backbutton worksans size20">Back</button>
 </a>
 </div>
 
@@ -92,6 +92,9 @@
     }
 
     $(document).ready(()=> {
+        $("button[name='backbuttonforresumesandtemplates']").click(()=>{
+            window.location.assign(document.referrer);
+        })
         $("input[name='resumeupload']").change(()=>{
             var resume_file = $("input[name='resumeupload']").prop('files')[0];
             $("#resumeuploadfile").html(resume_file.name);

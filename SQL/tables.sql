@@ -109,3 +109,20 @@ create table researchemails (
 ALTER TABLE researchemails ADD COLUMN iv varchar(10000) not null;
 ALTER TABLE researchemails ADD COLUMN datentimeinteger text not null AFTER rating1to10;
 ALTER TABLE researchemails ADD COLUMN emailid text not null AFTER id;
+
+--code for creating the companywebpages table that will hold information on company webpages
+create table companywebpages (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    companylink varchar(1000) not null,
+    companynotes longtext not null,
+    iv varchar(10000) not null 
+);
+
+--code for creating the databse table for holding the webpages/linkedins of people and their extracted text
+create table personwebpages (
+    id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+    personname varchar(200) not null,
+    linktopersonwebsite varchar(1000) not null,
+    notestext longtext not null,
+    iv varchar(10000) not null
+);

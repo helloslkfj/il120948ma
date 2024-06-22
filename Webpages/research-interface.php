@@ -9,188 +9,187 @@
     <br>
 
     <div>
-    <div class="container">
-        <div></div>
-        <div class="grid gap-r-15">
-            <div class="poppins size50 marginbottom center">Research Email Generator</div>
-            <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
-                <div>
-                    <a id="exitcurrentemail" class="underline textlink">Exit</a><text> current email generation process if you want to change your links</text>
-                </div>
-            <?php } ?>
-
-            
-                <div class="grid marginbottom">
-                    <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
-                        <input class="generateinput" name="professorname" type="text" placeholder="The full name of the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
-                    <?php } else { ?>
-                        <input class="generateinput" name="professorname" type="text" placeholder="The full name of the professor/researcher">
-                    <?php } ?>
-                    <p id="professornameerror" class="highlight"></p>
-                </div>
-
-                <div class="poppins size30">Links</div>
-
-                <div class="grid">
-                    <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
-                        <input class="generateinput" name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
-                    <?php } else {?>
-                        <input class="generateinput" name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher">
-                    <?php }?>
-                    <p id="professorweberror" class="highlight"></p>
-                </div>
-            
-
-            
-                <div class="grid marginbottom">
-                    <?php if(isset($_SESSION["researchemailrequestobj"])) { ?>
-                        <input class="generateinput" name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
-                    <?php } else {?>
-                        <input class="generateinput" name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications">
-                    <?php } ?>
-                    <p id="publicationweberror" class="highlight"></p>
-                </div>
+        <div class="container">
+            <div class="grid gap-r-15">
+                <div class="poppins size50 marginbottom center">Research Email Generator</div>
+                <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
+                    <div>
+                        <a id="exitcurrentemail" class="underline textlink">Exit</a><text> current email generation process if you want to change your links</text>
+                    </div>
+                <?php } ?>
 
                 
-                <div class="grid marginbottom">
-                    <div class="poppins size30">Select template</div>
-                    <?php 
-                        $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=?;", ["s"], [$encemail], "select", "nothing"));
-                        $dectemplates = decryptFullData($enctemplates, $key, 4);
-
-                        if(count($dectemplates) > 0) {
-                    ?>
-                    <select class="generateinput" name="templates"> 
-                        <?php 
-                            for($i=0;$i<count($dectemplates);$i++) {
-                                if(isset($_SESSION["researchemailrequestobj"]) == true && $_SESSION["researchemailrequestobj"]->template == $dectemplates[$i][1]) {
-                        ?>
-                                    <option value="<?php echo $dectemplates[$i][1]; ?>" selected><?php echo $dectemplates[$i][1]; ?></option>
-                                <?php } else { ?>
-                                    <option value="<?php echo $dectemplates[$i][1]; ?>"><?php echo $dectemplates[$i][1]; ?></option>
-                                <?php } ?>
+                    <div class="grid marginbottom">
+                        <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
+                            <input class="generateinput" name="professorname" type="text" placeholder="The full name of the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorname; ?>">
+                        <?php } else { ?>
+                            <input class="generateinput" name="professorname" type="text" placeholder="The full name of the professor/researcher">
                         <?php } ?>
-                        <option value="Create New">Create New</option>
-                    </select>
-                    <?php } else { ?>
-                        <button class="center" name="createtemplate">Create a Template</button> 
-                    <?php } ?>
-                    <p id="templateerror" class="highlight"></p>
-                </div>
+                        <p id="professornameerror" class="highlight"></p>
+                    </div>
 
-     
+                    <div class="poppins size30">Links</div>
+
+                    <div class="grid">
+                        <?php if(isset($_SESSION["researchemailrequestobj"])) {?>
+                            <input class="generateinput" name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher" value="<?php echo $_SESSION["researchemailrequestobj"]->professorwebpage; ?>">
+                        <?php } else {?>
+                            <input class="generateinput" name="professorwebpage" type="text" placeholder="Link to webpage that is dedicated to the professor/researcher">
+                        <?php }?>
+                        <p id="professorweberror" class="highlight"></p>
+                    </div>
+                
+
+                
+                    <div class="grid marginbottom">
+                        <?php if(isset($_SESSION["researchemailrequestobj"])) { ?>
+                            <input class="generateinput" name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications" value="<?php echo $_SESSION["researchemailrequestobj"]->publicationwebpage; ?>">
+                        <?php } else {?>
+                            <input class="generateinput" name="publicationwebpage" type="text" placeholder="Link to one of the professor's/researcher's publications">
+                        <?php } ?>
+                        <p id="publicationweberror" class="highlight"></p>
+                    </div>
+
+                    
+                    <div class="grid marginbottom">
+                        <div class="poppins size30">Select template</div>
+                        <?php 
+                            $enctemplates = getDatafromSQLResponse(["email", "title", "textt", "datentimeinteger", "iv"], executeSQL($conn, "SELECT * FROM templates WHERE email=?;", ["s"], [$encemail], "select", "nothing"));
+                            $dectemplates = decryptFullData($enctemplates, $key, 4);
+
+                            if(count($dectemplates) > 0) {
+                        ?>
+                        <select class="generateinput" name="templates"> 
+                            <?php 
+                                for($i=0;$i<count($dectemplates);$i++) {
+                                    if(isset($_SESSION["researchemailrequestobj"]) == true && $_SESSION["researchemailrequestobj"]->template == $dectemplates[$i][1]) {
+                            ?>
+                                        <option value="<?php echo $dectemplates[$i][1]; ?>" selected><?php echo $dectemplates[$i][1]; ?></option>
+                                    <?php } else { ?>
+                                        <option value="<?php echo $dectemplates[$i][1]; ?>"><?php echo $dectemplates[$i][1]; ?></option>
+                                    <?php } ?>
+                            <?php } ?>
+                            <option value="Create New">Create New</option>
+                        </select>
+                        <?php } else { ?>
+                            <button class="center" name="createtemplate">Create a Template</button> 
+                        <?php } ?>
+                        <p id="templateerror" class="highlight"></p>
+                    </div>
+
         
-                <div class="grid">
-                    <div class="poppins size30">Select a resume</div>
-                    <?php 
-                        $encresumes = getDatafromSQLResponse(["resumename", "resumelocation", "iv"], executeSQL($conn, "SELECT * FROM resumes WHERE email=?", ["s"], [$encemail], "select", "nothing"));
-                        $decresumes = decryptFullData($encresumes, $key, 2);
-                        if(count($decresumes) > 0) {
-                    ?>
-                    <select class="generateinput" name="resumes">
+            
+                    <div class="grid">
+                        <div class="poppins size30">Select a resume</div>
                         <?php 
-                            for($i=0;$i<count($decresumes);$i++) {
-                                if(isset($_SESSION["researchemailrequestobj"]) == true && $_SESSION["researchemailrequestobj"]->resume == $decresumes[$i][0]) {
+                            $encresumes = getDatafromSQLResponse(["resumename", "resumelocation", "iv"], executeSQL($conn, "SELECT * FROM resumes WHERE email=?", ["s"], [$encemail], "select", "nothing"));
+                            $decresumes = decryptFullData($encresumes, $key, 2);
+                            if(count($decresumes) > 0) {
                         ?>
-                                    <option value="<?php echo $decresumes[$i][0]; ?>" selected><?php echo $decresumes[$i][0]; ?></option>
-                                <?php } else { ?>
-                                    <option value="<?php echo $decresumes[$i][0]; ?>"><?php echo $decresumes[$i][0]; ?></option>
-                                <?php } ?>
+                        <select class="generateinput" name="resumes">
+                            <?php 
+                                for($i=0;$i<count($decresumes);$i++) {
+                                    if(isset($_SESSION["researchemailrequestobj"]) == true && $_SESSION["researchemailrequestobj"]->resume == $decresumes[$i][0]) {
+                            ?>
+                                        <option value="<?php echo $decresumes[$i][0]; ?>" selected><?php echo $decresumes[$i][0]; ?></option>
+                                    <?php } else { ?>
+                                        <option value="<?php echo $decresumes[$i][0]; ?>"><?php echo $decresumes[$i][0]; ?></option>
+                                    <?php } ?>
+                            <?php } ?>
+                            <option value="Add More">Add More</option>
+                        </select>
+                        <?php } else {?>
+                            <button class="center" name="addresume">Add a Resume</button> 
                         <?php } ?>
-                        <option value="Add More">Add More</option>
-                    </select>
-                    <?php } else {?>
-                        <button class="center" name="addresume">Add a Resume</button> 
-                    <?php } ?>
-                    <p id="resumeerror" class="highlight"></p>
-                </div>
-                
-           
-            
-            <!-- professor webpage text input form once the session of error for professor webpage is set (errorhandling) -->
-            <?php if(isset($_SESSION["profwebextraction-error"]) == true and $_SESSION["profwebextraction-error"] == true) {?>
-                <div class="grid gap-r-5">
-                    <text class="highlight">Professor Webpage Error</text>
-                    <div class="grid">
-                        <textarea name="profwebpagetextinput" type="text" placeholder="Error has occured where the professor's/researcher's website cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the professor's webpage to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the webpage, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the professor's/researcher's webpage. Once you are done, just click generate again and we will now use this provided professor/researcher webpage text for getting context on the professor/researcher. Do not worry about it including unnecessary text pieces, etc as our model will automatically take out the relevant information." rows=8 cols=1></textarea>
-                        <p id="profwebpagetextinputerror" class="highlight"></p>
-                    </div>
-                </div>
-            <?php } ?>
-            
-            <!-- publication webpage text input form once the session of error for publication webpage is set (errorhandling) -->
-             <?php if(isset($_SESSION["publicationextraction-error"]) == true and $_SESSION["publicationextraction-error"] == true) {?>
-                <div class="grid gap-r-5">
-                    <text class="highlight">Publication Error</text>
-                    <div class="grid">
-                        <textarea name="publicationtextinput" type="text" placeholder="Error has occured where the professor's/researcher's website cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the professor's webpage to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the webpage, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the professor's/researcher's webpage. Once you are done, just click generate again and we will now use this provided professor/researcher webpage text for getting context on the professor/researcher. Do not worry about it including unnecessary text pieces, etc as our model will automatically take out the relevant information." rows=8 cols=1></textarea>
-                        <p id="publicationtextinputerror" class="highlight"></p>
-                    </div>
-                </div>
-            <?php } ?>
-            <!-- payment integration with stripe will be done later we will just have saved, whether subscription of the user is active or not, thats all we need
-            Stripe handles the reccuring billing by itself-->
-            <div class="grid gap-r-5">
-                <text>All error:</text>
-                <p id="researchemailerror" class="highlight"></p>
-            </div>
-            
-            <div class="generaltwocolumns">
-
-                <div class="right">
-                    <button class="roundbutton center" name="generateresearch">Generate</button>
-                </div>
-
-                <div>
-                    <div id="loader" class="left">
-
-                    </div>
-                </div>
-
-            </div>
-
-            <br>
-            <br>
-            <br>
-            <?php if(isset($_SESSION["researchemailinfo"])) { ?>
-                <div id="generatedemailgrid" class="grid gap-r-10">
-                 
-          
-                    <div class="grid">
-                        <div class="poppins;">Subject</div>
-                        <input class="generateinput" name="emailsubject" value="<?php echo $_SESSION["researchemailinfo"]->researchemailsubject; ?>" readonly></input>
-                    </div>
-                    <div class="grid">
-                        <textarea class="generateoutput" name="emailbody" cols=1 rows=10 readonly><?php echo $_SESSION["researchemailinfo"]->researchemail; ?></textarea>
+                        <p id="resumeerror" class="highlight"></p>
                     </div>
                     
-                    <div class="generalthreecolumns gap-c-10 auto fit">
-                        <div>
-                            <button name="doneemail" class="center linebutton poppins size20">Done</button>
+            
+                
+                <!-- professor webpage text input form once the session of error for professor webpage is set (errorhandling) -->
+                <?php if(isset($_SESSION["profwebextraction-error"]) == true and $_SESSION["profwebextraction-error"] == true) {?>
+                    <div class="grid gap-r-5">
+                        <text class="highlight">Professor Webpage Error</text>
+                        <div class="grid">
+                            <textarea name="profwebpagetextinput" type="text" placeholder="Error has occured where the professor's/researcher's website cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the professor's webpage to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the webpage, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the professor's/researcher's webpage. Once you are done, just click generate again and we will now use this provided professor/researcher webpage text for getting context on the professor/researcher. Do not worry about it including unnecessary text pieces, etc as our model will automatically take out the relevant information." rows=8 cols=1></textarea>
+                            <p id="profwebpagetextinputerror" class="highlight"></p>
                         </div>
-
-                        <div>
-                            <button name="copyemail" class="center linebutton poppins size20">Copy</button>
+                    </div>
+                <?php } ?>
+                
+                <!-- publication webpage text input form once the session of error for publication webpage is set (errorhandling) -->
+                <?php if(isset($_SESSION["publicationextraction-error"]) == true and $_SESSION["publicationextraction-error"] == true) {?>
+                    <div class="grid gap-r-5">
+                        <text class="highlight">Publication Error</text>
+                        <div class="grid">
+                            <textarea name="publicationtextinput" type="text" placeholder="Error has occured where the professor's/researcher's website cannot be accessed. Command A (MacOS) or CTRL A (Microsoft Windows) or CTRL Shift A (Linux) on the professor's webpage to select everything. Then, Command C (MacOS) or CTRL C (Microsoft Windows) or CTRL Shift C (Linux) the webpage, followed by a Command V (MacOS) or CTRL V (Microsoft Windows) or CTRL Shift V (Linux) into this box. This will allow you to copy and paste all the text of the professor's/researcher's webpage. Once you are done, just click generate again and we will now use this provided professor/researcher webpage text for getting context on the professor/researcher. Do not worry about it including unnecessary text pieces, etc as our model will automatically take out the relevant information." rows=8 cols=1></textarea>
+                            <p id="publicationtextinputerror" class="highlight"></p>
                         </div>
+                    </div>
+                <?php } ?>
+                <!-- payment integration with stripe will be done later we will just have saved, whether subscription of the user is active or not, thats all we need
+                Stripe handles the reccuring billing by itself-->
+                <div class="grid gap-r-5">
+                    <text>All error:</text>
+                    <p id="researchemailerror" class="highlight"></p>
+                </div>
+                
+                <div class="generaltwocolumns">
 
-                        <?php if($_SESSION["researchemailinfo"]->attempts < 2) {?>
-                            <div>
-                                <div id="regenerateloader"></div> <button name="regeneratebutton" class="center linebutton poppins size20">Regenerate</button>
-                            </div>
+                    <div class="right">
+                        <button class="roundbutton center" name="generateresearch">Generate</button>
+                    </div>
 
-                        <?php } else { ?>
-                            <div></div>
-                        <?php }?>
+                    <div>
+                        <div id="loader" class="left">
+
+                        </div>
                     </div>
 
                 </div>
-            <?php } ?>
 
+                <br>
+                <br>
+                <br>
+                <?php if(isset($_SESSION["researchemailinfo"])) { ?>
+                    <div id="generatedemailgrid" class="grid gap-r-10">
+                    
+            
+                        <div class="grid">
+                            <div class="poppins;">Subject</div>
+                            <input class="generateinput" name="emailsubject" value="<?php echo $_SESSION["researchemailinfo"]->researchemailsubject; ?>" readonly></input>
+                        </div>
+                        <div class="grid">
+                            <textarea class="generateoutput" name="emailbody" cols=1 rows=10 readonly><?php echo $_SESSION["researchemailinfo"]->researchemail; ?></textarea>
+                        </div>
+                        
+                        <div class="generalthreecolumns gap-c-10 auto fit">
+                            <div>
+                                <button name="doneemail" class="center linebutton poppins size20">Done</button>
+                            </div>
+
+                            <div>
+                                <button name="copyemail" class="center linebutton poppins size20">Copy</button>
+                            </div>
+
+                            <?php if($_SESSION["researchemailinfo"]->attempts < 2) {?>
+                                <div>
+                                    <div id="regenerateloader"></div> <button name="regeneratebutton" class="center linebutton poppins size20">Regenerate</button>
+                                </div>
+
+                            <?php } else { ?>
+                                <div></div>
+                            <?php }?>
+                        </div>
+
+                    </div>
+                <?php } ?>
+
+            </div>
+    
+            <br>
+            <br>
         </div>
-   
-        <br>
-        <br>
-    </div>
     </div>
     <br>
     <br>
@@ -252,7 +251,7 @@
 
             $("body").on("change", "select[name='templates']", function() {
                 if($("select[name='templates']").find(":selected").val() == "Create New") {
-                    window.location.replace('templates.php');
+                    window.location.assign('templates.php');
                 } else {
                     var templatedata = createFormDataObject1([$("select[name='templates']").find(":selected")], ["template"]);
                     sendAJAXRequest2('../PHP-backened/research-scrape.php', templatedata, reLoadandErrorHandle, "#templateerror");
@@ -260,7 +259,7 @@
             });
             $("body").on("change", "select[name='resumes']", function() {
                 if($("select[name='resumes']").find(":selected").val() == "Add More") {
-                    window.location.replace('resumes.php');
+                    window.location.assign('resumes.php');
                 } else {
                     var resumedata = createFormDataObject([$("select[name='resumes']").find(":selected")], ["resume"]);
                     sendAJAXRequest2('../PHP-backened/research-scrape.php', resumedata, reLoadandErrorHandle, "#resumeerror");
@@ -268,10 +267,10 @@
             });
 
             $("button[name='createtemplate']").click(()=>{
-                window.location.replace('templates.php');
+                window.location.assign('templates.php');
             });
             $("button[name='addresume']").click(()=>{
-                window.location.replace('resumes.php');
+                window.location.assign('resumes.php');
             });
 
             $("button[name='generateresearch']").click(()=>{
@@ -300,7 +299,6 @@
                     instanterror += 1;
                 }
                 if(researchemailinfo.get("resume") == 'null' || researchemailinfo.get("resume") == 'undefined' || researchemailinfo.get("resume") == "") {
-                    console.log(researchemailinfo.get("resume"));
                     $("#resumeerror").html('Please attach a resume.');
                     instanterror += 1;
                 }

@@ -39,5 +39,15 @@
     box-shadow: 10px 10px 5px -4px rgba(0,0,0,0.75);
   }
 
+  /*CSS so text doesn't stick to the top left corner in textarea*/
+  textarea {
+    padding:5px;
+  }
+
+  /*CSS so text doesn't stick to the left side on an input*/
+  input {
+    padding:5px;
+  }
+
 
 
