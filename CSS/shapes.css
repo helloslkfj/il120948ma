@@ -77,6 +77,11 @@
 }
 
 
-greyborder {
-  border-color: grey;
+.greyborder {
+  border: solid 0.8px grey;
+
+}
+
+.blackborder {
+  border: solid 0.8px black;
 }

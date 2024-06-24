@@ -9,7 +9,8 @@
 <div class="container">
     <div></div>
     <div class="grid gap-r-15">
-        <div class="poppins purple size50 center">Your Emails</div>
+        <div class="poppins size50 center">Your Emails</div>
+        <br>
         <div class="searchgrid gap-c-10">
             <input class="generateinput" name="searchemails" placeholder="Search..."></input>
             <div class="right">
@@ -51,7 +52,7 @@
 
             </script>
             <?php for($i=0;$i<count($totalemailarr);$i++) { ?>
-                <div class="grid boxshadow roundcorner">
+                <div class="grid greyborder roundcorner">
                     <div class="majoremailgrid">
                         <div></div>
                         <div class="grid gap-r-10">
@@ -62,11 +63,13 @@
                             </div>
 
                             <div class="left">
-                                <button name="<?php echo "viewbtn|".$totalemailarr[$i][0]; ?>" class="center">View</button>
+                                <button name="<?php echo "viewbtn|".$totalemailarr[$i][0]; ?>" class="center roundbutton">View</button>
                             </div>
+                     
 
                             <div id="<?php echo "emailcover".$totalemailarr[$i][0]; ?>" class="grid none">
-                                <div class="poppins size20">Email</div>
+                                <br>
+                            <div class="poppins size20">Email</div>
                                 <textarea class="generateoutput" name="<?php echo "email|".$totalemailarr[$i][0]; ?>" rows=14 cols=1><?php echo $totalemailarr[$i][2]; ?></textarea>
                             </div>
                             <br>
@@ -74,7 +77,7 @@
                         <div class="right">
                             <br>
                             <img height="20">
-                            <text class="center poppins purple">Type: <?php echo $totalemailarr[$i][4]?></text>
+                            <text class="center poppins weight200 purple">Type: <?php echo $totalemailarr[$i][4]?></text>
                             <br>
                         </div>
                         <div></div>

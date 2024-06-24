@@ -174,8 +174,12 @@
       }
 
       .roundbutton:hover {
-        opacity: 0.8;
-        box-shadow: 1px 1px 1px #3A138D;
+        background-color: #1b0055;
+
+      }
+
+      .roundbutton:active {
+        background-color: #3a138d;
       }
 
       /*thin button*/
