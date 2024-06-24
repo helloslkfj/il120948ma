@@ -15,7 +15,7 @@
                         if(isset($_SESSION["template"])) {
                     ?> 
                         <div class="generaltwocolumns center gap-c-10">
-                            <em class="generictext"><?php echo $_SESSION["template"]->title; ?></em>
+                            <em class="poppins size20 weight200"><?php echo $_SESSION["template"]->title; ?></em>
                             <button name="exittemplate" class="thinbutton">Exit</button>
                         </div>
 
@@ -122,7 +122,7 @@
 <br>
 
 <div class="width90 auto">
-<a>
+<a href="research-interface.php">
     <button name="backbuttonforresumesandtemplates" class="backbutton worksans size20">Back</button>
 </a>
 </div>

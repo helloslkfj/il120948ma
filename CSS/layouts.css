@@ -284,6 +284,10 @@
     width: calc(90%);
 }
 
+.width97 {
+    width: calc(97%);
+}
+
 .width50 {
     width: calc(50%);
 }

@@ -9,7 +9,7 @@
         
         <div class="header">
 
-        <div class="templateslayout">
+        <div class="templateslayout width97">
 
             <div class="title">
 
