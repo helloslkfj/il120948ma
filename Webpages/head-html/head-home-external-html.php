@@ -9,7 +9,7 @@
 
         <div class="header">
 
-        <div class="generaltwocolumns">
+        <div class="templateslayout width97">
 
             <div class="title">
 
@@ -30,14 +30,31 @@
 
             </div>
 
-            <div class="buttons right">
+            <div>
                 <br>
-                
-                <a href="signup.php">
+                <br>
+                <br>
+                <div class="inline">
 
-                <button class="gsbutton">Get Started</button>
+                    <div>
+                        <a href="plans.php">
+                            <button class="gsbutton">Pricing</button>
+                        </a>
 
-                </a>
+                    </div>
+                    
+                    <div>
+        
+                    <a href="signup.php">
+
+                    <button class="gsbutton">Get Started</button>
+
+                    </a>
+                    </div>
+
+                    
+
+                </div>
 
             </div>
 
