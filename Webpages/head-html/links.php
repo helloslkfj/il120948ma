@@ -7,6 +7,7 @@
 <link href="../CSS/buttons&inputs.css" rel="stylesheet" type="text/css">
 <link href="../CSS/shapes.css" rel="stylesheet" type="text/css">
 <link href="../font-awesome-6-pro-main/css/all.css" rel="stylesheet">
+<link href="../CSS/animations.css" rel="stylesheet" type="text/css">
 
 <!-- code for sizing-->
 <meta name="viewport" content="width=device-width, initial-scale=1">

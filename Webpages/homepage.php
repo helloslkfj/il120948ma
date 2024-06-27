@@ -15,9 +15,9 @@
     <br>
 
     <div class="grid2">
-
       <div class="blurb1">
-        Calliope drafts personalized cold emails so you can focus on school, work, and life.
+        <span id="typing-text"></span>
+        <span class="cursortext">|</span>
       </div>
 
       <div>
@@ -84,6 +84,33 @@
  
 
 </div>
+
+<script>
+
+// script.js
+document.addEventListener("DOMContentLoaded", function() {
+    const text = "Calliope drafts personalized cold emails so you can focus on school, work, and life.";
+    const typingSpeed = 80; // Milliseconds per character
+    let index = 0;
+
+    function type() {
+        if (index < text.length) {
+            document.getElementById("typing-text").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(type, typingSpeed);
+        } else {
+            document.querySelector(".cursortext").style.display = 'none'; // Remove cursor after typing
+        }
+    }
+
+    type();
+});
+
+
+
+
+
+</script>
 
 <?php 
     include 'footer-frontend.php';
