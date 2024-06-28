@@ -43,10 +43,9 @@
                             <br>
 
                             <div class="worksans weight200 white">
-                                Generate emails to break the ice with companies.
+                                Generate emails & messages to network and get the role at your dream company.
                             </div>
 
-                            <br>
                             <br>
 
                         </button>
@@ -57,14 +56,15 @@
                     <a href="emails-interface.php">
                         <button class="roundborder purplefill pointer">
                             <div class="worksans weight300 white size20">
-                                Your Emails
+                                Your Outreach
 
                             </div>
                             <br>
 
                             <div class="worksans weight200 white">
-                                Your comprehensive record of research and corporate emails.
+                                Your comprehensive record of emails & messages.
                             </div>
+                            <br>
                             <br>
                         </button>
                     </a>

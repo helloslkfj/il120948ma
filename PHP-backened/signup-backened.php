@@ -123,7 +123,7 @@
 
                 4th Paragraph:
                 - End it off with Regards, myname ";
-                $templatearr = [$signupemail, "Basic Research Template", $basictemplatetext, strtotime(date("Y-m-d H:i:s"))]; //need to make this more of a proper template, but this is the basic research template inititalization
+                $templatearr = [$signupemail, "Basic Research Email Template", $basictemplatetext, strtotime(date("Y-m-d H:i:s"))]; //need to make this more of a proper template, but this is the basic research template inititalization
                 $enctemplatearr = encryptDataGivenIv($templatearr,$key, $tencryptedsignuparr[0]);
                 executeSQL($conn, "INSERT INTO templates(email, title, textt, datentimeinteger, iv) VALUES(?,?,?,?,?)", ["s","s","s","s","s"], array_merge($enctemplatearr, [$tencryptedsignuparr[0]]), "insert", 4);
 

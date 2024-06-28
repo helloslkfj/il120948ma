@@ -9,10 +9,10 @@
     <div>
         <div class="container">
             <div class="grid gap-r-15">
-                <div class="poppins size50 marginbottom center">Corporate Email Generator</div>
+                <div class="poppins size50 marginbottom center">Corporate Email/Message Generator</div>
                 <?php if(isset($_SESSION["corporateemailrequestobj"])) {?>
                         <div>
-                            <a id="exitcurrentemail" class="underline textlink">Exit</a><text> current email generation process if you want to change your links</text>
+                            <a id="exitcurrentemailormes" class="underline textlink">Exit</a><text> current email generation process if you want to change your links</text>
                         </div>
                 <?php } ?>
                 <div class="grid marginbottom">
@@ -22,6 +22,39 @@
                                 <input class="generateinput" name="personname" type="text" placeholder="The full name of the person you want to outreach to">
                         <?php } ?>
                         <p id="personnameerror" class="highlight"></p>
+                </div>
+
+                <div class="poppins size30">Type</div>
+
+                <div class="grid marginbottom">
+                    <?php if(isset($_SESSION["corporateemailrequestobj"])) {?>
+                        <select class="generateinput" name="messagetype">
+                            <?php if($_SESSION["corporateemailrequestobj"]->messagetype == "Email") { ?>
+                                <option value="Email" selected>Email</option>
+                                <option value="LinkedIn Message">LinkedIn Message</option>
+                            <?php } else { ?>
+                                <option value="Email">Email</option>
+                                <option value="LinkedIn Message" selected>LinkedIn Message</option>
+                            <?php } ?>
+                        </select>
+                    <?php } else {?>
+                        <select class="generateinput" name="messagetype">
+                            <option value="Email">Email</option>
+                            <option value="LinkedIn Message">LinkedIn Message</option>
+                        </select>
+                    <?php }?>
+                    <p id="messagetypeerror" class="highlight"></p>      
+                </div>
+
+                <div class="poppins size30">Industry</div>
+
+                <div class="grid marginbottom">
+                    <?php if(isset($_SESSION["corporateemailrequestobj"])) {?>
+                        <input class="generateinput" name="industryofinterest" type="text" placeholder="Give the specific industry/sector your interested in (Ex. Investment banking, Marketing, etc)" value="<?php echo $_SESSION["corporateemailrequestobj"]->industryofinterest; ?>">
+                    <?php } else {?>
+                        <input class="generateinput" name="industryofinterest" type="text" placeholder="Give the specific industry/sector your interested in (Ex. Investment banking, Marketing, etc)">
+                    <?php }?>
+                    <p id="industryofinteresterror" class="highlight"></p>      
                 </div>
 
                 <div class="poppins size30">Links</div>
@@ -36,7 +69,7 @@
                 </div>
                 <div class="grid marginbottom">
                     <?php if(isset($_SESSION["corporateemailrequestobj"])) { ?>
-                        <input class="generateinput" name="companywebpage" type="text" placeholder="Link to the company's website that you are interested in specifically the about/what we do page" value="<?php echo $_SESSION["corporateemailrequestobj"]->corporatepage; ?>">
+                        <input class="generateinput" name="companywebpage" type="text" placeholder="Link to the company's website that you are interested in specifically the about/what we do page" value="<?php echo $_SESSION["corporateemailrequestobj"]->companywebpage; ?>">
                     <?php } else {?>
                         <input class="generateinput" name="companywebpage" type="text" placeholder="Link to the company's website that you are interested in specifically the about/what we do page">
                     <?php } ?>
@@ -70,7 +103,7 @@
                 </div>
 
                 <div class="grid">
-                    <div class="poppins size30">Select a resume</div>
+                    <div class="poppins size30">Select resume</div>
                     <?php 
                         $encresumes = getDatafromSQLResponse(["resumename", "resumelocation", "iv"], executeSQL($conn, "SELECT * FROM resumes WHERE email=?", ["s"], [$encemail], "select", "nothing"));
                         $decresumes = decryptFullData($encresumes, $key, 2);
@@ -150,7 +183,7 @@
                             <input class="generateinput" name="emailsubject" value="<?php echo $_SESSION["corporateemailinfo"]->corporateemailsubject; ?>" readonly></input>
                         </div>
                         <div class="grid">
-                            <textarea class="generateoutput" name="emailbody" cols=1 rows=10 readonly><?php echo $_SESSION["corporateemailinfo"]->corporateemailtext; ?></textarea>
+                            <textarea class="generateoutput" name="emailbody" cols=1 rows=10 readonly><?php echo $_SESSION["corporateemailinfo"]->corporateemail; ?></textarea>
                         </div>
                             
                         <div class="generalthreecolumns gap-c-10 auto fit">
@@ -165,6 +198,37 @@
                             <?php if($_SESSION["corporateemailinfo"]->attempts < 2) {?>
                                 <div>
                                     <div id="regenerateloader"></div> <button name="regeneratebutton" class="center linebutton poppins size20">Regenerate</button>
+                                </div>
+
+                            <?php } else { ?>
+                                <div></div>
+                            <?php }?>
+                        </div>
+
+                    </div>
+                <?php } ?>
+
+                <?php if(isset($_SESSION["corporatemessageinfo"])) {?>
+                    <div id="generatedmessagegrid" class="grid gap-r-10">
+                        
+
+                        <div class="grid">
+                            <div class="poppins;">Message</div>
+                            <textarea class="generateoutput" name="messagebody" cols=1 rows=10 readonly><?php echo $_SESSION["corporatemessageinfo"]->corporatemessage; ?></textarea>
+                        </div>
+                            
+                        <div class="generalthreecolumns gap-c-10 auto fit">
+                            <div>
+                                <button name="donemessage" class="center linebutton poppins size20">Done</button>
+                            </div>
+
+                            <div>
+                                <button name="copymessage" class="center linebutton poppins size20">Copy</button>
+                            </div>
+
+                            <?php if($_SESSION["corporatemessageinfo"]->attempts < 2) {?>
+                                <div>
+                                    <div id="regenerateloader1"></div> <button name="regeneratebutton" class="center linebutton poppins size20">Regenerate</button>
                                 </div>
 
                             <?php } else { ?>
@@ -190,10 +254,65 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
+
+            const backenedurl = "../PHP-backened/corporateinterfacebackened.php";
+
+            $("#exitcurrentemailormes").click(()=> {
+                var exitemailormesdata = createFormDataObject([],[]);
+                exitemailormesdata.append('exitemailormes', 'true');
+                sendAJAXRequest(backenedurl, exitemailormesdata, reLoad);
+            });
+
+            $("button[name='doneemail']").click(()=>{
+                var doneemaildata = createFormDataObject([], []);
+                doneemaildata.append('doneemail', 'true');
+                sendAJAXRequest(backenedurl, doneemaildata, reLoad);
+            });
+
+            $("button[name='donemessage']").click(()=>{
+                var donemessagedata = createFormDataObject([], []);
+                donemessagedata.append('donemessage', 'true');
+                sendAJAXRequest(backenedurl, donemessagedata, reLoad);
+            });
+
+            $("button[name='copyemail']").click(()=>{
+                var emailsubject = $("input[name='emailsubject']").val();
+                var emailbody = $("textarea[name='emailbody']").val();
+
+                var totalemailtext = emailsubject+"\n\n"+emailbody;
+
+                navigator.clipboard.writeText(totalemailtext);
+                $("button[name='copyemail']").html("Copied");
+            });
+
+            $("button[name='copymessage']").click(()=> {
+                var messagebody = $("textarea[name='messagebody']").val();
+
+                navigator.clipboard.writeText(messagebody);
+                $("button[name='copymessage']").html("Copied");
+            });
+
+            $("button[name='regeneratebutton']").click(()=>{
+                var regeneratebuttondata = createFormDataObject([],[]);
+                regeneratebuttondata.append('regenerate', 'true');
+                if($("#regenerateloader").html() != undefined) {
+                    $("#regenerateloader").html("<div><i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i></div>");
+                }
+                if($("#regenerateloader1").html() != undefined) {
+                    $("#regenerateloader1").html("<div><i class='center fa-regular fa-gear fa-spin sidetosidepadding fa-lg'></i></div>");
+                }
+                sendAJAXRequest(backenedurl, regeneratebuttondata, reLoad);
+            });
+
             const url = "../PHP-backened/corporate-scrape.php";
+
             $("input[name='personname']").keyup(()=>{
                 var personnamedata = createFormDataObject(["input[name='personname']"], ["personname"]);
                 sendAJAXRequest2(url, personnamedata, reLoadandErrorHandle, "#personnameerror");
+            });
+            $("input[name='industryofinterest']").keyup(()=>{
+                var industryofinterestdata = createFormDataObject(["input[name='industryofinterest']"], ["industryofinterest"]);
+                sendAJAXRequest2(url, industryofinterestdata, reLoadandErrorHandle, "#industryofinteresterror");
             });
             $("input[name='personwebpage']").keyup(()=>{
                 var personwebdata = createFormDataObject(["input[name='personwebpage']"], ["personwebpage"]);
@@ -204,20 +323,24 @@
                 sendAJAXRequest2(url, companywebdata, reLoadandErrorHandle, "#companyweberror");
             });
             $("textarea[name='personwebpagetextinput']").keyup(()=>{
-                var personwebpagetextdata = createFormDataObject(["textarea[name='personwebpagetextinput']", "personwebpagetextinput"]);
-                sendAJAXRequest2(url, personwebpagetextdata, reLoadandErrorHandle, "personwebpagetextinputerror");
+                var personwebpagetextdata = createFormDataObject(["textarea[name='personwebpagetextinput']"], ["personwebpagetextinput"]);
+                sendAJAXRequest2(url, personwebpagetextdata, reLoadandErrorHandle, "#personwebpagetextinputerror");
             });
             $("textarea[name='companywebpagetextinput']").keyup(()=>{
                 var companywebpagetextdata = createFormDataObject(["textarea[name='companywebpagetextinput']"], ["companywebpagetextinput"]);
-                sendAJAXRequest2(url, companywebpagetextdata, reLoadandErrorHandle, "companywebpagetextinputerror");
+                sendAJAXRequest2(url, companywebpagetextdata, reLoadandErrorHandle, "#companywebpagetextinputerror");
             });
 
+            $("body").on("change", "select[name='messagetype']", function() {
+                var typeofmessagedata = createFormDataObject([$("select[name='messagetype']").find(":selected")], ["messagetype"]);
+                sendAJAXRequest2(url, typeofmessagedata, reLoadandErrorHandle, "#messagetypeerror");
+            });
             $("body").on("change", "select[name='templates']", function() {
                 if($("select[name='templates']").find(":selected").val() == "Create New") {
                     window.location.assign('templates.php');
                 } else {
-                    var templatedata = createFormDataObject1([$("select[name='templates']").find(":selected")], ["template"]);
-                    sendAJAXRequest2('../PHP-backened/research-scrape.php', templatedata, reLoadandErrorHandle, "#templateerror");
+                    var templatedata = createFormDataObject([$("select[name='templates']").find(":selected")], ["template"]);
+                    sendAJAXRequest2(url, templatedata, reLoadandErrorHandle, "#templateerror");
                 }
             });
             $("body").on("change", "select[name='resumes']", function() {
@@ -225,7 +348,7 @@
                     window.location.assign('resumes.php');
                 } else {
                     var resumedata = createFormDataObject([$("select[name='resumes']").find(":selected")], ["resume"]);
-                    sendAJAXRequest2('../PHP-backened/research-scrape.php', resumedata, reLoadandErrorHandle, "#resumeerror");
+                    sendAJAXRequest2(url, resumedata, reLoadandErrorHandle, "#resumeerror");
                 }
             });
 
@@ -237,9 +360,9 @@
             });
 
             $("button[name='generatecorporate']").click(()=>{
-                var inputnamesarr = ["personname", "personwebpage", "companywebpage", "template", "resume"];
-                var inputsarr = [$("input[name='personname']"), $("input[name='personwebpage']"), $("input[name='companywebpage']"), $("select[name='templates']").find(":selected"), $("select[name='resumes']").find(":selected")];
-                var keyupelementsarr = ["input[name='personname']", "input[name='personwebpage']", "input[name='companywebpage']"];
+                var inputnamesarr = ["personname", "personwebpage", "companywebpage", "template", "resume", "messagetype", "industryofinterest"];
+                var inputsarr = [$("input[name='personname']"), $("input[name='personwebpage']"), $("input[name='companywebpage']"), $("select[name='templates']").find(":selected"), $("select[name='resumes']").find(":selected"), $("select[name='messagetype']").find(":selected"), $("input[name='industryofinterest']")];
+                var keyupelementsarr = ["input[name='personname']", "input[name='personwebpage']", "input[name='companywebpage']", "input[name='industryofinterest']"];
 
                 if($("textarea[name='personwebpagetextinput']").val() != undefined) {
                     inputnamesarr.push("personwebpagetextinput");
@@ -251,10 +374,12 @@
                     inputnamesarr.push("companywebpagetextinput");
                     inputsarr.push($("textarea[name='companywebpagetextinput']"));
                     keyupelementsarr.push("textarea[name='companywebpagetextinput']");
+
+
                 }
 
-                corporateemailinfo = createFormDataObject1(inputsarr, inputnamesarr);
-                corporateemailinfo.append('generatecorporateemail', true);
+                corporateemailinfo = createFormDataObject(inputsarr, inputnamesarr);
+                corporateemailinfo.append('generatecorporate', true);
 
                 var instanterror = 0;
                 if(corporateemailinfo.get("template") == 'null' || corporateemailinfo.get("template") == 'undefined' || corporateemailinfo.get("template") == "") {
@@ -272,12 +397,13 @@
                     return;
                 }
 
-                changeUpAllElements(["select[name='templates']", "select[name='resumes']"]);
+                changeUpAllElements(["select[name='templates']", "select[name='resumes']", "select[name='messagetype']"]);
                 $("#loader").html("<div><i class='center purple fa-regular fa-gear fa-spin sidetosidepadding fa-2xl'></i></div>");
-                sendAJAXRequest2('../PHP-backened/corporate-scrape.php', corporateemailinfo, function(input, varname) {
+                sendAJAXRequest2(url, corporateemailinfo, function(input, varname) {
                     $("#loader").html("");
                     //the generate grid is just nothing if there is no reload as only reload reload indicated email
                     $("#generatedemailgrid").html("");
+                    $("#generatedmessagegrid").html("");
                     reLoadandErrorHandle(input, varname); 
                 }, "#corporateemailerror");
 

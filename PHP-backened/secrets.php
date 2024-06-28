@@ -4,4 +4,5 @@
     $key = collapse2DArrayto1D(getDatafromSQLResponse(["actualkey"], executeSQL($conn, "SELECT actualkey FROM secrets WHERE keyname='key';", "nothing", "nothing", "select", "nothing")))[0];
     $sendgridapi_key = collapse2DArrayto1D(getDatafromSQLResponse(["actualkey"], executeSQL($conn, "SELECT actualkey FROM secrets WHERE keyname='sendgridapikey';", "nothing", "nothing", "select", "nothing")))[0];
     $Open_API_Key = collapse2DArrayto1D(getDatafromSQLResponse(["actualkey"], executeSQL($conn, "SELECT actualkey FROM secrets WHERE keyname='openaiapikey';", "nothing", "nothing", "select", "nothing")))[0];
+    $Proxycurl_API_Key = collapse2DArrayto1D(getDatafromSQLResponse(["actualkey"], executeSQL($conn, "SELECT * FROM secrets WHERE keyname='proxycurl';", "nothing", "nothing", "select", "nothing")))[0];
 ?>

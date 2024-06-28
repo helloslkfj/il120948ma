@@ -207,9 +207,19 @@
         return $decattributearr;
     }
 
+    //function for inserting a static element into the twodarray
     function insertElementIntoTwoDarray($twodarray, $newelementvalue) {
         for($i=0;$i<count($twodarray);$i++) {
             $twodarray[$i][] = $newelementvalue;
+        }
+
+        return $twodarray;
+    }
+
+    //function for inserting a non-static element into 
+    function insertnonStaticElementofTwodArrayIntoTwoDarray($twodarray, $twodelement, $index) {
+        for($i=0;$i<count($twodarray);$i++) {
+            $twodarray[$i][] = $twodelement[$i][$index];
         }
 
         return $twodarray;

@@ -1,5 +1,5 @@
 <?php 
-    include_once 'header-backened-nonfriend.php';
+    include_once __DIR__.'/header-backened-nonfriend.php';
 
     $error = 0; 
 
@@ -169,9 +169,9 @@
                         $linktextvarname = "link".($i+1)."text";
                         if(in_array($twoimportantresearchlinks[$i], $decwebpagelinks) != true) {
                             $linktext = getAnythingFromHTML($twoimportantresearchlinks[$i], ['head', 'header', 'footer', 'script'], ['body'], 'text');
-                            $decwebpageinsert = [$twoimportantresearchlinks[$i], $linktext];
+                            $decwebpageinsert = [$twoimportantresearchlinks[$i], $linktext, strtotime(date("Y-m-d H:i:s"))];
                             $encwebpageinsert = encryptDataGivenIv($decwebpageinsert, $key, $_SESSION["user"]->iv);
-                            executeSQL($conn, "INSERT INTO webpages(linktowebsite, webtext, iv) VALUES(?,?,?)", ["s", "s", "s"], array_merge($encwebpageinsert, [$_SESSION["user"]->iv]), "insert", 2);
+                            executeSQL($conn, "INSERT INTO webpages(linktowebsite, webtext, datentimeinteger, iv) VALUES(?,?,?,?)", ["s", "s", "s", "s"], array_merge($encwebpageinsert, [$_SESSION["user"]->iv]), "insert", 2);
 
                             $$linktextvarname = $linktext; 
                         }
