@@ -16,8 +16,7 @@
 
     <div class="grid2">
       <div class="blurb1">
-        <span id="typing-text"></span>
-        <span class="cursortext">|</span>
+        <span id="typing-text"></span><span id="cursor" class="blinking-cursor">|</span>
       </div>
 
       <div>
@@ -87,24 +86,41 @@
 
 <script>
 
-// script.js
-document.addEventListener("DOMContentLoaded", function() {
-    const text = "Calliope drafts personalized cold emails so you can focus on school, work, and life.";
-    const typingSpeed = 80; // Milliseconds per character
-    let index = 0;
 
-    function type() {
-        if (index < text.length) {
-            document.getElementById("typing-text").innerHTML += text.charAt(index);
-            index++;
-            setTimeout(type, typingSpeed);
-        } else {
-            document.querySelector(".cursortext").style.display = 'none'; // Remove cursor after typing
+
+const typingText = document.getElementById('typing-text');
+        const cursor = document.getElementById('cursor');
+        const statements = ["Calliope drafts personalized cold emails so you can focus on school, work, and life.", "Calliope prompts you step-by-step to provide a truly effortless writing experience.", "Prepare to be blown away."];
+        let statementIndex = 0;
+        let charIndex = 0;
+
+        function type() {
+            cursor.classList.remove('blinking-cursor');
+            if (charIndex < statements[statementIndex].length) {
+                typingText.textContent += statements[statementIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 70);
+            } else {
+                cursor.classList.add('blinking-cursor');
+                setTimeout(erase, 4000);
+            }
         }
-    }
 
-    type();
-});
+        function erase() {
+            if (charIndex > 0) {
+                typingText.textContent = statements[statementIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(erase, 50);
+            } else {
+                cursor.classList.remove('blinking-cursor');
+                statementIndex = (statementIndex + 1) % statements.length;
+                setTimeout(type, 2000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            setTimeout(type, 500);
+        });
 
 
 
