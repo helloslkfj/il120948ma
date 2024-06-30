@@ -122,7 +122,7 @@
 <br>
 
 <div class="width90 auto">
-<a href="research-interface.php">
+<a>
     <button name="backbuttonforresumesandtemplates" class="backbutton worksans size20">Back</button>
 </a>
 </div>
